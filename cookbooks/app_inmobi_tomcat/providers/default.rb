@@ -47,7 +47,8 @@ action :install do
   log "  Packages which will be installed: #{packages}"
   packages .each do |p|
     log "installing #{p}"
-    if p?("sun-java6-jre")
+    case p
+    when "sun-java6-jre"
         log "Setting debconf parameters to automate #{p} installation"
         bash "update-debconf-set-selections" do
             echo 'sun-java6-bin shared/accepted-sun-dlj-v1-1 boolean true
