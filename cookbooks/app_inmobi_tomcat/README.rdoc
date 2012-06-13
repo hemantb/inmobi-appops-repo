@@ -1,5 +1,0 @@
-= Inmobi App Tomcat Cookbook
-
-== DESCRIPTION:
-
-Yet to be documented!
