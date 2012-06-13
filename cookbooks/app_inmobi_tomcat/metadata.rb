@@ -7,7 +7,7 @@ version          "0.2.1"
 
 depends "rs_utils"
 recipe  "app_inmobi_tomcat::default", "Installs the tomcat application server."
-recipe  "app_inmobi_tomcat::sdt_click", "Installs the sdt application server."
+recipe  "app_inmobi_tomcat::debinst", "Installs the debians dependent on tomcat"
 
 #Java tuning parameters
 
