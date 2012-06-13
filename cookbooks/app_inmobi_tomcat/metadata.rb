@@ -31,5 +31,23 @@ attribute "app_tomcat/java/JmxPort",
 attribute "app_tomcat/java/HeapDumpPath",
   :display_name => "Tomcat Java HeapDumpPath",
   :description => "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
-  :required => "recommended",
+  :required => "optional",
   :default => "/var/log/tomcat6/dump.tmp"
+
+attribute "app_tomcat/java/ExtraOpts",
+  :display_name => "Tomcat Java extra options",
+  :description => "The tomcat extra options to be passed to the java process",
+  :required => "optional",
+  :default => " "
+
+attribute "app_tomcat/port",
+  :display_name => "Tomcat Java port number",
+  :description => "The port number Tomcat process should listen to",
+  :required => "optional",
+  :default => "8080"
+
+attribute "app_tomcat/base",
+  :display_name => "Tomcat Java appBase parameter",
+  :description => "The Tomcat Jave appBase parameter configured in server.xml",
+  :required => "optional",
+  :default => "webapps"
