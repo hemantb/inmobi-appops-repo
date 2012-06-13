@@ -51,6 +51,7 @@ action :install do
     when "sun-java6-jre"
         log "Setting debconf parameters to automate #{p} installation"
         bash "update-debconf-set-selections" do
+            code <<-EOF
             echo 'sun-java6-bin shared/accepted-sun-dlj-v1-1 boolean true
             sun-java6-jdk shared/accepted-sun-dlj-v1-1 boolean true
             sun-java6-jre shared/accepted-sun-dlj-v1-1 boolean true
@@ -59,6 +60,7 @@ action :install do
             sun-java6-bin shared/present-sun-dlj-v1-1 note
             sun-java6-jdk shared/present-sun-dlj-v1-1 note
             sun-java6-jre shared/present-sun-dlj-v1-1 note'|debconf-set-selections
+            EOF
        end
 
     end
