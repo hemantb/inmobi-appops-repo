@@ -5,6 +5,7 @@ description      "Installs the tomcat application server."
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.2.1"
 
+depends "rs_utils"
 recipe  "app_inmobi_tomcat::default", "Installs the tomcat application server."
 
 #Java tuning parameters
