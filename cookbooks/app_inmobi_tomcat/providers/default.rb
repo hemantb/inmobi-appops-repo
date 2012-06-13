@@ -93,7 +93,7 @@ action :setup_config do
     group "root"
     owner "#{node[:app_tomcat][:app_user]}"
     mode "0644"
-    cookbook 'app_tomcat'
+    cookbook 'app_inmobi_tomcat'
     variables(
             :doc_root => node[:app][:root],
             :app_port => node[:app][:port]
