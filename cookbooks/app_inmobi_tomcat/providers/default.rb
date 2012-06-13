@@ -103,7 +103,7 @@ action :setup_config do
     source "tomcat6_init.erb"
     group "root"
     owner "root"
-    mode "0644"
+    mode "0755"
     variables(
       :app_user => node[:app_tomcat][:app_user],
       :java_xmx => node[:app_tomcat][:java][:xmx],
