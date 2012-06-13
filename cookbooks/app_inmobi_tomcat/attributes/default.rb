@@ -19,7 +19,7 @@ case node[:platform]
 when "ubuntu", "debian"
   set[:app_tomcat][:app_user] = "tomcat6"
   set[:app_tomcat][:app_group] = "tomcat6"
-  set[:app_tomcat][:alternatives_cmd] = "update-alternatives  --auto java"
+  set[:app_tomcat][:alternatives_cmd] = "update-alternatives --set java /usr/lib/jvm/java-6-sun/jre/bin/java"
 when "centos", "fedora", "suse", "redhat", "redhatenterpriseserver"
   set[:app_tomcat][:app_user] = "tomcat"
   set[:app_tomcat][:app_group] = "tomcat"

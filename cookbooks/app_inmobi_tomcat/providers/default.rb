@@ -37,9 +37,28 @@ end
 action :install do
 
   packages = new_resource.packages
+  log "  Running apt-get update"
+
+  execute "default" do
+    command "apt-get udpate"
+    ignore_failure true
+  end
+
   log "  Packages which will be installed: #{packages}"
   packages .each do |p|
     log "installing #{p}"
+    if p?("sun-java6-jre")
+        log "Setting debconf parameters to automate #{p} installation"
+        bash "update debconf-set-selections" do
+            echo 'sun-java6-bin shared/accepted-sun-dlj-v1-1 boolean true
+            sun-java6-jdk shared/accepted-sun-dlj-v1-1 boolean true
+            sun-java6-jre shared/accepted-sun-dlj-v1-1 boolean true
+            sun-java6-jre sun-java6-jre/stopthread boolean true
+            sun-java6-jre sun-java6-jre/jcepolicy note
+            sun-java6-bin shared/present-sun-dlj-v1-1 note
+            sun-java6-jdk shared/present-sun-dlj-v1-1 note
+            sun-java6-jre shared/present-sun-dlj-v1-1 note'|debconf-set-selections
+       end
     package p do
 	options "--force-yes"
 	action :install
