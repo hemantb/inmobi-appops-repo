@@ -31,3 +31,6 @@ when "centos", "fedora", "suse", "redhat", "redhatenterpriseserver"
 else
   raise "Unrecognized distro #{node[:platform]}, exiting "
 end
+
+set_unless[:app_tomcat][:app_user] = "tomcat6"
+set_unless[:app_tomcat][:app_group] = "tomcat6"
