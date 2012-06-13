@@ -110,12 +110,10 @@ action :setup_config do
       :java_maxpermsize => node[:app_tomcat][:java][:maxpermsize],
       :java_jmx_port => node[:app_tomcat][:java][:jmx_port],
       :java_heamdumppath => node[:app_tomcat][:java][:heapdumppath],
+      :java_extraopts => node[:app_tomcat][:java][:extraopts],
       :host_ip => node[:ip]
     )
   end
-
-node[:app][:root] = "/var/lib/tomcat/webapps"
-node[:app][:port] = "8080"
 
   log "  Creating server.xml"
   template "/etc/tomcat6/server.xml" do
@@ -126,8 +124,8 @@ node[:app][:port] = "8080"
     mode "0644"
 #    cookbook 'app_inmobi_tomcat'
     variables(
-            :doc_root => node[:app][:root],
-            :app_port => node[:app][:port]
+            :doc_base => node[:app_tomcat][:base],
+            :app_port => node[:app_tomcat][:port]
           )
   end
 

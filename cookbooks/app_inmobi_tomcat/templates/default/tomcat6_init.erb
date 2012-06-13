@@ -73,7 +73,7 @@ TOMCAT6_SECURITY=no
 # It also looks like the default heap size of 64M is not enough for most cases
 # so the maximum heap size is set to 128M
 if [ -z "$JAVA_OPTS" ]; then
-	JAVA_OPTS="-Djava.awt.headless=true -XX:MaxPermSize="<%=@java_maxpermsize%>" -Xmx="<%=@java_xmx%>" -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port="<%@java_jmx_port%>" -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname="<%@host_ip%>" -Duser.language=en -Duser.country=US -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="<%@java_heapdumppath%>""
+	JAVA_OPTS="-Djava.awt.headless=true -XX:MaxPermSize="<%=@java_maxpermsize%>" -Xmx="<%=@java_xmx%>" -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port="<%@java_jmx_port%>" -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname="<%@host_ip%>" -Duser.language=en -Duser.country=US -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="<%@java_heapdumppath%>" <%@java_extraopts%>"
 
 fi
 

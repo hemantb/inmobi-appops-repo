@@ -12,6 +12,9 @@ set_unless[:app_tomcat][:java][:maxpermsize] = "256m"
 set_unless[:app_tomcat][:java][:xmx] = "512m"
 set_unless[:app_tomcat][:java][:heapdumppath] = "/var/log/tomcat6/dump.tmp"
 set_unless[:app_tomcat][:java][:jmx_port] = "9004"
+set_unless[:app_tomcat][:java][:extraopts] = " "
+set_unless[:app_tomcat][:port] = "8080"
+set_unless[:app_tomcat][:base] = "webapps"
 
 # Calculated attributes
 # Defining apache user, java alternatives and database adapter parameters depending on platform.
