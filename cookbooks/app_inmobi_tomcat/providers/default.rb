@@ -108,10 +108,10 @@ action :setup_config do
       :app_user => node[:app_tomcat][:app_user],
       :java_xmx => node[:app_tomcat][:java][:xmx],
       :java_maxpermsize => node[:app_tomcat][:java][:maxpermsize],
-      :java_jmx_port => node[:app_tomcat][:java][:jmx_port],
+      :java_jmx_port => node[:app_tomcat][:java][:jmxport],
       :java_heapdumppath => node[:app_tomcat][:java][:heapdumppath],
       :java_extraopts => node[:app_tomcat][:java][:extraopts],
-      :host_ip => node[:ip]
+      :host_ip => node[:app_tomcat][:ip]
     )
   end
 

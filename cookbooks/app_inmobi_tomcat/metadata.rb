@@ -16,6 +16,18 @@ attribute "app_tomcat/java/xmx",
   :required => "optional",
   :default => "512m"
 
+attribute "app_tomcat/user",
+  :display_name => "Tomcat process owner",
+  :description => "Tomcat process owner (eg: tomcat6)",
+  :required => "optional",
+  :default => "tomcat6"
+
+attribute "app_tomcat/group",
+  :display_name => "Tomcat process group owner",
+  :description => "Tomcat process group owner (eg: tomcat6)",
+  :required => "optional",
+  :default => "tomcat6"
+
 attribute "app_tomcat/java/MaxPermSize",
   :display_name => "Tomcat Java MaxPermSize",
   :description => "The java MaxPermSize argument (i.e. 256m)",

@@ -5,14 +5,14 @@
 # RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
 # if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
-set[:ip] = $PRIVATE_IP
+set[:app_tomcat][:ip] = $PRIVATE_IP
 # Recommended attributes
 # Defines the maximum value of the permanent generation space size
 set_unless[:app_tomcat][:java][:maxpermsize] = "256m"
 # Defines the maximum size of the heap used by the JVM
 set_unless[:app_tomcat][:java][:xmx] = "512m"
 set_unless[:app_tomcat][:java][:heapdumppath] = "/var/log/tomcat6/dump.tmp"
-set_unless[:app_tomcat][:java][:jmx_port] = "9004"
+set_unless[:app_tomcat][:java][:jmxport] = "9004"
 set_unless[:app_tomcat][:java][:extraopts] = "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0"
 set_unless[:app_tomcat][:port] = "8080"
 set_unless[:app_tomcat][:base] = "webapps"
