@@ -1,152 +1,144 @@
 {
-  "license": "Copyright Inmobi, Inc. All rights reserved.",
   "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
-  "replacing": {
-  },
-  "dependencies": {
-    "rs_utils": ">= 0.0.0"
-  },
-  "maintainer_email": "bhagyaraj.g@inmobi.com",
-  "conflicting": {
-  },
-  "description": "Installs the tomcat application server.",
-  "version": "0.2.1",
-  "recommendations": {
-  },
-  "platforms": {
-  },
-  "recipes": {
-    "app_inmobi_tomcat::sdt_click": "Installs the sdt application server.",
-    "app_inmobi_tomcat::default": "Installs the tomcat application server."
-  },
-  "providing": {
-  },
-  "name": "app_inmobi_tomcat/",
   "groupings": {
   },
   "attributes": {
-    "app_tomcat/java/xmx": {
-      "default": "512m",
-      "choice": [
-
-      ],
-      "type": "string",
-      "required": "optional",
-      "description": "The java Xmx argument (i.e. 512m)",
-      "display_name": "Tomcat Java XMX",
-      "calculated": false,
-      "recipes": [
-
-      ]
-    },
-    "app_tomcat/java/HeapDumpPath": {
-      "default": "/var/log/tomcat6/dump.tmp",
-      "choice": [
-
-      ],
-      "type": "string",
-      "required": "optional",
-      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
-      "display_name": "Tomcat Java HeapDumpPath",
-      "calculated": false,
-      "recipes": [
-
-      ]
-    },
-    "app_tomcat/base": {
-      "default": "webapps",
-      "choice": [
-
-      ],
-      "type": "string",
-      "required": "optional",
-      "description": "The Tomcat Jave appBase parameter configured in server.xml",
-      "display_name": "Tomcat Java appBase parameter",
-      "calculated": false,
-      "recipes": [
-
-      ]
-    },
     "app_tomcat/app_user": {
       "default": "tomcat6",
-      "choice": [
-
-      ],
       "type": "string",
-      "required": "optional",
       "description": "Tomcat process owner (eg: tomcat6)",
       "display_name": "Tomcat process owner",
+      "required": "optional",
       "calculated": false,
+      "choice": [
+
+      ],
       "recipes": [
 
       ]
     },
-    "app_tomcat/java/ExtraOpts": {
-      "default": "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0",
+    "app_tomcat/java/xmx": {
+      "default": "512m",
+      "type": "string",
+      "description": "The java Xmx argument (i.e. 512m)",
+      "display_name": "Tomcat Java XMX",
+      "required": "optional",
+      "calculated": false,
       "choice": [
 
       ],
-      "type": "string",
-      "required": "optional",
-      "description": "The tomcat extra options to be passed to the java process",
-      "display_name": "Tomcat Java extra options",
-      "calculated": false,
-      "recipes": [
-
-      ]
-    },
-    "app_tomcat/java/JmxPort": {
-      "default": "9004",
-      "choice": [
-
-      ],
-      "type": "string",
-      "required": "optional",
-      "description": "The jmx port number argument (i.e. 9004)",
-      "display_name": "Tomcat JMX port number",
-      "calculated": false,
-      "recipes": [
-
-      ]
-    },
-    "app_tomcat/port": {
-      "default": "8080",
-      "choice": [
-
-      ],
-      "type": "string",
-      "required": "optional",
-      "description": "The port number Tomcat process should listen to",
-      "display_name": "Tomcat Java port number",
-      "calculated": false,
-      "recipes": [
-
-      ]
-    },
-    "app_tomcat/app_group": {
-      "default": "tomcat6",
-      "choice": [
-
-      ],
-      "type": "string",
-      "required": "optional",
-      "description": "Tomcat process group owner (eg: tomcat6)",
-      "display_name": "Tomcat process group owner",
-      "calculated": false,
       "recipes": [
 
       ]
     },
     "app_tomcat/java/MaxPermSize": {
       "default": "256m",
+      "type": "string",
+      "description": "The java MaxPermSize argument (i.e. 256m)",
+      "display_name": "Tomcat Java MaxPermSize",
+      "required": "optional",
+      "calculated": false,
       "choice": [
 
       ],
+      "recipes": [
+
+      ]
+    },
+    "app_tomcat/app_group": {
+      "default": "tomcat6",
       "type": "string",
+      "description": "Tomcat process group owner (eg: tomcat6)",
+      "display_name": "Tomcat process group owner",
       "required": "optional",
-      "description": "The java MaxPermSize argument (i.e. 256m)",
-      "display_name": "Tomcat Java MaxPermSize",
       "calculated": false,
+      "choice": [
+
+      ],
+      "recipes": [
+
+      ]
+    },
+    "app_tomcat/java/JmxPort": {
+      "default": "9004",
+      "type": "string",
+      "description": "The jmx port number argument (i.e. 9004)",
+      "display_name": "Tomcat JMX port number",
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "recipes": [
+
+      ]
+    },
+    "app_tomcat/port": {
+      "default": "8080",
+      "type": "string",
+      "description": "The port number Tomcat process should listen to",
+      "display_name": "Tomcat Java port number",
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "recipes": [
+
+      ]
+    },
+    "app_tomcat/java/ExtraOpts": {
+      "default": "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0",
+      "type": "string",
+      "description": "The tomcat extra options to be passed to the java process",
+      "display_name": "Tomcat Java extra options",
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "recipes": [
+
+      ]
+    },
+    "app_tomcat/java/HeapDumpPath": {
+      "default": "/var/log/tomcat6/dump.tmp",
+      "type": "string",
+      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
+      "display_name": "Tomcat Java HeapDumpPath",
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "recipes": [
+
+      ]
+    },
+    "app_tomcat/webapp/debians": {
+      "default": "true",
+      "type": "string",
+      "description": "If version number is omitted packagename with latest version will be installed",
+      "display_name": "Give space separated list of pkg1=version1,pkg2=version2,... entries",
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "recipes": [
+        "app_inmobi_tomcat::debinst"
+      ]
+    },
+    "app_tomcat/base": {
+      "default": "webapps",
+      "type": "string",
+      "description": "The Tomcat Jave appBase parameter configured in server.xml",
+      "display_name": "Tomcat Java appBase parameter",
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
       "recipes": [
 
       ]
@@ -154,5 +146,27 @@
   },
   "suggestions": {
   },
-  "maintainer": "Inmobi"
+  "description": "Installs the tomcat application server.",
+  "recommendations": {
+  },
+  "dependencies": {
+    "rs_utils": ">= 0.0.0"
+  },
+  "maintainer_email": "bhagyaraj.g@inmobi.com",
+  "version": "0.2.1",
+  "providing": {
+  },
+  "license": "Copyright Inmobi, Inc. All rights reserved.",
+  "platforms": {
+  },
+  "replacing": {
+  },
+  "maintainer": "Inmobi",
+  "name": "app_inmobi_tomcat",
+  "conflicting": {
+  },
+  "recipes": {
+    "app_inmobi_tomcat::default": "Installs the tomcat application server.",
+    "app_inmobi_tomcat::sdt_click": "Installs the sdt application server."
+  }
 }
