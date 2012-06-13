@@ -16,13 +16,13 @@ attribute "app_tomcat/java/xmx",
   :required => "optional",
   :default => "512m"
 
-attribute "app_tomcat/user",
+attribute "app_tomcat/app_user",
   :display_name => "Tomcat process owner",
   :description => "Tomcat process owner (eg: tomcat6)",
   :required => "optional",
   :default => "tomcat6"
 
-attribute "app_tomcat/group",
+attribute "app_tomcat/app_group",
   :display_name => "Tomcat process group owner",
   :description => "Tomcat process group owner (eg: tomcat6)",
   :required => "optional",
