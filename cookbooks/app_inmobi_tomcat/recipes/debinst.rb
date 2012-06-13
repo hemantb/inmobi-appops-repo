@@ -7,8 +7,9 @@ end
 
 case node[:app_tomcat][:webapp][:restart]
 when "true"
-app_inmobi_tomcat "default" do
-  action :restart
+  app_inmobi_tomcat "default" do
+    action :restart
+  end
 end
 
 rs_utils_marker :end
