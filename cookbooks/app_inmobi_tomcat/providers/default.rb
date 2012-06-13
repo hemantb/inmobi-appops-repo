@@ -111,7 +111,7 @@ action :setup_config do
       :java_jmx_port => node[:app_tomcat][:java][:jmxport],
       :java_heapdumppath => node[:app_tomcat][:java][:heapdumppath],
       :java_extraopts => node[:app_tomcat][:java][:extraopts],
-      :host_ip => node[:app_tomcat][:ip]
+      :host_ip => ENV['RS_SERVER_NAME']
     )
   end
 

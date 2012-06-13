@@ -5,7 +5,6 @@
 # RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
 # if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
-set[:app_tomcat][:ip] = $PRIVATE_IP
 # Recommended attributes
 # Defines the maximum value of the permanent generation space size
 set_unless[:app_tomcat][:java][:maxpermsize] = "256m"
