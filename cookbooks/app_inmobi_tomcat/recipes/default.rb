@@ -29,10 +29,15 @@ when "centos", "fedora", "suse", "redhat", "redhatenterpriseserver"
     ]
 end
 
-app_inmobi_tomcat "default" do
+app_inmobi_tomcat "install_packages" do
   persist true
   packages node[:app_tomcat][:packages]
   action :install
+end
+
+app_inmobi_tomcat "setup_configuration" do
+  persist true
+  action :setup_config
 end
 
 rs_utils_marker :end
