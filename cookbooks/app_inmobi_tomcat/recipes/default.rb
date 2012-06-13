@@ -5,7 +5,7 @@
 # RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
 # if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
-rightscale_marker :begin
+rs_utils_marker :begin
 
 log "  Setting provider specific settings for tomcat"
 
@@ -35,4 +35,4 @@ app_inmobi_tomcat "default" do
   action :install
 end
 
-rightscale_marker :end
+rs_utils_marker :end
