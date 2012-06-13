@@ -1,87 +1,86 @@
 {
-  "version": "0.2.1",
-  "replacing": {
+  "dependencies": {
   },
-  "platforms": {
-  },
-  "recommendations": {
-  },
-  "maintainer_email": "bhagyaraj.g@inmobi.com",
+  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
   "groupings": {
   },
-  "providing": {
-  },
+  "name": "app_inmobi_tomcat",
+  "license": "Copyright Inmobi, Inc. All rights reserved.",
   "attributes": {
-    "app_tomcat/java/JmxPort": {
-      "required": "optional",
-      "default": "9004",
-      "type": "string",
-      "calculated": false,
-      "display_name": "Tomcat JMX port number",
-      "choice": [
-
-      ],
-      "description": "The jmx port number argument (i.e. 9004)",
-      "recipes": [
-
-      ]
-    },
     "app_tomcat/java/xmx": {
       "required": "optional",
-      "default": "512m",
-      "type": "string",
-      "calculated": false,
       "display_name": "Tomcat Java XMX",
-      "choice": [
-
-      ],
       "description": "The java Xmx argument (i.e. 512m)",
-      "recipes": [
-
-      ]
-    },
-    "app_tomcat/java/HeapDumpPath": {
-      "required": "optional",
-      "default": "/var/log/tomcat6/dump.tmp",
-      "type": "string",
-      "calculated": false,
-      "display_name": "Tomcat Java HeapDumpPath",
       "choice": [
 
       ],
-      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
       "recipes": [
 
-      ]
+      ],
+      "calculated": false,
+      "type": "string",
+      "default": "512m"
+    },
+    "app_tomcat/java/JmxPort": {
+      "required": "optional",
+      "display_name": "Tomcat JMX port number",
+      "description": "The jmx port number argument (i.e. 9004)",
+      "choice": [
+
+      ],
+      "recipes": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "default": "9004"
     },
     "app_tomcat/java/MaxPermSize": {
       "required": "optional",
-      "default": "256m",
-      "type": "string",
-      "calculated": false,
       "display_name": "Tomcat Java MaxPermSize",
+      "description": "The java MaxPermSize argument (i.e. 256m)",
       "choice": [
 
       ],
-      "description": "The java MaxPermSize argument (i.e. 256m)",
       "recipes": [
 
-      ]
+      ],
+      "calculated": false,
+      "type": "string",
+      "default": "256m"
+    },
+    "app_tomcat/java/HeapDumpPath": {
+      "required": "optional",
+      "display_name": "Tomcat Java HeapDumpPath",
+      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
+      "choice": [
+
+      ],
+      "recipes": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "default": "/var/log/tomcat6/dump.tmp"
     }
   },
-  "dependencies": {
-    "rightscale": ">= 0.0.0"
+  "replacing": {
   },
-  "name": "app_inmobi_tomcat",
-  "recipes": {
-    "app_inmobi_tomcat::default": "Installs the tomcat application server."
+  "recommendations": {
+  },
+  "platforms": {
   },
   "description": "Installs the tomcat application server.",
   "suggestions": {
   },
-  "license": "Copyright Inmobi, Inc. All rights reserved.",
-  "maintainer": "Inmobi",
-  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
+  "recipes": {
+    "app_inmobi_tomcat::default": "Installs the tomcat application server."
+  },
+  "maintainer_email": "bhagyaraj.g@inmobi.com",
   "conflicting": {
-  }
+  },
+  "providing": {
+  },
+  "maintainer": "Inmobi",
+  "version": "0.2.1"
 }
