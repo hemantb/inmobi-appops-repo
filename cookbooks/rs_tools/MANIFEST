@@ -1,0 +1,8 @@
+recipes/default.rb	534f6110bca641dda1022d0c41923bfc01087654
+files/default/right_aws-2.1.1.gem	ec9c0f51e17ca2c49ff4374134e4b119b0a03bd5
+metadata.rb	89d070f85f7a56a242fc70fb866cbe4170c21b14
+README.rdoc	907c50a061e2f926f9617cf26653c8340b302cc0
+metadata.json	57de0b230e3a18d32f80ec2ff067c6d12cca7840
+files/default/rightscale_tools-1.0.37.gem	534e0ac4bfd22be03a413e6eef4f9fafd4457108
+files/default/right_rackspace-0.0.0.20111110.gem	c33b68762873ba972ecd57bdc65fa11b7190ed09
+definitions/rs_tools.rb	dd49bf326e86c8482759b51905e0849c9b8d1b94
