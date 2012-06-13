@@ -1,11 +1,11 @@
 #
-# Cookbook Name:: app_tomcat
+# Cookbook Name:: app_inmobi_tomcat
 #
-# Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
-# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
-# if applicable, other agreements such as a RightScale Master Subscription Agreement.
+# Copyright Inmobi, Inc. All rights reserved.
+# Author: Bhagyaraj.g
 
 # Recommended attributes
+
 # Defines the maximum value of the permanent generation space size
 set_unless[:app_tomcat][:java][:maxpermsize] = "256m"
 # Defines the maximum size of the heap used by the JVM
@@ -17,7 +17,7 @@ set_unless[:app_tomcat][:port] = "8080"
 set_unless[:app_tomcat][:base] = "webapps"
 
 # Calculated attributes
-# Defining apache user, java alternatives and database adapter parameters depending on platform.
+# Defining java alternatives, tomcat user and group parameters depending on platform.
 case node[:platform]
 when "ubuntu", "debian"
   set[:app_tomcat][:app_user] = "tomcat6"

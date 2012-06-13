@@ -1,3 +1,9 @@
+#
+# Cookbook Name:: app_inmobi_tomcat
+#
+# Copyright Inmobi, Inc. All rights reserved.
+# Author: Bhagyaraj.g
+
 # Install packages required for application server setup
 actions :install
   # Set of installed packages
@@ -6,6 +12,7 @@ actions :install
 # Set up the application vhost on specified port
 # Action designed to setup APP LWRP with common parameters required for apache vhost file
 actions :setup_config
+
 #  # Application root
 #  attribute :root, :kind_of => String
 #  # Application port

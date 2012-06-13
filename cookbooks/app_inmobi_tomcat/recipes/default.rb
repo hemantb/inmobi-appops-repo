@@ -1,15 +1,13 @@
 #
-# Cookbook Name:: app_tomcat
+# Cookbook Name:: app_inmobi_tomcat
 #
-# Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
-# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
-# if applicable, other agreements such as a RightScale Master Subscription Agreement.
+# Copyright Inmobi, Inc. All rights reserved.
+# Author: Bhagyaraj.g
 
 rs_utils_marker :begin
 
 log "  Setting provider specific settings for tomcat"
 
-# Preparing list of database adapter packages depending on platform and database adapter
 case node[:platform]
 when "ubuntu", "debian"
     node[:app_tomcat][:packages] = [
