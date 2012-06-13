@@ -30,5 +30,5 @@ attribute "app_tomcat/java/JmxPort",
 attribute "app_tomcat/java/HeapDumpPath",
   :display_name => "Tomcat Java HeapDumpPath",
   :description => "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
-  :required => "optional",
+  :required => "recommended",
   :default => "/var/log/tomcat6/dump.tmp"
