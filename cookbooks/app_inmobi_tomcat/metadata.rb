@@ -72,8 +72,8 @@ attribute "app_tomcat/webapp/debians",
   :recipes => [ "app_inmobi_tomcat::debinst" ]
 
 attribute "app_tomcat/webapp/restart",
-  :display_name => "Give space separated list of pkg1=version1,pkg2=version2,... entries",
-  :description => "If version number is omitted packagename with latest version will be installed",
+  :display_name => "Should tomcat service be restarted? (eg: false ; default = true)",
+  :description => "Mention if tomcat service should be restarted. Use text value as true/false",
   :required => "optional",
   :default => "true",
   :recipes => [ "app_inmobi_tomcat::debinst" ]
