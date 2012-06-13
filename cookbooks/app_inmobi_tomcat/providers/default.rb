@@ -97,10 +97,10 @@ action :setup_config do
     )
   end
 
-  log "  Creating /etc/init.d/tomcat6"
-  template "/etc/tomcat6/tomcat6.conf" do
+  log "  Creating /etc/init.d/tomcat6 with host_ip like #{node[:ip]}"
+  template "/etc/init.d/tomcat6" do
     action :create
-    source "tomcat6_conf.erb"
+    source "tomcat6_init.erb"
     group "root"
     owner "root"
     mode "0644"
@@ -118,7 +118,7 @@ action :setup_config do
   log "  Creating server.xml"
   template "/etc/tomcat6/server.xml" do
     action :create
-    source "server_xml.erb"
+    source "tomcat6_server_xml.erb"
     group "root"
     owner "#{node[:app_tomcat][:app_user]}"
     mode "0644"
