@@ -39,7 +39,7 @@ action :install do
   packages = new_resource.packages
   log "  Running apt-get update"
 
-  execute "default" do
+  execute "update apt cache" do
     command "apt-get udpate"
     ignore_failure true
   end
@@ -59,6 +59,7 @@ action :install do
             sun-java6-jdk shared/present-sun-dlj-v1-1 note
             sun-java6-jre shared/present-sun-dlj-v1-1 note'|debconf-set-selections
        end
+    end
     package p do
 	options "--force-yes"
 	action :install
@@ -69,7 +70,6 @@ action :install do
     command "#{node[:app_tomcat][:alternatives_cmd]}"
     action :run
   end
-
 end
 
 # Setup tomcat configuration files
