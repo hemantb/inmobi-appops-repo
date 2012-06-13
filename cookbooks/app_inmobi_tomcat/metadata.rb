@@ -38,7 +38,7 @@ attribute "app_tomcat/java/ExtraOpts",
   :display_name => "Tomcat Java extra options",
   :description => "The tomcat extra options to be passed to the java process",
   :required => "optional",
-  :default => " "
+  :default => "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0"
 
 attribute "app_tomcat/port",
   :display_name => "Tomcat Java port number",

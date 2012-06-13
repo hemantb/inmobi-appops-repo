@@ -1,129 +1,129 @@
 {
-  "recipes": {
-    "app_inmobi_tomcat::default": "Installs the tomcat application server."
+  "recommendations": {
+  },
+  "replacing": {
+  },
+  "maintainer_email": "bhagyaraj.g@inmobi.com",
+  "version": "0.2.1",
+  "groupings": {
+  },
+  "maintainer": "Inmobi",
+  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
+  "description": "Installs the tomcat application server.",
+  "attributes": {
+    "app_tomcat/java/HeapDumpPath": {
+      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
+      "calculated": false,
+      "type": "string",
+      "display_name": "Tomcat Java HeapDumpPath",
+      "recipes": [
+
+      ],
+      "choice": [
+
+      ],
+      "default": "/var/log/tomcat6/dump.tmp",
+      "required": "optional"
+    },
+    "app_tomcat/base": {
+      "description": "The Tomcat Jave appBase parameter configured in server.xml",
+      "calculated": false,
+      "type": "string",
+      "display_name": "Tomcat Java appBase parameter",
+      "recipes": [
+
+      ],
+      "choice": [
+
+      ],
+      "default": "webapps",
+      "required": "optional"
+    },
+    "app_tomcat/java/JmxPort": {
+      "description": "The jmx port number argument (i.e. 9004)",
+      "calculated": false,
+      "type": "string",
+      "display_name": "Tomcat JMX port number",
+      "recipes": [
+
+      ],
+      "choice": [
+
+      ],
+      "default": "9004",
+      "required": "optional"
+    },
+    "app_tomcat/java/xmx": {
+      "description": "The java Xmx argument (i.e. 512m)",
+      "calculated": false,
+      "type": "string",
+      "display_name": "Tomcat Java XMX",
+      "recipes": [
+
+      ],
+      "choice": [
+
+      ],
+      "default": "512m",
+      "required": "optional"
+    },
+    "app_tomcat/java/ExtraOpts": {
+      "description": "The tomcat extra options to be passed to the java process",
+      "calculated": false,
+      "type": "string",
+      "display_name": "Tomcat Java extra options",
+      "recipes": [
+
+      ],
+      "choice": [
+
+      ],
+      "default": "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0",
+      "required": "optional"
+    },
+    "app_tomcat/java/MaxPermSize": {
+      "description": "The java MaxPermSize argument (i.e. 256m)",
+      "calculated": false,
+      "type": "string",
+      "display_name": "Tomcat Java MaxPermSize",
+      "recipes": [
+
+      ],
+      "choice": [
+
+      ],
+      "default": "256m",
+      "required": "optional"
+    },
+    "app_tomcat/port": {
+      "description": "The port number Tomcat process should listen to",
+      "calculated": false,
+      "type": "string",
+      "display_name": "Tomcat Java port number",
+      "recipes": [
+
+      ],
+      "choice": [
+
+      ],
+      "default": "8080",
+      "required": "optional"
+    }
   },
   "providing": {
   },
   "conflicting": {
   },
+  "recipes": {
+    "app_inmobi_tomcat::default": "Installs the tomcat application server."
+  },
   "suggestions": {
-  },
-  "name": "app_inmobi_tomcat",
-  "replacing": {
-  },
-  "description": "Installs the tomcat application server.",
-  "license": "Copyright Inmobi, Inc. All rights reserved.",
-  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
-  "maintainer": "Inmobi",
-  "version": "0.2.1",
-  "maintainer_email": "bhagyaraj.g@inmobi.com",
-  "recommendations": {
   },
   "dependencies": {
     "rs_utils": ">= 0.0.0"
   },
-  "groupings": {
-  },
-  "attributes": {
-    "app_tomcat/java/ExtraOpts": {
-      "default": " ",
-      "recipes": [
-
-      ],
-      "description": "The tomcat extra options to be passed to the java process",
-      "calculated": false,
-      "display_name": "Tomcat Java extra options",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string"
-    },
-    "app_tomcat/java/xmx": {
-      "default": "512m",
-      "recipes": [
-
-      ],
-      "description": "The java Xmx argument (i.e. 512m)",
-      "calculated": false,
-      "display_name": "Tomcat Java XMX",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string"
-    },
-    "app_tomcat/java/HeapDumpPath": {
-      "default": "/var/log/tomcat6/dump.tmp",
-      "recipes": [
-
-      ],
-      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
-      "calculated": false,
-      "display_name": "Tomcat Java HeapDumpPath",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string"
-    },
-    "app_tomcat/port": {
-      "default": "8080",
-      "recipes": [
-
-      ],
-      "description": "The port number Tomcat process should listen to",
-      "calculated": false,
-      "display_name": "Tomcat Java port number",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string"
-    },
-    "app_tomcat/java/MaxPermSize": {
-      "default": "256m",
-      "recipes": [
-
-      ],
-      "description": "The java MaxPermSize argument (i.e. 256m)",
-      "calculated": false,
-      "display_name": "Tomcat Java MaxPermSize",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string"
-    },
-    "app_tomcat/base": {
-      "default": "webapps",
-      "recipes": [
-
-      ],
-      "description": "The Tomcat Jave appBase parameter configured in server.xml",
-      "calculated": false,
-      "display_name": "Tomcat Java appBase parameter",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string"
-    },
-    "app_tomcat/java/JmxPort": {
-      "default": "9004",
-      "recipes": [
-
-      ],
-      "description": "The jmx port number argument (i.e. 9004)",
-      "calculated": false,
-      "display_name": "Tomcat JMX port number",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string"
-    }
-  },
+  "name": "app_inmobi_tomcat/",
   "platforms": {
-  }
+  },
+  "license": "Copyright Inmobi, Inc. All rights reserved."
 }
