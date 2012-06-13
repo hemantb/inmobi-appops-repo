@@ -49,7 +49,7 @@ action :install do
     log "installing #{p}"
     if p?("sun-java6-jre")
         log "Setting debconf parameters to automate #{p} installation"
-        bash "update debconf-set-selections" do
+        bash "update-debconf-set-selections" do
             echo 'sun-java6-bin shared/accepted-sun-dlj-v1-1 boolean true
             sun-java6-jdk shared/accepted-sun-dlj-v1-1 boolean true
             sun-java6-jre shared/accepted-sun-dlj-v1-1 boolean true
@@ -59,17 +59,23 @@ action :install do
             sun-java6-jdk shared/present-sun-dlj-v1-1 note
             sun-java6-jre shared/present-sun-dlj-v1-1 note'|debconf-set-selections
        end
+
     end
+
     package p do
 	options "--force-yes"
 	action :install
     end
+
   end
+
   # Executing java alternatives command, this will set installed java as choose as default
-  execute "alternatives" do
+  execute "update-alternatives" do
     command "#{node[:app_tomcat][:alternatives_cmd]}"
     action :run
   end
+
+  action_restart
 end
 
 # Setup tomcat configuration files
