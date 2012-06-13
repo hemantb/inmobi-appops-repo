@@ -1,0 +1,88 @@
+{
+  "dependencies": {
+    "rightscale": ">= 0.0.0",
+    "app": ">= 0.0.0"
+  },
+  "description": "Installs the tomcat application server.",
+  "replacing": {
+  },
+  "recommendations": {
+  },
+  "name": "app_inmobi_tomcat",
+  "maintainer": "Inmobi",
+  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
+  "groupings": {
+  },
+  "recipes": {
+    "app_tomcat::default": "Installs the tomcat application server."
+  },
+  "maintainer_email": "bhagyaraj.g@inmobi.com",
+  "attributes": {
+    "app_tomcat/java/HeapDumpPath": {
+      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
+      "required": "optional",
+      "calculated": false,
+      "display_name": "Tomcat Java HeapDumpPath",
+      "choice": [
+
+      ],
+      "default": "/var/log/tomcat6/dump.tmp",
+      "recipes": [
+
+      ],
+      "type": "string"
+    },
+    "app_tomcat/java/MaxPermSize": {
+      "description": "The java MaxPermSize argument (i.e. 256m)",
+      "required": "optional",
+      "calculated": false,
+      "display_name": "Tomcat Java MaxPermSize",
+      "choice": [
+
+      ],
+      "default": "256m",
+      "recipes": [
+
+      ],
+      "type": "string"
+    },
+    "app_tomcat/java/JmxPort": {
+      "description": "The jmx port number argument (i.e. 9004)",
+      "required": "optional",
+      "calculated": false,
+      "display_name": "Tomcat JMX port number",
+      "choice": [
+
+      ],
+      "default": "9004",
+      "recipes": [
+
+      ],
+      "type": "string"
+    },
+    "app_tomcat/java/xmx": {
+      "description": "The java Xmx argument (i.e. 512m)",
+      "required": "optional",
+      "calculated": false,
+      "display_name": "Tomcat Java XMX",
+      "choice": [
+
+      ],
+      "default": "512m",
+      "recipes": [
+
+      ],
+      "type": "string"
+    }
+  },
+  "version": "0.2.1",
+  "providing": {
+  },
+  "suggestions": {
+  },
+  "license": "Copyright Inmobi, Inc. All rights reserved.",
+  "conflicting": {
+  },
+  "platforms": {
+  }
+}
