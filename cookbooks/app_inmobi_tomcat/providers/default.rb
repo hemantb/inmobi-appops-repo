@@ -40,8 +40,10 @@ action :install do
   log "  Packages which will be installed: #{packages}"
   packages .each do |p|
     log "installing #{p}"
-    package p
-
+    package p do
+	options "--force-yes"
+	action :install
+    end
   end
   # Executing java alternatives command, this will set installed java as choose as default
   execute "alternatives" do
