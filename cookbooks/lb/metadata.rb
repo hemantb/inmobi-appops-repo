@@ -6,6 +6,9 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "1.0.0"
 
 depends "lb_haproxy"
+depends "lb_clb"
+depends "lb_elb"
+depends "apache2"
 depends "app", ">= 1.0"
 
 recipe "lb::default", "This loads the required load balancer resources."
