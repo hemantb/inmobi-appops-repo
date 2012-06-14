@@ -1,0 +1,16 @@
+Alias /deb <%= node[:aptFTPArchive][:aptRootPath] %>
+<Directory <%= node[:aptFTPArchive][:aptRootPath] %>>
+        Options FollowSymLinks
+        AllowOverride None
+        Options +Indexes
+        
+</Directory>
+
+ErrorLog /var/log/apache2/drepo-error.log
+
+# Possible values include: debug, info, notice, warn, error, crit,
+# alert, emerg.
+LogLevel warn
+
+CustomLog /var/log/apache2/drepo-access.log combined
+
