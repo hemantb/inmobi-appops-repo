@@ -6,7 +6,7 @@
 # if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
 # Required attributes that determine which provider to use.
-set_unless[:inmobi_lb][:service][:provider] = "lb_haproxy"
+set_unless[:inmobi_lb][:service][:provider] = "inmobi_lb"
 
 # Logical name for the application (balancing group) to use.
 #set_unless[:inmobi_lb][:vhost_names] = "default"

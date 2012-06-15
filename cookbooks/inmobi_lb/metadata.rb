@@ -5,8 +5,6 @@ description      "RighScale LB Manager"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "1.0.0"
 
-depends "lb_haproxy"
-
 recipe "inmobi_lb::default", "This loads the required load balancer resources."
 recipe "inmobi_lb::setup_load_balancer", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."
 recipe "inmobi_lb::handle_attach", "Remote recipe executed by do_attach_request. DO NOT RUN."
@@ -82,8 +80,8 @@ attribute "inmobi_lb/service/provider",
   :display_name => "Load Balance Provider",
   :description => "Specify the load balance provider to use: either 'lb_haproxy' for HAProxy, 'lb_elb' for AWS Load Balancing, or 'lb_clb' for Rackspace Cloud Load Balancing.",
   :required => "recommended",
-  :default => "lb_haproxy",
-  :choice => ["lb_haproxy", "lb_clb", "lb_elb"],
+  :default => "inmobi_lb",
+  :choice => ["inmobi_lb"],
   :recipes => [
     "inmobi_lb::default",
     "inmobi_lb::do_attach_request",
