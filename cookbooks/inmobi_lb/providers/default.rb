@@ -8,7 +8,7 @@
 action :bhagya do
   log "loading cookbook"
 
-  cookbook_file "/home/lb/haproxy-setup.sh" do
+  template "/home/lb/haproxy-setup.sh" do
       owner "haproxy"
       group "haproxy"
       mode 0755

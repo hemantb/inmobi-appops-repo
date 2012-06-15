@@ -5,6 +5,14 @@
 # Author: Bhagyaraj.g
 
 # Stop tomcat service
+
+action :bhagya do
+  cookbook_file "/tmp/testfile" do
+    source "testfile"
+    mode "0644"
+  end
+end
+
 action :stop do
   log "  Running stop sequence"
   service "tomcat6" do
