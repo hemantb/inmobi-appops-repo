@@ -15,7 +15,7 @@ def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
-VHOST_NAMES = node[:lb][:vhost_names]
+VHOST_NAMES = node[:inmobi_lb][:vhost_names]
 
 log "  Install load balancer"
 
