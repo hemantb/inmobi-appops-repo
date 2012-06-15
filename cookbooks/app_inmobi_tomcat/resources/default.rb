@@ -13,8 +13,6 @@ actions :install
 # Action designed to setup APP LWRP with common parameters required for apache vhost file
 actions :setup_config
 
-actions :bhagya
-
 #  # Application root
 #  attribute :root, :kind_of => String
 #  # Application port
