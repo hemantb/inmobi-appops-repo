@@ -1,9 +1,6 @@
 # 
 # Cookbook Name:: lb_haproxy
 #
-# Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
-# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
-# if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
 # HTTP-only virtual host template
 #
@@ -13,14 +10,14 @@
 
 <VirtualHost *:80>
 
-     ServerName <%= node[:lb][:host] %>
+     ServerName <%= node[:inmobi_lb][:host] %>
      UseCanonicalName On
      
-     DocumentRoot /home/webapp/<%= node[:rails][:application_name] %>/public
+     DocumentRoot /opt/mkhoj/share/webapp/<%= node[:rails][:application_name] %>/public
       <DirectoryMatch  /\.git/|/\.svn/ >
        Deny from all
      </DirectoryMatch>
-     <Directory "/home/webapp/<%= node[:rails][:application_name] %>/public">
+     <Directory "/opt/mkhoj/share/webapp/<%= node[:rails][:application_name] %>/public">
       Options FollowSymLinks
       AllowOverride None
       Order allow,deny
@@ -42,7 +39,7 @@
      RewriteRule ^/(.*)$ /$1 [QSA,L]
 
      # Proxy the rest to the load balancer 
-     RewriteRule ^/(.*)$ http://127.0.0.1:<%= node[:lb][:bind_port] %>%{REQUEST_URI} [P,QSA,L]
+     RewriteRule ^/(.*)$ http://127.0.0.1:<%= node[:inmobi_lb][:bind_port] %>%{REQUEST_URI} [P,QSA,L]
 
      LogLevel warn
 

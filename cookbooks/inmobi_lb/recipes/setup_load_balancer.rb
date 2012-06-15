@@ -1,9 +1,6 @@
 # 
-# Cookbook Name:: lb
+# Cookbook Name:: inmobi_lb
 #
-# Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
-# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
-# if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
 rightscale_marker :begin
 
@@ -23,13 +20,12 @@ inmobi_lb vhosts(node[:inmobi_lb][:vhost_names]).first do
   action :install
 end
 
+log "Adding vhosts"
 
-#log "Adding vhosts"
-
-#vhosts(VHOST_NAMES).each do |vhost_name|
-#  inmobi_lb vhost_name do
-#    action :add_vhost
-#  end
-#end
+vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
+  inmobi_lb vhost_name do
+    action :add_vhost
+  end
+end
 
 rightscale_marker :end

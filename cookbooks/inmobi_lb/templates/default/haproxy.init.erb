@@ -16,11 +16,11 @@ else
 fi
 
 
-BASEDIR="/home/lb"
+BASEDIR="/opt/mkhoj/conf/lb"
 HABINARY="/usr/sbin/haproxy"
 
 #relative, for chrooted environment
-HACONFIG="$BASEDIR/rightscale_lb.cfg"
+HACONFIG="$BASEDIR/inmobi_lb.cfg"
 PIDFILE=`perl -nle 'print for m/\s*pidfile\s+([^\s]+)/'  $HACONFIG`
 
 

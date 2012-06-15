@@ -14,5 +14,5 @@ backend <%= @backend_name_line %>
         <%= @health_check_line %>
 
         # Special server line that allow HAProxy to start with cookies enabled and no valid servers.
-        server disabled-server 127.0.0.1:1 disabled
+        server disabled-server 127.0.0.1:1 check downinter 2000d
 

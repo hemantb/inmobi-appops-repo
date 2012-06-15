@@ -1,9 +1,6 @@
 # 
 # Cookbook Name:: lb
 #
-# Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
-# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
-# if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
 # Required attributes that determine which provider to use.
 set_unless[:inmobi_lb][:service][:provider] = "inmobi_lb"
@@ -37,7 +34,7 @@ set_unless[:inmobi_lb][:cron_reconverge_minute] = "#{5+rand(50)}"
 set_unless[:inmobi_lb][:appserver_list] = {}
 
 # Config file used by load balancer.
-set_unless[:inmobi_lb][:cfg_file] = "/home/lb/rightscale_lb.cfg"
+set_unless[:inmobi_lb][:cfg_file] = "/opt/mkhoj/conf/lb/inmobi_lb.cfg"
 
 # Web service name based on OS.
 case platform
