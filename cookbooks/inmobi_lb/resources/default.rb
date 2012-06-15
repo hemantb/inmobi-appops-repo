@@ -46,8 +46,6 @@ attribute :service_account_secret, :kind_of => String, :default => ""
 #
 add_action :install
 
-add_action :bhagya
-
 # Add Vhost
 # Configures load balancer to answer for specified virtual host
 #
