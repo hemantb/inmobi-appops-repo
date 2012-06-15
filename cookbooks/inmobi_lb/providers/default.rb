@@ -5,17 +5,6 @@
 # RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
 # if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
-action :bhagya do
-  log "loading cookbook"
-
-  template "/home/lb/haproxy-setup.sh" do
-      owner "haproxy"
-      group "haproxy"
-      mode 0755
-      source "haproxy-cat.sh"
-  end
-end
-
 action :install do
 
   log "  Installing haproxy"
@@ -58,13 +47,13 @@ action :install do
   end
 
   # Install script that concatenates individual server files after the haproxy config head into the haproxy config.
-  #cookbook_file "/home/lb/haproxy-cat.sh" do
-  #  owner "haproxy"
-  #  group "haproxy"
-  #  mode 0755
-  #  source "haproxy-cat.sh"
-# #   cookbook "lb_haproxy"
-  #end
+  template "/home/lb/haproxy-cat.sh" do
+    owner "haproxy"
+    group "haproxy"
+    mode 0755
+    source "haproxy-cat.sh"
+#    cookbook "lb_haproxy"
+  end
 
   # Install the haproxy config head which is the part of the haproxy config that doesn't change.
   template "/home/lb/rightscale_lb.cfg.head" do
