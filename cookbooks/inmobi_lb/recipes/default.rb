@@ -7,10 +7,6 @@
 
 rightscale_marker :begin
 
-#class Chef::Recipe
-#  include RightScale::App::Helper
-#end
-
 log "  Setup default load balancer resource."
 
 # Set provider for each vhost.
