@@ -7,11 +7,7 @@
 
 rightscale_marker :begin
 
-#class Chef::Recipe
-#  include RightScale::App::Helper
-#end
-
-#include_recipe "inmobi_lb::default"
+include_recipe "inmobi_lb::default"
 
 def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
@@ -25,16 +21,17 @@ log "  Install load balancer"
 # Any vhost name set with provider can be used. Using first one in list to make it simple.
 log "Installing software #{VHOST_NAMES}"
 
-inmobi_lb vhosts(VHOST_NAMES).first do
-  action :install
-end
+#inmobi_lb vhosts(VHOST_NAMES).first do
+#  action :install
+#end
 
-log "Adding vhosts"
 
-vhosts(VHOST_NAMES).each do |vhost_name|
-  inmobi_lb vhost_name do
-    action :add_vhost
-  end
-end
+#log "Adding vhosts"
+
+#vhosts(VHOST_NAMES).each do |vhost_name|
+#  inmobi_lb vhost_name do
+#    action :add_vhost
+#  end
+#end
 
 rightscale_marker :end
