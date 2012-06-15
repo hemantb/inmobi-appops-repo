@@ -7,6 +7,7 @@ version          "1.0.0"
 
 recipe "inmobi_lb::default", "This loads the required load balancer resources."
 recipe "inmobi_lb::setup_load_balancer", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."
+recipe "inmobi_lb::setup_load_balancer2", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."
 recipe "inmobi_lb::handle_attach", "Remote recipe executed by do_attach_request. DO NOT RUN."
 recipe "inmobi_lb::handle_detach", "Remote recipe executed by do_detach_request. DO NOT RUN."
 recipe "inmobi_lb::do_attach_all", "Registers all running application servers with the loadbalancer:<vhost_name>=app tags. This should be run on a load balancer to connect all application servers in deployment."
