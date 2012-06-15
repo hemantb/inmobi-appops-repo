@@ -1,7 +1,7 @@
 maintainer       "Inmobi, Inc."
 maintainer_email "bhagyaraj.g@inmobi.com"
 license          "Copyright Inmobi, Inc. All rights reserved."
-description      "HAProxy LB Manager"
+description      "Inmobi HAProxy LB Manager"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "1.0.0"
 
