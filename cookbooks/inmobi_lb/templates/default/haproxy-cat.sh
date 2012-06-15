@@ -10,7 +10,7 @@ CONF_FILE=/opt/mkhoj/conf/lb/inmobi_lb.cfg
 
 cat /opt/mkhoj/conf/lb/inmobi_lb.cfg.head > ${CONF_FILE}
 
-echo "frontend all_requests 127.0.0.1:85" >> ${CONF_FILE}
+echo "frontend all_requests 0.0.0.0:85" >> ${CONF_FILE}
 
 vhosts=""
 
