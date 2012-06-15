@@ -7,10 +7,6 @@
 
 rightscale_marker :begin
 
-#class Chef::Recipe
-#  include RightScale::App::Helper
-#end
-
 log "  Override load balancer to use HAProxy."
 node[:lb][:service][:provider] = "lb_haproxy"
 
