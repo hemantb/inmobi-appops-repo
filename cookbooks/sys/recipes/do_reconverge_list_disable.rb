@@ -5,17 +5,17 @@
 # RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
 # if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
-rightscale_marker :begin
+rs_utils_marker :begin
 
 node[:sys][:reconverge_list].split(" ").each do |recipe|
-
-  log "  Removing re-converge task for #{recipe}"
-
+      
+  log "Removing re-converge task for #{recipe}"
+    
   sys_reconverge "Disable recipe re-converge" do
     recipe_name recipe
     action :disable
   end
-
+    
 end if node[:sys]
 
-rightscale_marker :end
+rs_utils_marker :end

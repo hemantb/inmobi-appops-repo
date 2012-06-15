@@ -2,34 +2,17 @@
 
 == DESCRIPTION:
 
-This cookbook provides recipes for setting up a server for RightScale. This
-includes setting up the running of periodic recipes and setting up swap.
+RightScale system utilities 
+
+== DETAILS:
 
 == REQUIREMENTS:
 
-* Requires a VM launched from a RightScale managed RightImage.
+Requires a VM launched from a RightScale managed RightImage
 
-== COOKBOOKS DEPENDENCIES:
+== SETUP:
 
-Please see <tt>metadata.rb</tt> file for the latest dependencies.
-
-== KNOWN LIMITATIONS:
-
-There are no known limitations.
-
-== SETUP/USAGE:
-
-* Place the <tt>sys::default</tt> recipe into the boot recipes to have your
-  server set up with any periodic recipes from the inputs.
-* Place the <tt>sys::setup_swap</tt> recipe into the boot recipes to set up
-  swap on your server. You may wish to use ephemeral storage for swap, in that
-  case you should include the <tt>block_device::setup_ephemeral</tt> recipe
-  before it.
-* You can disable and enable the periodic recipes running by running the
-  <tt>sys::do_reconverge_list_disable</tt> and
-  <tt>sys::do_reconverge_list_enable</tt> recipes.
-
-== DETAILS:
+== USAGE:
 
 === Sysem Consistency (re-convergence)
 
@@ -48,9 +31,10 @@ There are no known limitations.
         action :disable
       end
 
-= LICENSE:
+== KNOWN LIMITATIONS:
 
-Copyright RightScale, Inc. All rights reserved.  All access and use subject to
-the RightScale Terms of Service available at http://www.rightscale.com/terms.php
-and, if applicable, other agreements such as a RightScale Master Subscription
-Agreement.
+= LICENSE
+
+Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
+RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
+if applicable, other agreements such as a RightScale Master Subscription Agreement.
