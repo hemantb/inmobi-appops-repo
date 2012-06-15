@@ -19,6 +19,7 @@ def vhosts(vhost_list)
 end
 
 vhosts(node[:lb][:vhost_names]).each do | vhost_name |
+  log "Adding provider name as #{node[:lb][:service][:provider]}"
   lb vhost_name do
     provider node[:lb][:service][:provider]
     persist true # Store this resource in node between converges.
