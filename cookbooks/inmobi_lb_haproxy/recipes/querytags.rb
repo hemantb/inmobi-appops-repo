@@ -1,3 +1,5 @@
+a = "Hello".gsub(/H/,"h")
+
 remote_recipe "Attach me to load balancer" do
     recipe "inmobi_lb_haproxy::runremote"
     attributes :remote_recipe => {
