@@ -11,6 +11,8 @@ rightscale_marker :begin
 #  include RightScale::App::Helper
 #end
 
+include_recipe "inmobi_lb::default"
+
 def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
