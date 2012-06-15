@@ -12,6 +12,8 @@ depends "apache2"
 depends "app", ">= 1.0"
 
 recipe "inmobi_lb_haproxy::testing", "This loads the required load balancer resources."
+recipe "inmobi_lb_haproxy::runremote", "This loads the required load balancer resources."
+recipe "inmobi_lb_haproxy::querytags", "This loads the required load balancer resources."
 recipe "lb::default", "This loads the required load balancer resources."
 recipe "lb::setup_load_balancer", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."
 recipe "lb::handle_attach", "Remote recipe executed by do_attach_request. DO NOT RUN."
