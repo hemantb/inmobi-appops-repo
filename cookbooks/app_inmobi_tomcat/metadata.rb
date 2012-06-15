@@ -9,6 +9,7 @@ depends "app"
 depends "rightscale"
 
 recipe  "app_tomcat::default", "Installs the tomcat application server."
+recipe  "app_tomcat::debinst", "Install tomcat related applicationd debians."
 
 #Java tuning parameters
 

@@ -1,31 +1,36 @@
 {
-  "dependencies": {
-    "rightscale": ">= 0.0.0",
-    "app": ">= 0.0.0"
+  "groupings": {
+  },
+  "maintainer_email": "bhagyaraj.g@inmobi.com",
+  "suggestions": {
   },
   "description": "Installs the tomcat application server.",
-  "replacing": {
+  "platforms": {
+  },
+  "name": "app_inmobi_tomcat",
+  "version": "0.2.1",
+  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
+  "providing": {
+  },
+  "dependencies": {
+    "app": ">= 0.0.0",
+    "rightscale": ">= 0.0.0"
   },
   "recommendations": {
   },
-  "name": "app_inmobi_tomcat",
-  "maintainer": "Inmobi",
-  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
-  "groupings": {
-  },
   "recipes": {
+    "app_tomcat::debinst": "Install tomcat related applicationd debians.",
     "app_tomcat::default": "Installs the tomcat application server."
   },
-  "maintainer_email": "bhagyaraj.g@inmobi.com",
   "attributes": {
     "app_tomcat/java/HeapDumpPath": {
-      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
-      "required": "optional",
       "calculated": false,
+      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
       "display_name": "Tomcat Java HeapDumpPath",
       "choice": [
 
       ],
+      "required": "optional",
       "default": "/var/log/tomcat6/dump.tmp",
       "recipes": [
 
@@ -33,56 +38,52 @@
       "type": "string"
     },
     "app_tomcat/java/MaxPermSize": {
-      "description": "The java MaxPermSize argument (i.e. 256m)",
-      "required": "optional",
       "calculated": false,
+      "description": "The java MaxPermSize argument (i.e. 256m)",
       "display_name": "Tomcat Java MaxPermSize",
       "choice": [
 
       ],
+      "required": "optional",
       "default": "256m",
       "recipes": [
 
       ],
       "type": "string"
     },
-    "app_tomcat/java/JmxPort": {
-      "description": "The jmx port number argument (i.e. 9004)",
-      "required": "optional",
+    "app_tomcat/java/xmx": {
       "calculated": false,
-      "display_name": "Tomcat JMX port number",
+      "description": "The java Xmx argument (i.e. 512m)",
+      "display_name": "Tomcat Java XMX",
       "choice": [
 
       ],
-      "default": "9004",
+      "required": "optional",
+      "default": "512m",
       "recipes": [
 
       ],
       "type": "string"
     },
-    "app_tomcat/java/xmx": {
-      "description": "The java Xmx argument (i.e. 512m)",
-      "required": "optional",
+    "app_tomcat/java/JmxPort": {
       "calculated": false,
-      "display_name": "Tomcat Java XMX",
+      "description": "The jmx port number argument (i.e. 9004)",
+      "display_name": "Tomcat JMX port number",
       "choice": [
 
       ],
-      "default": "512m",
+      "required": "optional",
+      "default": "9004",
       "recipes": [
 
       ],
       "type": "string"
     }
   },
-  "version": "0.2.1",
-  "providing": {
+  "replacing": {
   },
-  "suggestions": {
-  },
-  "license": "Copyright Inmobi, Inc. All rights reserved.",
   "conflicting": {
   },
-  "platforms": {
-  }
+  "license": "Copyright Inmobi, Inc. All rights reserved.",
+  "maintainer": "Inmobi"
 }
