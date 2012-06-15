@@ -41,7 +41,7 @@ module RightScale
       #
       # @return [Array<String>] Array of vhosts
       def vhosts(vhost_list)
-        return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+        return vhost_list.split(",").uniq.each
       end
 
     end
