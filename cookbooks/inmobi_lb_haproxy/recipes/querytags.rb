@@ -1,5 +1,7 @@
-remote_recipe "remote recipe for lbchecks" do
-  recipe "inmobi_lb_haproxy::runremote"
-  attributes { turns => "10", from => @node[:rightscale][:instance_uuid] }
-  recipients_tags ["loadbalancer:cms=lb"]
+remote_recipe "Attach me to load balancer" do
+    recipe "inmobi_lb_haproxy::runremote"
+    attributes :remote_recipe => {
+      :vhost_names => "cmsapplicationhost"
+    }
+    recipients_tags "loadbalancer:cms=lb"
 end
