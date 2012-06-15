@@ -5,6 +5,17 @@
 # RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
 # if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
+action :bhagya do
+  log "loading cookbook"
+
+  cookbook_file "/home/lb/haproxy-setup.sh" do
+      owner "haproxy"
+      group "haproxy"
+      mode 0755
+      source "haproxy-cat.sh"
+  end
+end
+
 action :install do
 
   log "  Installing haproxy"
