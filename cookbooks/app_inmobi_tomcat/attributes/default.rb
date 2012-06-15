@@ -6,6 +6,7 @@
 
 # Recommended attributes
 
+set_unless[:app_tomcat][:webapp][:vhosts] = nil
 # Defines the maximum value of the permanent generation space size
 set_unless[:app_tomcat][:java][:maxpermsize] = "256m"
 # Defines the maximum size of the heap used by the JVM

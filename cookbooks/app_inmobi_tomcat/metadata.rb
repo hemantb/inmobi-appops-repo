@@ -77,3 +77,9 @@ attribute "app_tomcat/webapp/restart",
   :required => "optional",
   :default => "true",
   :recipes => [ "app_inmobi_tomcat::debinst" ]
+
+attribute "app_tomcat/webapp/vhosts",
+  :display_name => "Give space separated list of pkg1=version1,pkg2=version2,... entries",
+  :description => "If version number is omitted packagename with latest version will be installed",
+  :required => "optional",
+  :recipes => [ "app_inmobi_tomcat::debinst" ]

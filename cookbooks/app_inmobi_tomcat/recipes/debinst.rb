@@ -12,4 +12,11 @@ when "true"
   end
 end
 
+if node[:app_tomcat][:webapp][:vhosts] do
+  node[:app_tomcat][:webapp][:vhosts] .each do |vhost_name|
+    log "Adding tag for loadbalancer:#{vhost_name}=app"
+    right_link_tag "loadbalancer:#{vhost_name}=app"
+  end
+end
+
 rs_utils_marker :end
