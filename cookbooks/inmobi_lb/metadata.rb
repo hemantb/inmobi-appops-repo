@@ -17,7 +17,7 @@ recipe "inmobi_lb::do_detach_request", "Sends request to all servers with loadba
 recipe "inmobi_lb::setup_reverse_proxy_config", "Configures Apache reverse proxy."
 recipe "inmobi_lb::setup_monitoring", "Installs the load balancer collectd plugin for monitoring support."
 
-attribute "lb/vhost_names",
+attribute "inmobi_lb/vhost_names",
   :display_name => "Virtual Host Names",
   :description => "Comma-separated list of host names for which the load balancer will answer website requests. First entry will be the default backend and will answer for all host names not listed here. A single entry of any name, e.g. 'default' or 'applistener', will mimic basic behavior of one load balancer with one pool of application servers. This will be used for naming server pool backends. Application servers must only provide 1 host name and will join server pool backends using this name (e.g., www.mysite.com, api.mysite.com, default.mysite.com).",
   :required => true,
@@ -78,7 +78,7 @@ attribute "lb/health_check_uri",
     "inmobi_lb::handle_attach"
   ]
 
-attribute "lb/service/provider",
+attribute "inmobi_lb/service/provider",
   :display_name => "Load Balance Provider",
   :description => "Specify the load balance provider to use: either 'lb_haproxy' for HAProxy, 'lb_elb' for AWS Load Balancing, or 'lb_clb' for Rackspace Cloud Load Balancing.",
   :required => "recommended",

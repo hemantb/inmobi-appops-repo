@@ -18,10 +18,10 @@ def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
-vhosts(node[:lb][:vhost_names]).each do | vhost_name |
+vhosts(node[:inmobi_lb][:vhost_names]).each do | vhost_name |
   log "Adding provider name as #{node[:lb][:service][:provider]}"
   lb vhost_name do
-    provider node[:lb][:service][:provider]
+    provider node[:inmobi_lb][:service][:provider]
     persist true # Store this resource in node between converges.
     action :nothing
   end
