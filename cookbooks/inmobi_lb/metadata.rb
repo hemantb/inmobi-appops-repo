@@ -7,15 +7,15 @@ version          "1.0.0"
 
 depends "lb_haproxy"
 
-recipe "lb::default", "This loads the required load balancer resources."
-recipe "lb::setup_load_balancer", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."
-recipe "lb::handle_attach", "Remote recipe executed by do_attach_request. DO NOT RUN."
-recipe "lb::handle_detach", "Remote recipe executed by do_detach_request. DO NOT RUN."
-recipe "lb::do_attach_all", "Registers all running application servers with the loadbalancer:<vhost_name>=app tags. This should be run on a load balancer to connect all application servers in deployment."
-recipe "lb::do_attach_request", "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to attach current server to listener pool. This should be run by a new application server that is ready to accept connections."
-recipe "lb::do_detach_request", "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to detach current server from listener pool. This should be run by an application server at decommission."
-recipe "lb::setup_reverse_proxy_config", "Configures Apache reverse proxy."
-recipe "lb::setup_monitoring", "Installs the load balancer collectd plugin for monitoring support."
+recipe "inmobi_lb::default", "This loads the required load balancer resources."
+recipe "inmobi_lb::setup_load_balancer", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."
+recipe "inmobi_lb::handle_attach", "Remote recipe executed by do_attach_request. DO NOT RUN."
+recipe "inmobi_lb::handle_detach", "Remote recipe executed by do_detach_request. DO NOT RUN."
+recipe "inmobi_lb::do_attach_all", "Registers all running application servers with the loadbalancer:<vhost_name>=app tags. This should be run on a load balancer to connect all application servers in deployment."
+recipe "inmobi_lb::do_attach_request", "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to attach current server to listener pool. This should be run by a new application server that is ready to accept connections."
+recipe "inmobi_lb::do_detach_request", "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to detach current server from listener pool. This should be run by an application server at decommission."
+recipe "inmobi_lb::setup_reverse_proxy_config", "Configures Apache reverse proxy."
+recipe "inmobi_lb::setup_monitoring", "Installs the load balancer collectd plugin for monitoring support."
 
 attribute "lb/vhost_names",
   :display_name => "Virtual Host Names",
@@ -23,13 +23,13 @@ attribute "lb/vhost_names",
   :required => "recommended",
   :default => "default",
   :recipes => [
-    "lb::default",
-    "lb::do_attach_request",
-    "lb::handle_attach",
-    "lb::do_detach_request",
-    "lb::handle_detach",
-    "lb::setup_load_balancer",
-    "lb::do_attach_all"
+    "inmobi_lb::default",
+    "inmobi_lb::do_attach_request",
+    "inmobi_lb::handle_attach",
+    "inmobi_lb::do_detach_request",
+    "inmobi_lb::handle_detach",
+    "inmobi_lb::setup_load_balancer",
+    "inmobi_lb::do_attach_all"
   ]
 
 attribute "lb/stats_uri",
@@ -38,7 +38,7 @@ attribute "lb/stats_uri",
   :required => "optional",
   :default => "/haproxy-status",
   :recipes => [
-    "lb::setup_load_balancer"
+    "inmobi_lb::setup_load_balancer"
   ]
 
 attribute "lb/stats_user",
@@ -47,7 +47,7 @@ attribute "lb/stats_user",
   :required => "optional",
   :default => "",
   :recipes => [
-    "lb::setup_load_balancer"
+    "inmobi_lb::setup_load_balancer"
   ]
 
 attribute "lb/stats_password",
@@ -56,7 +56,7 @@ attribute "lb/stats_password",
   :required => "optional",
   :default => "",
   :recipes => [
-    "lb::setup_load_balancer"
+    "inmobi_lb::setup_load_balancer"
   ]
 
 attribute "lb/session_stickiness",
@@ -66,7 +66,7 @@ attribute "lb/session_stickiness",
   :choice => ["true", "false"],
   :default => "true",
   :recipes => [
-    "lb::handle_attach"
+    "inmobi_lb::handle_attach"
   ]
 
 attribute "lb/health_check_uri",
@@ -75,8 +75,8 @@ attribute "lb/health_check_uri",
   :required => "optional",
   :default => "/",
   :recipes => [
-    "lb::setup_load_balancer",
-    "lb::handle_attach"
+    "inmobi_lb::setup_load_balancer",
+    "inmobi_lb::handle_attach"
   ]
 
 attribute "lb/service/provider",
@@ -86,9 +86,9 @@ attribute "lb/service/provider",
   :default => "lb_haproxy",
   :choice => ["lb_haproxy", "lb_clb", "lb_elb"],
   :recipes => [
-    "lb::default",
-    "lb::do_attach_request",
-    "lb::do_detach_request"
+    "inmobi_lb::default",
+    "inmobi_lb::do_attach_request",
+    "inmobi_lb::do_detach_request"
   ]
 
 attribute "lb/service/region",
@@ -98,9 +98,9 @@ attribute "lb/service/region",
   :default => "ORD (Chicago)",
   :choice => ["ORD (Chicago)", "DFW (Dallas/Ft. Worth)", "LON (London)"],
   :recipes => [
-    "lb::default",
-    "lb::do_attach_request",
-    "lb::do_detach_request"
+    "inmobi_lb::default",
+    "inmobi_lb::do_attach_request",
+    "inmobi_lb::do_detach_request"
   ]
 
 attribute "lb/service/lb_name",
@@ -108,9 +108,9 @@ attribute "lb/service/lb_name",
   :description => "Name of the Cloud Load Balancer or Elastic Load Balancer device.",
   :required => "optional",
   :recipes => [
-    "lb::default",
-    "lb::do_attach_request",
-    "lb::do_detach_request"
+    "inmobi_lb::default",
+    "inmobi_lb::do_attach_request",
+    "inmobi_lb::do_detach_request"
   ]
 
 attribute "lb/service/account_id",
@@ -118,9 +118,9 @@ attribute "lb/service/account_id",
   :description => "If using Rackspace Cloud Load Balancing, specify the Rackspace username to use for authentication (e.g., cred:RACKSPACE_USERNAME).",
   :required => "optional",
   :recipes => [
-    "lb::default",
-    "lb::do_attach_request",
-    "lb::do_detach_request"
+    "inmobi_lb::default",
+    "inmobi_lb::do_attach_request",
+    "inmobi_lb::do_detach_request"
   ]
 
 attribute "lb/service/account_secret",
@@ -128,7 +128,7 @@ attribute "lb/service/account_secret",
   :description => "If using Rackspace Cloud Load Balancing, specify the Rackspace API key to use for authentication (e.g. cred:RACKSPACE_AUTH_KEY).",
   :required => "optional",
   :recipes => [
-    "lb::default",
-    "lb::do_attach_request",
-    "lb::do_detach_request"
+    "inmobi_lb::default",
+    "inmobi_lb::do_attach_request",
+    "inmobi_lb::do_detach_request"
   ]
