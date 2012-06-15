@@ -21,7 +21,6 @@ attribute "lb/vhost_names",
   :display_name => "Virtual Host Names",
   :description => "Comma-separated list of host names for which the load balancer will answer website requests. First entry will be the default backend and will answer for all host names not listed here. A single entry of any name, e.g. 'default' or 'applistener', will mimic basic behavior of one load balancer with one pool of application servers. This will be used for naming server pool backends. Application servers must only provide 1 host name and will join server pool backends using this name (e.g., www.mysite.com, api.mysite.com, default.mysite.com).",
   :required => true,
-  :default => "default",
   :recipes => [
     "inmobi_lb::default",
     "inmobi_lb::do_attach_request",
