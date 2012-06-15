@@ -7,12 +7,45 @@
 
 rightscale_marker :begin
 
-class Chef::Recipe
-  include RightScale::LB::Helper
-end
+#class Chef::Recipe
+#  include RightScale::LB::Helper
+#end
 
 def vhosts(vhost_list)
    return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+end
+
+def get_attached_servers(vhost_name)
+        attached_servers = Set.new
+        haproxy_d = "/opt/mkhoj/conf/lb/lb_haproxy.d/#{vhost_name}"
+        Dir.entries(haproxy_d).select do |file|
+          next if file == "." or file == ".."
+          attached_servers.add?(file)
+        end if (::File.directory?(haproxy_d))
+
+        attached_servers
+end
+
+def query_appservers(vhost_name)
+        app_servers = Hash.new
+
+        r=rightscale_server_collection 'app_servers' do
+          tags ["loadbalancer:#{vhost_name}=app"]
+          secondary_tags ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
+          action :nothing
+        end
+        r.run_action(:load)
+
+        node[:server_collection]['app_servers'].to_hash.values.each do |tags|
+          uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
+          ip = RightScale::Utils::Helper.get_tag_value('appserver:listen_ip', tags)
+          port = RightScale::Utils::Helper.get_tag_value('appserver:listen_port', tags)
+          app_servers[uuid] = {}
+          app_servers[uuid][:ip] = ip
+          app_servers[uuid][:backend_port] = port.to_i
+        end
+
+        app_servers
 end
 
 DROP_THRESHOLD = 3
