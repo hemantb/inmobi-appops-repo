@@ -13,17 +13,15 @@ def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
-VHOST_NAMES = node[:inmobi_lb][:vhost_names]
-
 log "  Install load balancer"
 
 # In the 'install' action, the name is not used, but the provider from default recipe is needed.
 # Any vhost name set with provider can be used. Using first one in list to make it simple.
-log "Installing software #{VHOST_NAMES}"
+log "Installing software #{node[:inmobi_lb][:vhost_names]}"
 
-#inmobi_lb vhosts(VHOST_NAMES).first do
-#  action :install
-#end
+inmobi_lb vhosts(node[:inmobi_lb][:vhost_names]).first do
+  action :install
+end
 
 
 #log "Adding vhosts"
