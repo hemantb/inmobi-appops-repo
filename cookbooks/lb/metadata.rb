@@ -6,6 +6,10 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "1.0.0"
 
 depends "lb_haproxy"
+depends "lb_clb"
+depends "lb_elb"
+depends "apache2"
+depends "app", ">= 1.0"
 
 recipe "lb::default", "This loads the required load balancer resources."
 recipe "lb::setup_load_balancer", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."

@@ -7,8 +7,13 @@
 
 rightscale_marker :begin
 
-class Chef::Recipe
-  include RightScale::App::Helper
+#class Chef::Recipe
+#  include RightScale::App::Helper
+#end
+
+# Set provider for each vhost.
+def vhosts(vhost_list)
+  return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
 # Add the collectd exec plugin to the set of collectd plugins if it isn't already there.
@@ -24,7 +29,7 @@ directory File.join(node[:rightscale][:collectd_lib], "plugins") do
 end
 
 log "  Setup Monitoring"
-lb vhosts(node[:lb][:vhost_names]).first do
+inmobi_lb vhosts(node[:inmobi_lb][:vhost_names]).first do
   action :setup_monitoring
 end
 
