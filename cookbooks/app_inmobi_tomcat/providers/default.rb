@@ -142,13 +142,13 @@ action :setup_monitoring do
   log "  Setup of collectd monitoring for tomcat"
   rightscale_enable_collectd_plugin 'exec'
 
-  #include_recipe "rightscale::setup_monitoring"
+  include_recipe "rightscale::setup_monitoring"
  
   #installing and configuring collectd for tomcat
-  cookbook_file "/usr/share/java/collectd.jar" do
-    source "collectd.jar"
-    mode "0644"
-  end
+  #cookbook_file "/usr/share/java/collectd.jar" do
+  #  source "collectd.jar"
+  #  mode "0644"
+  #end
 
   #Linking collectd
   link "/usr/share/tomcat6/lib/collectd.jar" do
