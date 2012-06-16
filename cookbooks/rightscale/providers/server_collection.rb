@@ -20,6 +20,7 @@ action :load do
       all_tags = new_resource.tags.collect
       all_tags += new_resource.secondary_tags.collect if new_resource.secondary_tags
       delay = 1
+      log "All tags = #{all_tags.insert}"
       while true
         collection_resource.run_action(:load)
         collection = node[:server_collection][new_resource.name]
