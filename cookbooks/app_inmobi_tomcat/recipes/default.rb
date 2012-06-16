@@ -47,4 +47,7 @@ end
 include_recipe "rightscale::setup_timezone"
 include_recipe "rightscale::setup_server_tags"
 
+right_link_tag "appserver:active=true"
+right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
+
 rightscale_marker :end
