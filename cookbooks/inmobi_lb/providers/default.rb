@@ -19,9 +19,7 @@ action :install do
 
   # Install haproxy file depending on OS/platform.
   template "/etc/init.d/haproxy" do
-    only_if { node[:platform] == "centos" || node[:platform] == "redhat" || node[:platform] == "fedora" }
     source "haproxy.init.erb"
-#    cookbook "lb_haproxy"
     mode 0755
     notifies :restart, resources(:service => "haproxy")
   end
@@ -29,7 +27,6 @@ action :install do
   template "/etc/default/haproxy" do
     only_if { node[:platform] == "debian" || node[:platform] == "ubuntu" }
     source "default_haproxy.erb"
-#    cookbook "lb_haproxy"
     owner "root"
     notifies :restart, resources(:service => "haproxy")
   end
@@ -49,13 +46,11 @@ action :install do
     group "haproxy"
     mode 0755
     source "haproxy-cat.sh"
-#    cookbook "lb_haproxy"
   end
 
   # Install the haproxy config head which is the part of the haproxy config that doesn't change.
   template "/opt/mkhoj/conf/lb/inmobi_lb.cfg.head" do
     source "haproxy_http.erb"
-#    cookbook "lb_haproxy"
     owner "haproxy"
     group "haproxy"
     mode "0400"
@@ -68,7 +63,6 @@ action :install do
   # Install the haproxy config head which is the part of the haproxy config that doesn't change.
   template "/opt/mkhoj/conf/lb/inmobi_lb.cfg.default_backend" do
     source "haproxy_default_backend.erb"
-#    cookbook "lb_haproxy"
     owner "haproxy"
     group "haproxy"
     mode "0400"
@@ -97,7 +91,6 @@ action :add_vhost do
   # Create backend haproxy files for vhost it will answer for.
   template ::File.join("/opt/mkhoj/conf/lb/lb_haproxy.d", "#{vhost_name}.cfg") do
     source "haproxy_backend.erb"
-#    cookbook 'lb_haproxy'
     owner "haproxy"
     group "haproxy"
     mode "0400"
@@ -158,7 +151,6 @@ action :attach do
     group "haproxy"
     mode 0600
     backup false
-#    cookbook "lb_haproxy"
     variables(
       :backend_name => new_resource.backend_id,
       :backend_ip => new_resource.backend_ip,
@@ -247,7 +239,6 @@ action :setup_monitoring do
   # Install the haproxy collectd script into the collectd library plugins directory.
   remote_file(::File.join(node[:rightscale][:collectd_lib], "plugins", "haproxy")) do
     source "haproxy1.4.rb"
-#    cookbook "lb_haproxy"
     mode "0755"
   end
 
@@ -256,7 +247,6 @@ action :setup_monitoring do
     backup false
     source "haproxy_collectd_exec.erb"
     notifies :restart, resources(:service => "collectd")
-#    cookbook "lb_haproxy"
   end
 
   ruby_block "add_collectd_gauges" do

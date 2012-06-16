@@ -10,7 +10,7 @@ log "  Setting provider specific settings for tomcat"
 
 case node[:platform]
 when "ubuntu", "debian"
-    node[:app_tomcat][:packages] = [
+    node[:app_inmobi_tomcat][:packages] = [
       "mkhoj-base",
       "tomcat6",
       "tomcat6-common",
@@ -18,7 +18,7 @@ when "ubuntu", "debian"
       "sun-java6-jre"
     ]
 when "centos", "fedora", "suse", "redhat", "redhatenterpriseserver"
-    node[:app_tomcat][:packages] = [
+    node[:app_inmobi_tomcat][:packages] = [
       "eclipse-ecj",
       "tomcat6",
       "tomcat6-admin-webapps",
@@ -29,13 +29,18 @@ end
 
 app_inmobi_tomcat "install_packages" do
   persist true
-  packages node[:app_tomcat][:packages]
+  packages node[:app_inmobi_tomcat][:packages]
   action :install
 end
 
 app_inmobi_tomcat "setup_configuration" do
   persist true
   action :setup_config
+end
+
+app_inmobi_tomcat "setup_monitoring" do
+  persist true
+  action :setup_monitoring
 end
 
 rs_utils_marker :end

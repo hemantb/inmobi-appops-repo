@@ -28,4 +28,6 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
   end
 end
 
+include_recipe "inmobi_lb::setup_monitoring"
+
 rightscale_marker :end

@@ -1,11 +1,8 @@
 #
-# Cookbook Name:: lb
+# Cookbook Name:: inmobi_lb
 #
-# Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
-# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
-# if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
-module RightScale
+module Inmobi
   module LB
     module Helper
 
@@ -49,12 +46,9 @@ module RightScale
         r.run_action(:load)
         collection = node[:server_collection]["app_servers"]
 
-	Chef::Log.info "I am here checking..."
         break if collection.empty?
         break if !collection.empty? && collection.all? do |id, tags|
-            Chef::Log.info "atlease I am here"
           all_tags.all? do |prefix|
-            Chef::Log.info "checking for #{prefix} and tags as #{tags.inspect} for id #{id}"
             tags.detect { |tag| RightScale::Utils::Helper.matches_tag_wildcard?(prefix, tag) }
           end
         end

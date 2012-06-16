@@ -7,10 +7,6 @@
 
 rightscale_marker :begin
 
-#class Chef::Recipe
-#  include RightScale::App::Helper
-#end
-
 # Set provider for each vhost.
 def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each

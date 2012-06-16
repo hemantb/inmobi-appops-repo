@@ -8,7 +8,7 @@
 rightscale_marker :begin
 
 class Chef::Recipe
-  include RightScale::LB::Helper
+  include Inmobi::LB::Helper
 end
 
 def vhosts(vhost_list)

@@ -74,7 +74,7 @@ action :install do
 
   # Executing java alternatives command, this will set installed java as choose as default
   execute "update-alternatives" do
-    command "#{node[:app_tomcat][:alternatives_cmd]}"
+    command "#{node[:app_inmobi_tomcat][:alternatives_cmd]}"
     action :run
   end
 
@@ -92,9 +92,10 @@ action :setup_config do
     owner "root"
     mode "0644"
     variables(
-      :app_user => node[:app_tomcat][:app_user],
-      :app_group => node[:app_tomcat][:app_group]
+      :app_user => node[:app_inmobi_tomcat][:app_user],
+      :app_group => node[:app_inmobi_tomcat][:app_group]
     )
+    notifies :restart , "service[tomcat6]"
   end
 
   log "  Creating /etc/init.d/tomcat6 with host_ip like #{node[:ip]}"
@@ -105,14 +106,15 @@ action :setup_config do
     owner "root"
     mode "0755"
     variables(
-      :app_user => node[:app_tomcat][:app_user],
-      :java_xmx => node[:app_tomcat][:java][:xmx],
-      :java_maxpermsize => node[:app_tomcat][:java][:maxpermsize],
-      :java_jmx_port => node[:app_tomcat][:java][:jmxport],
-      :java_heapdumppath => node[:app_tomcat][:java][:heapdumppath],
-      :java_extraopts => node[:app_tomcat][:java][:extraopts],
+      :app_user => node[:app_inmobi_tomcat][:app_user],
+      :java_xmx => node[:app_inmobi_tomcat][:java][:xmx],
+      :java_maxpermsize => node[:app_inmobi_tomcat][:java][:maxpermsize],
+      :java_jmx_port => node[:app_inmobi_tomcat][:java][:jmxport],
+      :java_heapdumppath => node[:app_inmobi_tomcat][:java][:heapdumppath],
+      :java_extraopts => node[:app_inmobi_tomcat][:java][:extraopts],
       :host_ip => ENV['RS_SERVER_NAME']
     )
+    notifies :restart , "service[tomcat6]"
   end
 
   log "  Creating server.xml"
@@ -120,16 +122,47 @@ action :setup_config do
     action :create
     source "tomcat6_server_xml.erb"
     group "root"
-    owner "#{node[:app_tomcat][:app_user]}"
+    owner "#{node[:app_inmobi_tomcat][:app_user]}"
     mode "0644"
-#    cookbook 'app_inmobi_tomcat'
     variables(
-            :doc_base => node[:app_tomcat][:base],
-            :app_port => node[:app_tomcat][:port]
+            :doc_base => node[:app_inmobi_tomcat][:base],
+            :app_port => node[:app_inmobi_tomcat][:port]
           )
+    notifies :restart , "service[tomcat6]"
   end
 
-  # Re-starting tomcat service
-  action_restart
+end
+
+# Setup monitoring tools for tomcat
+action :setup_monitoring do
+
+  log "  Setup of collectd monitoring for tomcat"
+  rs_utils_enable_collectd_plugin 'exec'
+
+  include_recipe "rightscale::setup_monitoring"
+ 
+  #installing and configuring collectd for tomcat
+  cookbook_file "/usr/share/java/collectd.jar" do
+    source "collectd.jar"
+    mode "0644"
+    cookbook 'app_tomcat'
+  end
+
+  #Linking collectd
+  link "/usr/share/tomcat6/lib/collectd.jar" do
+    to "/usr/share/java/collectd.jar"
+    not_if do !::File.exists?("/usr/share/java/collectd.jar") end
+  end
+
+  #Add collectd support to tomcat.conf
+  bash "Add collectd to tomcat.conf" do
+    flags "-ex"
+    code <<-EOH
+      cat <<'EOF'>>/etc/tomcat6/tomcat6.conf
+      CATALINA_OPTS="\$CATALINA_OPTS -Djcd.host=#{node[:rightscale][:instance_uuid]} -Djcd.instance=tomcat6 -Djcd.dest=udp://#{node[:rightscale][:servers][:sketchy][:hostname]}:3011 -Djcd.tmpl=javalang,tomcat -javaagent:/usr/share/tomcat6/lib/collectd.jar"
+      EOF
+    EOH
+  end
+
 
 end
