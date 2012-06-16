@@ -8,6 +8,12 @@
 require 'timeout'
 
 # Provider collects and processes server tags used by the server_collection resource
+action :bhagya do
+
+ log "insider my recipee"
+
+end
+
 action :load do
 
 log "inside load and no issues"
@@ -29,7 +35,6 @@ log "inside load and no issues"
         collection = node[:server_collection][new_resource.name]
 
         break
-=begin
         break if new_resource.empty_ok && collection.empty?
         break if !collection.empty? && collection.all? do |id, tags|
           all_tags.all? do |prefix|
@@ -37,10 +42,9 @@ log "inside load and no issues"
           end
         end
 
-=end
-#        delay = ((delay == 1)? 2 : (delay*delay))
-#        Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
-#        sleep delay
+        delay = ((delay == 1)? 2 : (delay*delay))
+        Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
+        sleep delay
       end
     end
   rescue Timeout::Error => e

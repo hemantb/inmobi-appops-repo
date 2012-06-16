@@ -7,6 +7,7 @@
 
 # The server collection resource finds a set of servers in a deployment with a set of tags.
 actions :load
+actions :bhagya
 #
 # Attribute specifies the tag or tags to search for (if multiple tags are specified servers with any of the tags will match).
 attribute :tags, :kind_of => [String, Array]
