@@ -9,6 +9,7 @@ module RightScale
   module LB
     module Helper
 
+require "timeout"
       # @param [String] vhost_name virtual hosts name.
       #
       # @return [Set] attached_servers set of attached servers for vhost i.e., servers in lb config dir
@@ -33,10 +34,33 @@ module RightScale
 
         r = server_collection 'app_servers' do
           tags ["loadbalancer:#{vhost_name}=app"]
-        #  secondary_tags ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
           action :nothing
         end
+
+
+  begin
+    Timeout::timeout(new_resource.timeout) do
+      all_tags =  ["loadbalancer:#{vhost_name}=app", "server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
+      delay = 1
+      while true
         r.run_action(:load)
+        collection = node[:server_collection][new_resource.name]
+
+        break if collection.empty?
+        break if !collection.empty? && collection.all? do |id, tags|
+          all_tags.all? do |prefix|
+            tags.detect { |tag| RightScale::Utils::Helper.matches_tag_wildcard?(prefix, tag) }
+          end
+        end
+
+        delay = RightScale::System::Helper.calculate_exponential_backoff(delay)
+        Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
+        sleep delay
+      end
+    end
+  rescue Timeout::Error => e
+    raise "ERROR: timed out trying to find servers tagged with #{new_resource.tags.inspect}"
+  end
 
         node[:server_collection]['app_servers'].to_hash.values.each do |tags|
           uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
