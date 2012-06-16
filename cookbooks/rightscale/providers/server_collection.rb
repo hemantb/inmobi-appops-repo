@@ -44,5 +44,4 @@ log "inside load and no issues"
     raise "ERROR: timed out trying to find servers tagged with #{new_resource.tags.inspect}"
   end
 
-=end
 end
