@@ -9,7 +9,6 @@ module RightScale
   module LB
     module Helper
 
-require "timeout"
       # @param [String] vhost_name virtual hosts name.
       #
       # @return [Set] attached_servers set of attached servers for vhost i.e., servers in lb config dir
@@ -30,6 +29,7 @@ require "timeout"
       # @return [Hash] app_servers hash of app servers in deployment answering for vhost_name
       #
       def query_appservers(vhost_name)
+        require "timeout"
         app_servers = Hash.new
 
         r = server_collection 'app_servers' do
