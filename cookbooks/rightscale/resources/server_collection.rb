@@ -7,7 +7,6 @@
 
 # The server collection resource finds a set of servers in a deployment with a set of tags.
 actions :load
-actions :bhagya
 #
 # Attribute specifies the tag or tags to search for (if multiple tags are specified servers with any of the tags will match).
 attribute :tags, :kind_of => [String, Array]
@@ -20,7 +19,7 @@ attribute :timeout, :default => 60, :kind_of => Integer
 attribute :empty_ok, :default => true, :equal_to => [true, false]
 
 # Defines a default action
-def initialize(*args)
-  super
-  @action = :load
-end
+#def initialize(*args)
+#  super
+#  @action = :load
+#end
