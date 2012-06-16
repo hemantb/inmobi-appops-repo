@@ -2,5 +2,5 @@
 include_recipe "rightscale::setup_monitoring"
 
 app_inmobi_tomcat "default" do
-  action :setup_mointoring
+  action :setup_monitoring
 end
