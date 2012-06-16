@@ -1,5 +1,7 @@
 rightscale_marker :begin
 
+include_recipe "app_inmobi_tomcat::default"
+
 log "debians #{node[:app_inmobi_tomcat][:webapp][:debians]}"
 
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
