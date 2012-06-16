@@ -31,6 +31,7 @@ module RightScale
       def query_appservers(vhost_name)
         app_servers = Hash.new
 
+=begin
         r=rightscale_server_collection 'app_servers' do
           tags ["loadbalancer:#{vhost_name}=app"]
           secondary_tags ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
@@ -38,6 +39,7 @@ module RightScale
         end
         r.run_action(:load)
 
+=end
         node[:server_collection]['app_servers'].to_hash.values.each do |tags|
           uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
           ip = RightScale::Utils::Helper.get_tag_value('appserver:listen_ip', tags)
