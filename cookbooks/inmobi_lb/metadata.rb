@@ -5,6 +5,7 @@ description      "Inmobi HAProxy LB Manager"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "1.0.0"
 
+recipe "inmobi_lb::testing", "This loads the required load balancer resources."
 recipe "inmobi_lb::default", "This loads the required load balancer resources."
 recipe "inmobi_lb::setup_load_balancer", "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection."
 recipe "inmobi_lb::handle_attach", "Remote recipe executed by do_attach_request. DO NOT RUN."
