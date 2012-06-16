@@ -148,7 +148,6 @@ action :setup_monitoring do
   cookbook_file "/usr/share/java/collectd.jar" do
     source "collectd.jar"
     mode "0644"
-    cookbook 'app_tomcat'
   end
 
   #Linking collectd
