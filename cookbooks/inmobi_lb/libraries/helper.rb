@@ -59,7 +59,6 @@ module RightScale
           end
         end
 
-        log "No man"
         delay = ((delay == 1) ? 2 : (delay*delay)) 
         Chef::Log.info "not all tags for loadbalancer:#{vhost_name}=app exist; retrying in #{delay} seconds..."
         sleep delay
