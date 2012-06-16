@@ -7,9 +7,9 @@
 
 rightscale_marker :begin
 
-class Chef::Recipe
-  include RightScale::LB::Helper
-end
+#class Chef::Recipe
+#  include RightScale::LB::Helper
+#end
 
 def vhosts(vhost_list)
    return vhost_list.gsub(/\s+/, "").split(",").uniq.each
@@ -34,6 +34,7 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
     level :warn
   end
 
+=begin
   # Add any servers in deployment not in config.
   servers_to_attach = Set.new(deployment_servers.keys) - inconfig_servers
   log "  No servers to attach" do
@@ -48,7 +49,6 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
     end
   end
 
-=begin
   # Increment threshold counter if servers in config not in deployment.
   node[:inmobi_lb][:threshold] ||= Hash.new
   node[:inmobi_lb][:threshold][vhost_name] ||= Hash.new
@@ -91,5 +91,6 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
 
 =end
 end
+
 rightscale_marker :end
 
