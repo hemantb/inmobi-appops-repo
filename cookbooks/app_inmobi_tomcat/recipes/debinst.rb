@@ -6,7 +6,11 @@ log "debians #{node[:app_inmobi_tomcat][:webapp][:debians]}"
 
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   log "Installing #{p}"
-  package p
+  if p =~ /^([^=]+)=(.+)$/
+     package $1 do
+        version $2
+     end
+  end
 end
 
 case node[:app_inmobi_tomcat][:webapp][:restart]
