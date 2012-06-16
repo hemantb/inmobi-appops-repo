@@ -4,7 +4,7 @@
 # Copyright Inmobi, Inc. All rights reserved.
 # Author: Bhagyaraj.g
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 log "  Setting provider specific settings for tomcat"
 
@@ -45,4 +45,4 @@ end
 
 include_recipe "rightscale::setup_server_tags"
 
-rs_utils_marker :end
+rightscale_marker :end

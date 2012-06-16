@@ -137,7 +137,7 @@ end
 action :setup_monitoring do
 
   log "  Setup of collectd monitoring for tomcat"
-  rs_utils_enable_collectd_plugin 'exec'
+  rightscale_enable_collectd_plugin 'exec'
 
   include_recipe "rightscale::setup_monitoring"
  

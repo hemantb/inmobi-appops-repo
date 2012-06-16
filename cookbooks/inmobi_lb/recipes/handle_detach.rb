@@ -1,9 +1,6 @@
 # 
-# Cookbook Name:: lb
+# Cookbook Name:: inmobi_lb
 #
-# Copyright RightScale, Inc. All rights reserved.  All access and use subject to the
-# RightScale Terms of Service available at http://www.rightscale.com/terms.php and,
-# if applicable, other agreements such as a RightScale Master Subscription Agreement.
 
 rightscale_marker :begin
 
@@ -21,4 +18,3 @@ vhosts(node[:remote_recipe][:vhost_names]).each do |vhost_name|
 end
 
 rightscale_marker :end
-

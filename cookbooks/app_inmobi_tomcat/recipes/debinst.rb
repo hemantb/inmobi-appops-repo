@@ -1,4 +1,4 @@
-rs_utils_marker :begin
+rightscale_marker :begin
 
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   log "Installing #{p}"
@@ -23,4 +23,4 @@ right_link_tag "appserver:active=true"
 right_link_tag "appserver:listen_ip=#{node[:inmobi_app_tomcat][:ip]}"
 right_link_tag "appserver:listen_port=#{node[:inmobi_app_tomcat][:port]}"
 
-rs_utils_marker :end
+rightscale_marker :end
