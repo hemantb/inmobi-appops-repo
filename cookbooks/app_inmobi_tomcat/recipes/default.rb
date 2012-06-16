@@ -44,6 +44,6 @@ app_inmobi_tomcat "setup_configuration" do
   action :setup_config
 end
 
-include_recipe "inmobi_app_tomcat::setup_monitoring"
+include_recipe "app_inmobi_tomcat::setup_monitoring"
 
 rightscale_marker :end
