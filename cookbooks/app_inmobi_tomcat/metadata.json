@@ -1,188 +1,188 @@
 {
+  "name": "app_inmobi_tomcat",
   "platforms": {
   },
+  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n",
+  "suggestions": {
+  },
+  "description": "Installs the tomcat application server.",
   "groupings": {
   },
   "attributes": {
     "app_inmobi_tomcat/java/ExtraOpts": {
-      "calculated": false,
-      "type": "string",
+      "required": "optional",
       "choice": [
 
       ],
-      "required": "optional",
-      "default": "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0",
       "description": "The tomcat extra options to be passed to the java process",
       "display_name": "Tomcat Java extra options",
-      "recipes": [
-
-      ]
-    },
-    "app_inmobi_tomcat/java/HeapDumpPath": {
-      "calculated": false,
       "type": "string",
-      "choice": [
-
-      ],
-      "required": "optional",
-      "default": "/var/log/tomcat6/dump.tmp",
-      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
-      "display_name": "Tomcat Java HeapDumpPath",
-      "recipes": [
-
-      ]
-    },
-    "app_inmobi_tomcat/webapp/debians": {
       "calculated": false,
-      "type": "string",
-      "choice": [
+      "default": "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0",
+      "recipes": [
 
-      ],
-      "required": "required",
-      "description": "If version number is omitted packagename with latest version will be installed",
-      "display_name": "Give space separated list of pkg1=version1,pkg2=version2,... entries",
-      "recipes": [
-        "app_inmobi_tomcat::debinst"
-      ]
-    },
-    "app_inmobi_tomcat/webapp/restart": {
-      "calculated": false,
-      "type": "string",
-      "choice": [
-        "true",
-        "false"
-      ],
-      "required": "optional",
-      "default": "true",
-      "description": "Choices true or false",
-      "display_name": "Mention if tomcat needs to be restarted after debian install",
-      "recipes": [
-        "app_inmobi_tomcat::debinst"
       ]
     },
     "app_inmobi_tomcat/java/MaxPermSize": {
-      "calculated": false,
-      "type": "string",
+      "required": "optional",
       "choice": [
 
       ],
-      "required": "optional",
-      "default": "256m",
       "description": "The java MaxPermSize argument (i.e. 256m)",
       "display_name": "Tomcat Java MaxPermSize",
+      "type": "string",
+      "calculated": false,
+      "default": "256m",
       "recipes": [
 
       ]
     },
     "app_inmobi_tomcat/app_group": {
-      "calculated": false,
-      "type": "string",
+      "required": "optional",
       "choice": [
 
       ],
-      "required": "optional",
-      "default": "tomcat6",
       "description": "Tomcat process group owner (eg: tomcat6)",
       "display_name": "Tomcat process group owner",
+      "type": "string",
+      "calculated": false,
+      "default": "tomcat6",
       "recipes": [
 
       ]
     },
     "app_inmobi_tomcat/java/xmx": {
-      "calculated": false,
-      "type": "string",
+      "required": "optional",
       "choice": [
 
       ],
-      "required": "optional",
-      "default": "512m",
       "description": "The java Xmx argument (i.e. 512m)",
       "display_name": "Tomcat Java XMX",
+      "type": "string",
+      "calculated": false,
+      "default": "512m",
       "recipes": [
 
       ]
     },
-    "app_inmobi_tomcat/port": {
-      "calculated": false,
-      "type": "string",
+    "app_inmobi_tomcat/webapp/debians": {
+      "required": "required",
       "choice": [
 
       ],
+      "description": "If version number is omitted packagename with latest version will be installed",
+      "display_name": "Give space separated list of pkg1=version1,pkg2=version2,... entries",
+      "type": "string",
+      "calculated": false,
+      "recipes": [
+        "app_inmobi_tomcat::debinst"
+      ]
+    },
+    "app_inmobi_tomcat/port": {
       "required": "optional",
-      "default": "8080",
+      "choice": [
+
+      ],
       "description": "The port number Tomcat process should listen to",
       "display_name": "Tomcat Java port number",
+      "type": "string",
+      "calculated": false,
+      "default": "8080",
       "recipes": [
 
       ]
     },
     "app_inmobi_tomcat/java/JmxPort": {
-      "calculated": false,
-      "type": "string",
+      "required": "optional",
       "choice": [
 
       ],
-      "required": "optional",
-      "default": "9004",
       "description": "The jmx port number argument (i.e. 9004)",
       "display_name": "Tomcat JMX port number",
-      "recipes": [
-
-      ]
-    },
-    "app_inmobi_tomcat/app_user": {
-      "calculated": false,
       "type": "string",
-      "choice": [
-
-      ],
-      "required": "optional",
-      "default": "tomcat6",
-      "description": "Tomcat process owner (eg: tomcat6)",
-      "display_name": "Tomcat process owner",
+      "calculated": false,
+      "default": "9004",
       "recipes": [
 
       ]
     },
     "app_inmobi_tomcat/base": {
-      "calculated": false,
-      "type": "string",
+      "required": "optional",
       "choice": [
 
       ],
-      "required": "optional",
-      "default": "webapps",
       "description": "The Tomcat Jave appBase parameter configured in server.xml",
       "display_name": "Tomcat Java appBase parameter",
+      "type": "string",
+      "calculated": false,
+      "default": "webapps",
+      "recipes": [
+
+      ]
+    },
+    "app_inmobi_tomcat/java/HeapDumpPath": {
+      "required": "optional",
+      "choice": [
+
+      ],
+      "description": "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
+      "display_name": "Tomcat Java HeapDumpPath",
+      "type": "string",
+      "calculated": false,
+      "default": "/var/log/tomcat6/dump.tmp",
+      "recipes": [
+
+      ]
+    },
+    "app_inmobi_tomcat/webapp/restart": {
+      "required": "optional",
+      "choice": [
+        "true",
+        "false"
+      ],
+      "description": "Choices true or false",
+      "display_name": "Mention if tomcat needs to be restarted after debian install",
+      "type": "string",
+      "calculated": false,
+      "default": "true",
+      "recipes": [
+        "app_inmobi_tomcat::debinst"
+      ]
+    },
+    "app_inmobi_tomcat/app_user": {
+      "required": "optional",
+      "choice": [
+
+      ],
+      "description": "Tomcat process owner (eg: tomcat6)",
+      "display_name": "Tomcat process owner",
+      "type": "string",
+      "calculated": false,
+      "default": "tomcat6",
       "recipes": [
 
       ]
     }
   },
+  "providing": {
+  },
   "recommendations": {
   },
+  "license": "Copyright Inmobi, Inc. All rights reserved.",
+  "replacing": {
+  },
+  "conflicting": {
+  },
+  "maintainer_email": "bhagyaraj.g@inmobi.com",
+  "version": "0.2.1",
+  "maintainer": "Inmobi",
   "dependencies": {
     "rightscale::setup_monitoring": ">= 0.0.0",
     "rightscale": ">= 0.0.0",
     "rightscale::setup_server_tags": ">= 0.0.0"
   },
-  "replacing": {
-  },
-  "suggestions": {
-  },
-  "name": "app_inmobi_tomcat",
-  "maintainer": "Inmobi",
-  "description": "Installs the tomcat application server.",
-  "conflicting": {
-  },
-  "version": "0.2.1",
   "recipes": {
     "app_inmobi_tomcat::default": "Installs the tomcat application server.",
     "app_inmobi_tomcat::debinst": "Installs the debians dependent on tomcat"
-  },
-  "providing": {
-  },
-  "license": "Copyright Inmobi, Inc. All rights reserved.",
-  "maintainer_email": "bhagyaraj.g@inmobi.com",
-  "long_description": "= Inmobi App Tomcat Cookbook\n\n== DESCRIPTION:\n\nYet to be documented!\n"
+  }
 }
