@@ -26,6 +26,8 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
   inconfig_servers = ["testserver"]
   log "  Currently attached: #{inconfig_servers.nil? ? 0 : inconfig_servers.count}"
 
+end
+
   # Obtain list of app servers in deployment.
 
 rightscale_marker :end
