@@ -34,7 +34,7 @@ module RightScale
         main_tags = ["loadbalancer:#{vhost_name}=app"]
         secondary_tags = ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
 
-        r = server_collection 'app_servers' do
+        r = server_collection "app_servers" do
           tags main_tags
           action :nothing
         end
@@ -49,12 +49,12 @@ module RightScale
         r.run_action(:load)
         collection = node[:server_collection]["app_servers"]
 
+	Chef::Log.info "I am here checking..."
         break if collection.empty?
-	log "I am here checking..."
         break if !collection.empty? && collection.all? do |id, tags|
-            log "atlease I am here"
+            Chef::Log.info "atlease I am here"
           all_tags.all? do |prefix|
-            log "checking for #{prefix} and tags as #{tags.inspect} for id #{id}"
+            Chef::Log.info "checking for #{prefix} and tags as #{tags.inspect} for id #{id}"
             tags.detect { |tag| RightScale::Utils::Helper.matches_tag_wildcard?(prefix, tag) }
           end
         end
