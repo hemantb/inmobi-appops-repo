@@ -43,6 +43,7 @@ app_inmobi_tomcat "setup_monitoring" do
   action :setup_monitoring
 end
 
+include_recipe "rightscale::setup_timezone"
 include_recipe "rightscale::setup_server_tags"
 
 rightscale_marker :end

@@ -1,0 +1,6 @@
+server=<%= @backend_name %>
+backend_ip=<%= @backend_ip %>
+stickyness=<%= @session_sticky %>
+health_check_uri=<%= @health_check_uri %>
+maxconn=<%= @max_conn_per_server %>
+extraopts=inter 3000 rise 2 fall 3

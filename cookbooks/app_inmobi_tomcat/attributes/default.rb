@@ -7,7 +7,7 @@
 # Recommended attributes
 
 # This is a set instead of set_unless to support start/stop when the IP changes.
-set[:app_inmobi_tomcat][:ip] = node[:cloud][:private_ips][0]
+set[:app][:ip] = node[:cloud][:private_ips][0]
 
 set_unless[:app_inmobi_tomcat][:webapp][:vhosts] = nil
 # Defines the maximum value of the permanent generation space size

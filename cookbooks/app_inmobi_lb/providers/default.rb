@@ -67,7 +67,7 @@ action :install do
     group "haproxy"
     mode "0400"
 
-    default_backend = node[:inmobi_lb][:vhost_names].gsub(/\s+/, "").split(",").first.gsub(/\./, "_") + "_backend"
+    default_backend = node[:app_inmobi_lb][:vhost_names].gsub(/\s+/, "").split(",").first.gsub(/\./, "_") + "_backend"
     variables(
       :default_backend_line => default_backend
     )
@@ -95,11 +95,11 @@ action :add_vhost do
     group "haproxy"
     mode "0400"
     backend_name = vhost_name.gsub(".", "_") + "_backend"
-    stats_uri = "stats uri #{node[:inmobi_lb][:stats_uri]}" unless "#{node[:inmobi_lb][:stats_uri]}".empty?
-    stats_auth = "stats auth #{node[:inmobi_lb][:stats_user]}:#{node[:inmobi_lb][:stats_password]}" unless \
-                "#{node[:inmobi_lb][:stats_user]}".empty? || "#{node[:inmobi_lb][:stats_password]}".empty?
-    health_uri = "option httpchk GET #{node[:inmobi_lb][:health_check_uri]}" unless "#{node[:inmobi_lb][:health_check_uri]}".empty?
-    health_chk = "http-check disable-on-404" unless "#{node[:inmobi_lb][:health_check_uri]}".empty?
+    stats_uri = "stats uri #{node[:app_inmobi_lb][:stats_uri]}" unless "#{node[:app_inmobi_lb][:stats_uri]}".empty?
+    stats_auth = "stats auth #{node[:app_inmobi_lb][:stats_user]}:#{node[:app_inmobi_lb][:stats_password]}" unless \
+                "#{node[:app_inmobi_lb][:stats_user]}".empty? || "#{node[:app_inmobi_lb][:stats_password]}".empty?
+    health_uri = "option httpchk GET #{node[:app_inmobi_lb][:health_check_uri]}" unless "#{node[:app_inmobi_lb][:health_check_uri]}".empty?
+    health_chk = "http-check disable-on-404" unless "#{node[:app_inmobi_lb][:health_check_uri]}".empty?
     variables(
       :backend_name_line => backend_name,
       :stats_uri_line => stats_uri,
@@ -154,10 +154,8 @@ action :attach do
     variables(
       :backend_name => new_resource.backend_id,
       :backend_ip => new_resource.backend_ip,
-      :backend_port => new_resource.backend_port,
-      :max_conn_per_server => node[:inmobi_lb][:max_conn_per_server],
-      :session_sticky => node[:inmobi_lb][:session_stickiness],
-      :health_check_uri => node[:inmobi_lb][:health_check_uri]
+      :max_conn_per_server => node[:app_inmobi_lb][:max_conn_per_server],
+      :health_check_uri => node[:app_inmobi_lb][:health_check_uri]
     )
     notifies :run, resources(:execute => "/opt/mkhoj/conf/lb/haproxy-cat.sh")
   end
@@ -176,7 +174,6 @@ action :attach_request do
     attributes :remote_recipe => {
       :backend_ip => new_resource.backend_ip,
       :backend_id => new_resource.backend_id,
-      :backend_port => new_resource.backend_port,
       :vhost_names => vhost_name
     }
     recipients_tags "loadbalancer:#{vhost_name}=lb"

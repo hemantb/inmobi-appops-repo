@@ -78,9 +78,3 @@ attribute "inmobi_app_tomcat/webapp/restart",
   :default => "true",
   :choice => ["true","false"],
   :recipes => [ "app_inmobi_tomcat::debinst" ]
-
-attribute "inmobi_app_tomcat/webapp/vhosts",
-  :display_name => "virtual hostnames for hosted on this application server",
-  :description => "Give comma separated list of vhost names that this application server will host",
-  :required => "optional",
-  :recipes => [ "app_inmobi_tomcat::debinst" ]

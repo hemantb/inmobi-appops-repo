@@ -15,7 +15,7 @@ end
 DROP_THRESHOLD = 3
 
 # Iterate through each vhost.
-vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
+vhosts(node[:app_inmobi_lb][:vhost_names]).each do |vhost_name|
 
   log "Attach all for [#{vhost_name}]"
   # Obtain current list from lb config file.
@@ -46,38 +46,38 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
   end
 
   # Increment threshold counter if servers in config not in deployment.
-  node[:inmobi_lb][:threshold] ||= Hash.new
-  node[:inmobi_lb][:threshold][vhost_name] ||= Hash.new
+  node[:app_inmobi_lb][:threshold] ||= Hash.new
+  node[:app_inmobi_lb][:threshold][vhost_name] ||= Hash.new
   servers_missing = inconfig_servers - Set.new(deployment_servers.keys)
   servers_missing.each do |uuid|
-    node[:inmobi_lb][:threshold][vhost_name][uuid].is_a?(Integer) ? node[:inmobi_lb][:threshold][vhost_name][uuid] += 1 : node[:inmobi_lb][:threshold][vhost_name][uuid] = 1
-    log "  Increment threshold counter for #{uuid} = #{node[:inmobi_lb][:threshold][vhost_name][uuid]}"
+    node[:app_inmobi_lb][:threshold][vhost_name][uuid].is_a?(Integer) ? node[:app_inmobi_lb][:threshold][vhost_name][uuid] += 1 : node[:app_inmobi_lb][:threshold][vhost_name][uuid] = 1
+    log "  Increment threshold counter for #{uuid} = #{node[:app_inmobi_lb][:threshold][vhost_name][uuid]}"
   end
 
   # Set threshold counters to nil to those not incremented, thus assuming app server now accessable.
   # Set to nil since chef does not delete the key, can only alter it.
-  (Set.new(node[:inmobi_lb][:threshold][vhost_name].keys)-servers_missing).each do |uuid|
-    if node[:inmobi_lb][:threshold][vhost_name][uuid]
-      node[:inmobi_lb][:threshold][vhost_name][uuid] = nil
+  (Set.new(node[:app_inmobi_lb][:threshold][vhost_name].keys)-servers_missing).each do |uuid|
+    if node[:app_inmobi_lb][:threshold][vhost_name][uuid]
+      node[:app_inmobi_lb][:threshold][vhost_name][uuid] = nil
       log "  Resetting threshold for #{uuid}"
     end
   end
 
   # Delete servers that hit threshold.
   app_servers_detached = 0
-  node[:inmobi_lb][:threshold][vhost_name].each do |uuid, counter|
+  node[:app_inmobi_lb][:threshold][vhost_name].each do |uuid, counter|
     if counter == nil
       next
     elsif counter >= DROP_THRESHOLD
-      log "  Threshold of #{DROP_THRESHOLD} reached for #{uuid} (#{node[:inmobi_lb][:threshold][vhost_name][uuid]}) - detaching"
+      log "  Threshold of #{DROP_THRESHOLD} reached for #{uuid} (#{node[:app_inmobi_lb][:threshold][vhost_name][uuid]}) - detaching"
       inmobi_lb vhost_name do
         backend_id uuid
         action :detach
       end
-      node[:inmobi_lb][:threshold][vhost_name][uuid] = nil # Set to nil - chef does not delete the key, can only alter it.
+      node[:app_inmobi_lb][:threshold][vhost_name][uuid] = nil # Set to nil - chef does not delete the key, can only alter it.
       app_servers_detached += 1
     else
-      log "  Threshold not reached for #{uuid} : #{node[:inmobi_lb][:threshold][vhost_name][uuid]}"
+      log "  Threshold not reached for #{uuid} : #{node[:app_inmobi_lb][:threshold][vhost_name][uuid]}"
     end
   end
 

@@ -14,8 +14,8 @@ def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
-vhosts(node[:inmobi_lb][:vhost_names]).each do | vhost_name |
-  log "Adding provider name as #{node[:inmobi_lb][:service][:provider]}"
+vhosts(node[:app_inmobi_lb][:vhost_names]).each do | vhost_name |
+  log "Adding provider name as #{node[:app_inmobi_lb][:service][:provider]}"
   inmobi_lb vhost_name do
     provider "inmobi_lb"
     persist true # Store this resource in node between converges.
@@ -32,6 +32,7 @@ r.run_action(:install)
 # Reload newly install gem.
 Gem.clear_paths
 
+include_recipe "rightscale::setup_timezone"
 include_recipe "rightscale::setup_server_tags"
 
 rightscale_marker :end
