@@ -27,7 +27,7 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
 
   # Obtain list of app servers in deployment.
   deployment_servers = query_appservers(vhost_name)
-
+=begin
   # Send warning if no application servers are found.
   log "  No application servers found" do
     only_if { deployment_servers.empty? }
