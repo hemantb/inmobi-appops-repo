@@ -32,4 +32,6 @@ r.run_action(:install)
 # Reload newly install gem.
 Gem.clear_paths
 
+include_recipe "rightscale::setup_server_tags"
+
 rightscale_marker :end
