@@ -131,6 +131,9 @@ action :setup_config do
     notifies :restart , "service[tomcat6]"
   end
 
+  include_recipe "rightscale::setup_timezone"
+  include_recipe "rightscale::setup_server_tags"
+
 end
 
 # Setup monitoring tools for tomcat
