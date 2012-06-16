@@ -8,7 +8,7 @@ def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
-node[:app_inmobi_lb][:vhost_names].each do |vhost_name|
+vhosts(node[:app_inmobi_lb][:vhost_names]).each do |vhost_name|
   log "  Adding tag to answer for vhost load balancing - #{vhost_name}."
   lb_tag vhost_name
 
