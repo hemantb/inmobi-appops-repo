@@ -11,67 +11,67 @@ recipe  "app_inmobi_tomcat::debinst", "Installs the debians dependent on tomcat"
 
 #Java tuning parameters
 
-attribute "inmobi_app_tomcat/java/xmx",
+attribute "app_inmobi_tomcat/java/xmx",
   :display_name => "Tomcat Java XMX",
   :description => "The java Xmx argument (i.e. 512m)",
   :required => "optional",
   :default => "512m"
 
-attribute "inmobi_app_tomcat/app_user",
+attribute "app_inmobi_tomcat/app_user",
   :display_name => "Tomcat process owner",
   :description => "Tomcat process owner (eg: tomcat6)",
   :required => "optional",
   :default => "tomcat6"
 
-attribute "inmobi_app_tomcat/app_group",
+attribute "app_inmobi_tomcat/app_group",
   :display_name => "Tomcat process group owner",
   :description => "Tomcat process group owner (eg: tomcat6)",
   :required => "optional",
   :default => "tomcat6"
 
-attribute "inmobi_app_tomcat/java/MaxPermSize",
+attribute "app_inmobi_tomcat/java/MaxPermSize",
   :display_name => "Tomcat Java MaxPermSize",
   :description => "The java MaxPermSize argument (i.e. 256m)",
   :required => "optional",
   :default => "256m"
 
-attribute "inmobi_app_tomcat/java/JmxPort",
+attribute "app_inmobi_tomcat/java/JmxPort",
   :display_name => "Tomcat JMX port number",
   :description => "The jmx port number argument (i.e. 9004)",
   :required => "optional",
   :default => "9004"
 
-attribute "inmobi_app_tomcat/java/HeapDumpPath",
+attribute "app_inmobi_tomcat/java/HeapDumpPath",
   :display_name => "Tomcat Java HeapDumpPath",
   :description => "The java HeapDumpPath argument (i.e. /var/log/tomcat6/dump.tmp)",
   :required => "optional",
   :default => "/var/log/tomcat6/dump.tmp"
 
-attribute "inmobi_app_tomcat/java/ExtraOpts",
+attribute "app_inmobi_tomcat/java/ExtraOpts",
   :display_name => "Tomcat Java extra options",
   :description => "The tomcat extra options to be passed to the java process",
   :required => "optional",
   :default => "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0"
 
-attribute "inmobi_app_tomcat/port",
+attribute "app_inmobi_tomcat/port",
   :display_name => "Tomcat Java port number",
   :description => "The port number Tomcat process should listen to",
   :required => "optional",
   :default => "8080"
 
-attribute "inmobi_app_tomcat/base",
+attribute "app_inmobi_tomcat/base",
   :display_name => "Tomcat Java appBase parameter",
   :description => "The Tomcat Jave appBase parameter configured in server.xml",
   :required => "optional",
   :default => "webapps"
 
-attribute "inmobi_app_tomcat/webapp/debians",
+attribute "app_inmobi_tomcat/webapp/debians",
   :display_name => "Give space separated list of pkg1=version1,pkg2=version2,... entries",
   :description => "If version number is omitted packagename with latest version will be installed",
   :required => true,
   :recipes => [ "app_inmobi_tomcat::debinst" ]
 
-attribute "inmobi_app_tomcat/webapp/restart",
+attribute "app_inmobi_tomcat/webapp/restart",
   :display_name => "Mention if tomcat needs to be restarted after debian install",
   :description => "Choices true or false",
   :required => "optional",
