@@ -1,5 +1,7 @@
 rightscale_marker :begin
 
+log "debians #{node[:app_inmobi_tomcat][:webapp][:debians]}"
+
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   log "Installing #{p}"
   package p
