@@ -9,6 +9,9 @@ rightscale_marker :begin
 right_link_tag "appserver:active=true"
 right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
 
+include_recipe "rightscale::setup_timezone"
+include_recipe "rightscale::setup_server_tags"
+
 log "  Setting provider specific settings for tomcat"
 
 case node[:platform]
@@ -45,8 +48,5 @@ app_inmobi_tomcat "setup_monitoring" do
   persist true
   action :setup_monitoring
 end
-
-include_recipe "rightscale::setup_timezone"
-include_recipe "rightscale::setup_server_tags"
 
 rightscale_marker :end
