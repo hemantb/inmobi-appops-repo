@@ -9,23 +9,20 @@ require 'timeout'
 
 # Provider collects and processes server tags used by the server_collection resource
 action :load do
+
+log "inside load and no issues"
+=begin
   collection_resource = server_collection new_resource.name do
     tags new_resource.tags
     agent_ids new_resource.agent_ids
     action :nothing
   end
 
-#  def self.calculate_exponential_backoff(value)
-#     ((value == 1) ? 2 : (value*value))
-#  end
-
   begin
     Timeout::timeout(new_resource.timeout) do
-=begin
       all_tags = new_resource.tags.collect
       all_tags += new_resource.secondary_tags.collect if new_resource.secondary_tags
       delay = 1
-=begin
       log "All tags = #{all_tags.insert}"
 
       while true
@@ -43,10 +40,10 @@ action :load do
         Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
         sleep delay
       end
-=end
     end
   rescue Timeout::Error => e
     raise "ERROR: timed out trying to find servers tagged with #{new_resource.tags.inspect}"
   end
 
+=end
 end
