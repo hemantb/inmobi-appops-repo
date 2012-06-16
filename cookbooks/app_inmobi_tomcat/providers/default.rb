@@ -131,8 +131,8 @@ action :setup_config do
     notifies :restart , "service[tomcat6]"
   end
 
-  include_recipe "rightscale::setup_timezone"
-  include_recipe "rightscale::setup_server_tags"
+  #include_recipe "rightscale::setup_timezone"
+  #include_recipe "rightscale::setup_server_tags"
 
 end
 
@@ -142,7 +142,7 @@ action :setup_monitoring do
   log "  Setup of collectd monitoring for tomcat"
   rightscale_enable_collectd_plugin 'exec'
 
-  include_recipe "rightscale::setup_monitoring"
+  #include_recipe "rightscale::setup_monitoring"
  
   #installing and configuring collectd for tomcat
   cookbook_file "/usr/share/java/collectd.jar" do
