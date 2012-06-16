@@ -4,7 +4,7 @@
 
 rightscale_marker :begin
 
-include_recipe "inmobi_lb::default"
+include_recipe "app_inmobi_lb::default"
 
 def vhosts(vhost_list)
   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
@@ -28,6 +28,6 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
   end
 end
 
-include_recipe "inmobi_lb::setup_monitoring"
+include_recipe "app_inmobi_lb::setup_monitoring"
 
 rightscale_marker :end

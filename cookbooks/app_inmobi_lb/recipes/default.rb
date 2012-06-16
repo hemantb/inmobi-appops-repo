@@ -17,7 +17,7 @@ end
 vhosts(node[:app_inmobi_lb][:vhost_names]).each do | vhost_name |
   log "Adding provider name as #{node[:app_inmobi_lb][:service][:provider]}"
   inmobi_lb vhost_name do
-    provider "inmobi_lb"
+    provider "app_inmobi_lb"
     persist true # Store this resource in node between converges.
     action :nothing
   end
