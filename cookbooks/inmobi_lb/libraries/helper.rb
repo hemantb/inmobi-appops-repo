@@ -46,13 +46,16 @@ module RightScale
         collection = node[:server_collection]["app_servers"]
 
         break if collection.empty?
+	log "I am here checking..."
         break if !collection.empty? && collection.all? do |id, tags|
+            log "atlease I am here"
           all_tags.all? do |prefix|
             log "checking for #{prefix} and tags as #{tags.inspect} for id #{id}"
             tags.detect { |tag| RightScale::Utils::Helper.matches_tag_wildcard?(prefix, tag) }
           end
         end
 
+        log "No man"
         delay = ((delay == 1) ? 2 : (delay*delay)) 
         Chef::Log.info "not all tags for loadbalancer:#{vhost_name}=app exist; retrying in #{delay} seconds..."
         sleep delay
