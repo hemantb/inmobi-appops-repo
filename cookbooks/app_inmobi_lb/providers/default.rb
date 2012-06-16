@@ -233,6 +233,8 @@ action :setup_monitoring do
 
   log "  Setup monitoring for haproxy"
 
+  include_recipe "rightscale::setup_monitoring"
+
   # Install the haproxy collectd script into the collectd library plugins directory.
   remote_file(::File.join(node[:rightscale][:collectd_lib], "plugins", "haproxy")) do
     source "haproxy1.4.rb"
