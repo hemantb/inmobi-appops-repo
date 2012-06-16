@@ -37,14 +37,13 @@ require "timeout"
           action :nothing
         end
 
-
   begin
-    Timeout::timeout(new_resource.timeout) do
+    Timeout::timeout(60) do
       all_tags =  ["loadbalancer:#{vhost_name}=app", "server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
       delay = 1
       while true
         r.run_action(:load)
-        collection = node[:server_collection][new_resource.name]
+        collection = node[:server_collection]["app_servers"]
 
         break if collection.empty?
         break if !collection.empty? && collection.all? do |id, tags|
@@ -53,13 +52,13 @@ require "timeout"
           end
         end
 
-        delay = RightScale::System::Helper.calculate_exponential_backoff(delay)
-        Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
+        delay = ((delay == 1) ? 2 : (delay*delay)) 
+        Chef::Log.info "not all tags for loadbalancer:#{vhost_name}=app exist; retrying in #{delay} seconds..."
         sleep delay
       end
     end
   rescue Timeout::Error => e
-    raise "ERROR: timed out trying to find servers tagged with #{new_resource.tags.inspect}"
+    raise "ERROR: timed out trying to find servers tagged with loadbalancer:#{vhost_name}=app"
   end
 
         node[:server_collection]['app_servers'].to_hash.values.each do |tags|
