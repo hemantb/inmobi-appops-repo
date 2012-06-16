@@ -27,14 +27,13 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
 
   # Obtain list of app servers in deployment.
   deployment_servers = query_appservers(vhost_name)
-=begin
+
   # Send warning if no application servers are found.
   log "  No application servers found" do
     only_if { deployment_servers.empty? }
     level :warn
   end
 
-=begin
   # Add any servers in deployment not in config.
   servers_to_attach = Set.new(deployment_servers.keys) - inconfig_servers
   log "  No servers to attach" do
@@ -89,7 +88,6 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
     only_if { app_servers_detached == 0 }
   end
 
-=end
 end
 
 rightscale_marker :end
