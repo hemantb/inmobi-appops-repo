@@ -31,7 +31,7 @@ action :load do
           end
         end
 
-        delay = RightScale::System::Helper.calculate_exponential_backoff(delay)
+#        delay = RightScale::System::Helper.calculate_exponential_backoff(delay)
         Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
         sleep delay
       end
