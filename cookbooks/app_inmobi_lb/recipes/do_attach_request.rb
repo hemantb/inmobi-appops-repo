@@ -1,5 +1,5 @@
 # 
-# Cookbook Name:: inmobi_lb
+# Cookbook Name:: app_inmobi_lb
 #
 
 rightscale_marker :begin

@@ -170,7 +170,7 @@ action :attach_request do
 
   # Run remote_recipe for each vhost app server wants to be part of.
   remote_recipe "Attach me to load balancer" do
-    recipe "inmobi_lb::handle_attach"
+    recipe "app_inmobi_lb::handle_attach"
     attributes :remote_recipe => {
       :backend_ip => new_resource.backend_ip,
       :backend_id => new_resource.backend_id,
@@ -219,7 +219,7 @@ action :detach_request do
 
   # Run remote_recipe for each vhost app server is part of.
   remote_recipe "Detach me from load balancer" do
-    recipe "inmobi_lb::handle_detach"
+    recipe "app_inmobi_lb::handle_detach"
     attributes :remote_recipe => {
       :backend_id => new_resource.backend_id,
       :vhost_names => vhost_name

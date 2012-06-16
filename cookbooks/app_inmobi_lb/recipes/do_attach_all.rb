@@ -37,7 +37,7 @@ vhosts(node[:app_inmobi_lb][:vhost_names]).each do |vhost_name|
     only_if { servers_to_attach.empty? }
   end
   servers_to_attach.each do |uuid|
-    inmobi_lb vhost_name do
+    app_inmobi_lb vhost_name do
       backend_id uuid
       backend_ip deployment_servers[uuid][:ip]
       backend_port deployment_servers[uuid][:backend_port].to_i
@@ -70,7 +70,7 @@ vhosts(node[:app_inmobi_lb][:vhost_names]).each do |vhost_name|
       next
     elsif counter >= DROP_THRESHOLD
       log "  Threshold of #{DROP_THRESHOLD} reached for #{uuid} (#{node[:app_inmobi_lb][:threshold][vhost_name][uuid]}) - detaching"
-      inmobi_lb vhost_name do
+      app_inmobi_lb vhost_name do
         backend_id uuid
         action :detach
       end

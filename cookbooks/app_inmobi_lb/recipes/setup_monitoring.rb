@@ -25,7 +25,7 @@ directory File.join(node[:rightscale][:collectd_lib], "plugins") do
 end
 
 log "  Setup Monitoring"
-inmobi_lb vhosts(node[:inmobi_lb][:vhost_names]).first do
+app_inmobi_lb vhosts(node[:inmobi_lb][:vhost_names]).first do
   action :setup_monitoring
 end
 

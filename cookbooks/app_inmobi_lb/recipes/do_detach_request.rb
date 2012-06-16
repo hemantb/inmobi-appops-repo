@@ -18,7 +18,7 @@ vhosts(node[:app_inmobi_lb][:vhost_names]).each do |vhost_name|
   end
 
   log "  Sending remote detach request..."
-  inmobi_lb vhost_name do
+  app_inmobi_lb vhost_name do
     backend_id node[:rightscale][:instance_uuid]
     backend_ip node[:app][:ip]
     action :detach_request
