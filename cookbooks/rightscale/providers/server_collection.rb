@@ -21,6 +21,7 @@ action :load do
 
   begin
     Timeout::timeout(new_resource.timeout) do
+=begin
       all_tags = new_resource.tags.collect
       all_tags += new_resource.secondary_tags.collect if new_resource.secondary_tags
       delay = 1
