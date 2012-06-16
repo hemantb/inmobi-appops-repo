@@ -40,7 +40,6 @@ vhosts(node[:app_inmobi_lb][:vhost_names]).each do |vhost_name|
     app_inmobi_lb vhost_name do
       backend_id uuid
       backend_ip deployment_servers[uuid][:ip]
-      backend_port deployment_servers[uuid][:backend_port].to_i
       action :attach
     end
   end

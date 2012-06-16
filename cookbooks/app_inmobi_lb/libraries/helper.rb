@@ -29,7 +29,7 @@ module Inmobi
         require "timeout"
         app_servers = Hash.new
         main_tags = ["loadbalancer:#{vhost_name}=app"]
-        secondary_tags = ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
+        secondary_tags = ["server:uuid=*", "appserver:listen_ip=*"]
 
         r = server_collection "app_servers" do
           tags main_tags
@@ -65,10 +65,8 @@ module Inmobi
         node[:server_collection]['app_servers'].to_hash.values.each do |tags|
           uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
           ip = RightScale::Utils::Helper.get_tag_value('appserver:listen_ip', tags)
-          port = RightScale::Utils::Helper.get_tag_value('appserver:listen_port', tags)
           app_servers[uuid] = {}
           app_servers[uuid][:ip] = ip
-          app_servers[uuid][:backend_port] = port.to_i
         end
 
         app_servers
