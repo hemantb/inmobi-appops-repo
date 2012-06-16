@@ -15,6 +15,10 @@ action :load do
     action :nothing
   end
 
+  def self.calculate_exponential_backoff(value)
+    ((value == 1) ? 2 : (value*value))
+  end
+
   begin
     Timeout::timeout(new_resource.timeout) do
       all_tags = new_resource.tags.collect
@@ -32,7 +36,7 @@ action :load do
           end
         end
 
-#        delay = RightScale::System::Helper.calculate_exponential_backoff(delay)
+        delay = calculate_exponential_backoff(delay)
         Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
         sleep delay
       end
