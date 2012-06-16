@@ -19,7 +19,7 @@ attribute :timeout, :default => 60, :kind_of => Integer
 attribute :empty_ok, :default => true, :equal_to => [true, false]
 
 # Defines a default action
-#def initialize(*args)
-#  super
-#  @action = :load
-#end
+def initialize(*args)
+  super
+  @action = :load
+end

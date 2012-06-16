@@ -8,15 +8,7 @@
 require 'timeout'
 
 # Provider collects and processes server tags used by the server_collection resource
-action :bhagya do
-
- log "insider my recipee"
-
-end
-
 action :load do
-
-log "inside load and no issues"
   collection_resource = server_collection new_resource.name do
     tags new_resource.tags
     agent_ids new_resource.agent_ids
@@ -28,13 +20,10 @@ log "inside load and no issues"
       all_tags = new_resource.tags.collect
       all_tags += new_resource.secondary_tags.collect if new_resource.secondary_tags
       delay = 1
-      log "All tags = #{all_tags.insert}"
-
       while true
         collection_resource.run_action(:load)
         collection = node[:server_collection][new_resource.name]
 
-        break
         break if new_resource.empty_ok && collection.empty?
         break if !collection.empty? && collection.all? do |id, tags|
           all_tags.all? do |prefix|
@@ -42,7 +31,7 @@ log "inside load and no issues"
           end
         end
 
-        delay = ((delay == 1)? 2 : (delay*delay))
+#        delay = RightScale::System::Helper.calculate_exponential_backoff(delay)
         Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
         sleep delay
       end
