@@ -33,7 +33,7 @@ module RightScale
 
         r=server_collection 'app_servers' do
           tags ["loadbalancer:#{vhost_name}=app"]
-          secondary_tags ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
+#          secondary_tags ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
           action :nothing
         end
         r.run_action(:load)
