@@ -36,7 +36,7 @@ module RightScale
           secondary_tags ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
           action :nothing
         end
-        #r.run_action(:load)
+        r.run_action(:load)
 
         node[:server_collection]['app_servers'].to_hash.values.each do |tags|
           uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
