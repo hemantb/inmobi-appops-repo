@@ -15,13 +15,16 @@ action :load do
     action :nothing
   end
 
+  def self.calculate_exponential_backoff(value)
+     ((value == 1) ? 2 : (value*value))
+  end
+
   begin
     Timeout::timeout(new_resource.timeout) do
       all_tags = new_resource.tags.collect
       all_tags += new_resource.secondary_tags.collect if new_resource.secondary_tags
       delay = 1
       log "All tags = #{all_tags.insert}"
-=begin
       while true
         collection_resource.run_action(:load)
         collection = node[:server_collection][new_resource.name]
@@ -37,7 +40,6 @@ action :load do
         Chef::Log.info "not all tags for #{new_resource.tags.inspect} exist; retrying in #{delay} seconds..."
         sleep delay
       end
-=end
     end
   rescue Timeout::Error => e
     raise "ERROR: timed out trying to find servers tagged with #{new_resource.tags.inspect}"
