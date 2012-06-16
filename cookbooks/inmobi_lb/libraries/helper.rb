@@ -37,8 +37,8 @@ module RightScale
           action :nothing
         end
 
-  begin
-    Timeout::timeout(60) do
+     begin
+     Timeout::timeout(60) do
       all_tags =  ["loadbalancer:#{vhost_name}=app", "server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
       delay = 1
       while true
@@ -48,6 +48,7 @@ module RightScale
         break if collection.empty?
         break if !collection.empty? && collection.all? do |id, tags|
           all_tags.all? do |prefix|
+            log "checking for #{prefix} and tags as #{tags.inspect} for id #{id}"
             tags.detect { |tag| RightScale::Utils::Helper.matches_tag_wildcard?(prefix, tag) }
           end
         end
@@ -55,11 +56,11 @@ module RightScale
         delay = ((delay == 1) ? 2 : (delay*delay)) 
         Chef::Log.info "not all tags for loadbalancer:#{vhost_name}=app exist; retrying in #{delay} seconds..."
         sleep delay
-      end
+     end
     end
-  rescue Timeout::Error => e
-    raise "ERROR: timed out trying to find servers tagged with loadbalancer:#{vhost_name}=app"
-  end
+    rescue Timeout::Error => e
+      raise "ERROR: timed out trying to find servers tagged with loadbalancer:#{vhost_name}=app"
+    end
 
         node[:server_collection]['app_servers'].to_hash.values.each do |tags|
           uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
