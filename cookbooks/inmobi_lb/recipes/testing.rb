@@ -3,9 +3,12 @@ rightscale_marker :begin
 main_tags = ["loadbalancer:rs1.app.ev1.inmobi.com=app"]
 secondary_tags = ["server:uuid=*", "appserver:listen_ip=*", "appserver:listen_port=*"]
 
+lagent_ids = nil
+
 r = server_collection 'app_servers' do
   tags main_tags
-   action :nothing
+  agent_ids lagent_ids
+  action :nothing
 end
 
 r.run_action(:load)
