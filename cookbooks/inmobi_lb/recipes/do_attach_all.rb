@@ -23,7 +23,6 @@ vhosts(node[:inmobi_lb][:vhost_names]).each do |vhost_name|
   log "Attach all for [#{vhost_name}]"
   # Obtain current list from lb config file.
   inconfig_servers = get_attached_servers(vhost_name)
-  inconfig_servers = ["testserver"]
   log "  Currently attached: #{inconfig_servers.nil? ? 0 : inconfig_servers.count}"
 
 end
