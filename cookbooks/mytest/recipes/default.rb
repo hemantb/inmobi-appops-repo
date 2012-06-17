@@ -17,6 +17,7 @@ end
 script "test" do
         interpreter "bash -ex"
 	code <<-EOF
+		lsss
 		ls
 	EOF
 end
