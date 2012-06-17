@@ -7,7 +7,7 @@ log "restart #{node[:app_inmobi_tomcat][:webapp][:restart]}"
 
 service "tomcat6" do
   action :nothing
-}
+end
 
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   log "Installing #{p}"
