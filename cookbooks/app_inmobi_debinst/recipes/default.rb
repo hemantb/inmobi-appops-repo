@@ -1,9 +1,19 @@
 rightscale_marker :begin
 
-include_recipe "app_inmobi_tomcat::default"
+log "debians = #{node[:app_inmobi_debinst][:debians]}"
+log "service name = #{node[:app_inmobi_debinst][:restart]}"
+log "restart required? #{node[:app_inmobi_debinst][:restart]}"
+log "start command = #{node[:app_inmobi_debinst][:restart]}"
+log "stop command = #{node[:app_inmobi_debinst][:restart]}"
 
-log "debians #{node[:app_inmobi_tomcat][:webapp][:debians]}"
-log "restart #{node[:app_inmobi_tomcat][:webapp][:restart]}"
+app_inmobi_debinst "app_inmobi_debinst" do
+  action :nothing
+end
+
+service "app_inmobi_debinst" do
+  action :nothing
+  not_if {node[:app_inmobi_tomcat][:webapp][:restart] == "false"}
+end
 
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   log "Installing #{p}"
