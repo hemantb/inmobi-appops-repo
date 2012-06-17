@@ -26,9 +26,12 @@ rightscale_marker :begin
       cd /tmp
       tar -zxvf #{redis-tar}
       cd redis-2.4.8
-      make
-      make test
-      make install
+      echo "running make" >> /tmp/redis_install_log
+      make >> /tmp/redis_install_log
+      echo "running make test" >> /tmp/redis_install_log
+      make test >> /tmp/redis_install_log
+      echo "running make install" >> /tmp/redis_install_log
+      make install >> /tmp/redis_install_log
     EOF
   end
 
