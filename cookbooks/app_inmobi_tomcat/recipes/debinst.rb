@@ -9,6 +9,7 @@ node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   if p =~ /^([^=]+)=(.+)$/
      package $1 do
         version $2
+        options "--force-yes"
      end
   end
 end

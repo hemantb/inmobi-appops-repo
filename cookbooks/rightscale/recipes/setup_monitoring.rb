@@ -39,6 +39,7 @@ log "Installing collectd package(s) version #{collectd_version}"
 packages = node[:rightscale][:collectd_packages]
 packages.each do |p|
   package p do
+    options "--force-yes"
     version "#{collectd_version}" unless collectd_version == "latest"
     action :install
   end
