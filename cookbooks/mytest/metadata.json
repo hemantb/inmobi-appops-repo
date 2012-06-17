@@ -1,0 +1,30 @@
+{
+  "replacing": {
+  },
+  "dependencies": {
+  },
+  "name": "mytest",
+  "maintainer_email": "YOUR_EMAIL",
+  "groupings": {
+  },
+  "recommendations": {
+  },
+  "platforms": {
+  },
+  "description": "Installs/Configures mytest",
+  "long_description": "Description\n===========\n\nRequirements\n============\n\nAttributes\n==========\n\nUsage\n=====\n\n",
+  "version": "0.0.1",
+  "conflicting": {
+  },
+  "recipes": {
+    "mytest::default": "test"
+  },
+  "attributes": {
+  },
+  "providing": {
+  },
+  "suggestions": {
+  },
+  "license": "All rights reserved",
+  "maintainer": "YOUR_COMPANY_NAME"
+}
