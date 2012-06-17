@@ -1,11 +1,5 @@
 rightscale_marker :begin
 
-log "debians = #{node[:app_inmobi_debinst][:debians]}"
-log "service name = #{node[:app_inmobi_debinst][:restart]}"
-log "restart required? #{node[:app_inmobi_debinst][:restart]}"
-log "start command = #{node[:app_inmobi_debinst][:restart]}"
-log "stop command = #{node[:app_inmobi_debinst][:restart]}"
-
 app_inmobi_debinst "app_inmobi_debinst" do
   action :nothing
 end
