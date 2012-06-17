@@ -60,19 +60,19 @@ rightscale_marker :begin
     owner "root"
     mode "0644"
     variables(
-     :redis_port => node[:app_inmobi_redis][:redis_port]
-     :bind_address =>  node[:app_inmobi_redis][:bind_address]
-     :client_timeout =>  node[:app_inmobi_redis][:client_timeout]
-     :db_num =>  node[:app_inmobi_redis][:db_num]
-     :bgsave_line =>  node[:app_inmobi_redis][:bgsave_line]
-     :dump_file =>  node[:app_inmobi_redis][:dump_file]
-     :data_dir =>  node[:app_inmobi_redis][:data_dir]
-     :slave_of_line =>  node[:app_inmobi_redis][:slave_of_line]
-     :max_clients =>  node[:app_inmobi_redis][:max_clients]
-     :append_only =>  node[:app_inmobi_redis][:append_only]
-     :append_fsync => node[:app_inmobi_redis][:append_fsync]
-     :auto_aof_rewrite_percentage =>  node[:app_inmobi_redis][:auto_aof_rewrite_percentage]
-     :slowlog_log_slower_than => node[:app_inmobi_redis][:slowlog_log_slower_than]
+     :redis_port => node[:app_inmobi_redis][:redis_port],
+     :bind_address =>  node[:app_inmobi_redis][:bind_address],
+     :client_timeout =>  node[:app_inmobi_redis][:client_timeout],
+     :db_num =>  node[:app_inmobi_redis][:db_num],
+     :bgsave_line =>  node[:app_inmobi_redis][:bgsave_line],
+     :dump_file =>  node[:app_inmobi_redis][:dump_file],
+     :data_dir =>  node[:app_inmobi_redis][:data_dir],
+     :slave_of_line =>  node[:app_inmobi_redis][:slave_of_line],
+     :max_clients =>  node[:app_inmobi_redis][:max_clients],
+     :append_only =>  node[:app_inmobi_redis][:append_only],
+     :append_fsync => node[:app_inmobi_redis][:append_fsync],
+     :auto_aof_rewrite_percentage =>  node[:app_inmobi_redis][:auto_aof_rewrite_percentage],
+     :slowlog_log_slower_than => node[:app_inmobi_redis][:slowlog_log_slower_than],
     )
     notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:redis_port]}")
   end
