@@ -5,7 +5,7 @@ rightscale_marker :begin
     ignore_failure true
   end
 
-  depends = ["gcc","tcl8.5"]
+  depends = ["gcc","tcl8.5","mkhoj-base"]
 
   depends.each do |p|
     package p do
@@ -51,6 +51,15 @@ rightscale_marker :begin
   end
 
   log "  Creating /opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}"
+
+  directory "/opt/mkhoj/conf/redis" do
+    owner "root"
+    group "group"
+    mode "0755"
+    action :create
+    recursive true
+  end
+ 
   template "/opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}" do
     action :create
     source "redis-conf.erb"
