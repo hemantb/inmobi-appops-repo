@@ -1,116 +1,116 @@
 {
-  "version": "0.0.1",
-  "recipes": {
-    "app_inmobi_debinst": "Installs debians supporting custom start-stop script eg: daemontools"
-  },
   "description": "Installs/Configures app_inmobi_debinst",
-  "replacing": {
-  },
-  "attributes": {
-    "app_inmobi_debinst/restart": {
-      "type": "string",
-      "choice": [
-        "true",
-        "false"
-      ],
-      "recipes": [
-
-      ],
-      "description": "Select if service needs to be restarted after debian installations",
-      "calculated": false,
-      "default": "true",
-      "required": "optional",
-      "display_name": "Mention if service needs to be restarted after debian installations"
-    },
-    "app_inmobi_debinst/debians": {
-      "type": "string",
-      "choice": [
-
-      ],
-      "recipes": [
-
-      ],
-      "description": "If latest? is set to true, and if version numbers are missing in the debian names the latest package will be installed",
-      "calculated": false,
-      "default": null,
-      "required": "required",
-      "display_name": "Mention the debians and thier versions in packagename=version format"
-    },
-    "app_inmobi_debinst/starcmd": {
-      "type": "string",
-      "choice": [
-
-      ],
-      "recipes": [
-
-      ],
-      "description": "Eg: svc -u /etc/service-puppet",
-      "calculated": false,
-      "default": null,
-      "required": "optional",
-      "display_name": "Mention the complete command used to start the service"
-    },
-    "app_inmobi_debinst/service": {
-      "type": "string",
-      "choice": [
-
-      ],
-      "recipes": [
-
-      ],
-      "description": "This name will be used as init.d service name if start-stop commands are not mentioned",
-      "calculated": false,
-      "default": null,
-      "required": "required",
-      "display_name": "Mention the generic service name."
-    },
-    "app_inmobi_debinst/stopcmd": {
-      "type": "string",
-      "choice": [
-
-      ],
-      "recipes": [
-
-      ],
-      "description": "Eg: svc -d /etc/service-puppet",
-      "calculated": false,
-      "default": null,
-      "required": "optional",
-      "display_name": "Mention the complete command used to stop the service"
-    },
-    "app_inmobi_debinst/latest": {
-      "type": "string",
-      "choice": [
-        "true",
-        "false"
-      ],
-      "recipes": [
-
-      ],
-      "description": "If latest? is set to true, and if version numbers are missing in the debian names the latest package will be installed",
-      "calculated": false,
-      "default": "false",
-      "required": "optional",
-      "display_name": "Mention if latest package should be installed if version name is mentioned for a packagename in debians list"
-    }
-  },
-  "suggestions": {
-  },
-  "recommendations": {
-  },
-  "dependencies": {
-  },
   "name": "app_inmobi_debinst",
-  "platforms": {
+  "providing": {
   },
-  "maintainer": "Inmobi",
-  "long_description": "Description\n===========\n\nRequirements\n============\n\nAttributes\n==========\n\nUsage\n=====\n\n",
-  "groupings": {
+  "replacing": {
   },
   "conflicting": {
   },
-  "maintainer_email": "bhagyaraj.g@inmobi.com",
-  "providing": {
+  "attributes": {
+    "app_inmobi_debinst/latest": {
+      "choice": [
+        "true",
+        "false"
+      ],
+      "description": "If latest? is set to true, and if version numbers are missing in the debian names the latest package will be installed",
+      "display_name": "Mention if latest package should be installed if version name is mentioned for a packagename in debians list",
+      "calculated": false,
+      "default": "false",
+      "type": "string",
+      "recipes": [
+
+      ],
+      "required": "optional"
+    },
+    "app_inmobi_debinst/startcmd": {
+      "choice": [
+
+      ],
+      "description": "Eg: svc -u /etc/service-puppet",
+      "display_name": "Mention the complete command used to start the service",
+      "calculated": false,
+      "default": null,
+      "type": "string",
+      "recipes": [
+
+      ],
+      "required": "optional"
+    },
+    "app_inmobi_debinst/restart": {
+      "choice": [
+        "true",
+        "false"
+      ],
+      "description": "Select if service needs to be restarted after debian installations",
+      "display_name": "Mention if service needs to be restarted after debian installations",
+      "calculated": false,
+      "default": "true",
+      "type": "string",
+      "recipes": [
+
+      ],
+      "required": "optional"
+    },
+    "app_inmobi_debinst/debians": {
+      "choice": [
+
+      ],
+      "description": "If latest? is set to true, and if version numbers are missing in the debian names the latest package will be installed",
+      "display_name": "Mention the debians and thier versions in packagename=version format",
+      "calculated": false,
+      "default": null,
+      "type": "string",
+      "recipes": [
+
+      ],
+      "required": "required"
+    },
+    "app_inmobi_debinst/service": {
+      "choice": [
+
+      ],
+      "description": "This name will be used as init.d service name if start-stop commands are not mentioned",
+      "display_name": "Mention the generic service name.",
+      "calculated": false,
+      "default": null,
+      "type": "string",
+      "recipes": [
+
+      ],
+      "required": "required"
+    },
+    "app_inmobi_debinst/stopcmd": {
+      "choice": [
+
+      ],
+      "description": "Eg: svc -d /etc/service-puppet",
+      "display_name": "Mention the complete command used to stop the service",
+      "calculated": false,
+      "default": null,
+      "type": "string",
+      "recipes": [
+
+      ],
+      "required": "optional"
+    }
   },
-  "license": "All rights reserved"
+  "license": "All rights reserved",
+  "maintainer_email": "bhagyaraj.g@inmobi.com",
+  "dependencies": {
+  },
+  "platforms": {
+  },
+  "recommendations": {
+  },
+  "groupings": {
+  },
+  "version": "0.0.1",
+  "suggestions": {
+  },
+  "maintainer": "Inmobi",
+  "recipes": {
+    "app_inmobi_debinst": "Installs debians supporting custom start-stop script eg: daemontools"
+  },
+  "long_description": "Description\n===========\n\nRequirements\n============\n\nAttributes\n==========\n\nUsage\n=====\n\n"
 }
