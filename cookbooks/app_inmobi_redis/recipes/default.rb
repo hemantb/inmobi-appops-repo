@@ -54,7 +54,7 @@ rightscale_marker :begin
 
   directory "/opt/mkhoj/conf/redis" do
     owner "root"
-    group "group"
+    group "root"
     mode "0755"
     action :create
     recursive true
