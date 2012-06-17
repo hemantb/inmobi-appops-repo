@@ -30,7 +30,7 @@ attribute "app_inmobi_debinst/restart",
   :display_name => "Mention if service needs to be restarted after debian installations",
   :description => "Select if service needs to be restarted after debian installations",
   :required => "optional",
-  :default => "false",
+  :default => "true",
   :choice => ["true","false"]
 
 attribute "app_inmobi_debinst/starcmd",
