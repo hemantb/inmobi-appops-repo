@@ -45,7 +45,7 @@ rightscale_marker :begin
   end
 
   log "  Creating /etc/init.d/redis_#{node[:app_inmobi_redis][:redis_port]}"
-  template "/etc/init.d/#{node[:app_inmobi_redis][:redis_port]}" do
+  template "/etc/init.d/redis_#{node[:app_inmobi_redis][:redis_port]}" do
     action :create
     source "redis-init-script.erb"
     group "root"
