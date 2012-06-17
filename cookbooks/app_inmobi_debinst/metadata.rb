@@ -5,6 +5,8 @@ description      "Installs/Configures app_inmobi_debinst"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.0.1"
 
+depends "rightscale"
+
 recipe "app_inmobi_debinst" , "Installs debians supporting custom start-stop script eg: daemontools"
 
 attribute "app_inmobi_debinst/service",
