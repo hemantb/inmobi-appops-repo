@@ -11,3 +11,10 @@ cookbook_file "/tmp/testfile" do
 	source "testfile"
 	mode "0644"
 end
+
+bash "test" do
+	flags "-ex"
+	code <<-EOF
+		ls
+	EOF
+end
