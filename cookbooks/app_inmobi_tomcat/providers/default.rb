@@ -44,6 +44,10 @@ action :install do
     ignore_failure true
   end
 
+  service "tomcat6" do
+    action :nothing
+  end
+
   log "  Packages which will be installed: #{packages}"
   packages .each do |p|
     log "installing #{p}"
@@ -68,6 +72,7 @@ action :install do
     package p do
 	options "--force-yes"
 	action :install
+        notifies :restart , resources(:service => "tomcat6")
     end
 
   end
@@ -78,15 +83,10 @@ action :install do
     action :run
   end
 
-  action_restart
 end
 
 # Setup tomcat configuration files
 action :setup_config do
-
-  service "tomcat6" do
-      action :nothing
-  end
 
   log "  Creating /etc/default/tomcat6"
   template "/etc/default/tomcat6" do
@@ -135,6 +135,7 @@ action :setup_config do
     notifies :restart , "service[tomcat6]"
   end
 
+  service "tomcat6"
 end
 
 # Setup monitoring tools for tomcat

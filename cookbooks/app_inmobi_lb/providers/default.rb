@@ -54,7 +54,7 @@ action :install do
     owner "haproxy"
     group "haproxy"
     mode "0400"
-    stats_file="stats socket #{node[:app_inmobi_lb][:cfg_dir]}/status haproxy group haproxy"
+    stats_file="stats socket #{node[:app_inmobi_lb][:cfg_dir]}/status user haproxy group haproxy"
     variables(
       :stats_file_line => stats_file
     )
