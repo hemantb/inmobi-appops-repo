@@ -36,6 +36,7 @@ set_unless[:app_inmobi_lb][:appserver_list] = {}
 
 # Config file used by load balancer.
 set_unless[:app_inmobi_lb][:cfg_file] = "/opt/mkhoj/conf/lb/inmobi_lb.cfg"
+set_unless[:app_inmobi_lb][:cfg_dir] = "/opt/mkhoj/conf/lb"
 
 # Web service name based on OS.
 case platform
