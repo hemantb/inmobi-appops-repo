@@ -74,10 +74,4 @@ module Inmobi
 
     end
   end
-
-  # Set provider for each vhost.
-  def vhosts(vhost_list)
-    return vhost_list.gsub(/\s+/, "").split(",").uniq.each
-  end
-
 end

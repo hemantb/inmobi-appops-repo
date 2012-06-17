@@ -7,11 +7,12 @@
 
 rightscale_marker :begin
 
-class Chef::Recipe
-  include Inmobi::LB::Helper
-end
-
 log "  Setup default load balancer resource."
+
+# Set provider for each vhost.
+def vhosts(vhost_list)
+  return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+end
 
 vhosts(node[:app_inmobi_lb][:vhost_names]).each do | vhost_name |
   log "Adding provider name as #{node[:app_inmobi_lb][:service][:provider]}"

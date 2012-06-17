@@ -8,6 +8,10 @@ class Chef::Recipe
   include Inmobi::LB::Helper
 end
 
+def vhosts(vhost_list)
+   return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+end
+
 DROP_THRESHOLD = 3
 
 # Iterate through each vhost.

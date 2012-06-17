@@ -7,8 +7,9 @@
 
 rightscale_marker :begin
 
-class Chef::Recipe
-  include Inmobi::LB::Helper
+# Set provider for each vhost.
+def vhosts(vhost_list)
+  return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
 # Add the collectd exec plugin to the set of collectd plugins if it isn't already there.

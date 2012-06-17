@@ -4,11 +4,11 @@
 
 rightscale_marker :begin
 
-class Chef::Recipe
-  include Inmobi::LB::Helper
-end
-
 include_recipe "app_inmobi_lb::default"
+
+def vhosts(vhost_list)
+  return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+end
 
 log "  Install load balancer"
 

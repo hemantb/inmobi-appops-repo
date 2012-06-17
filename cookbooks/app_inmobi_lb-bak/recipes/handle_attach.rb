@@ -7,8 +7,8 @@
 
 rightscale_marker :begin
 
-class Chef::Recipe
-  include Inmobi::LB::Helper
+def vhosts(vhost_list)
+  return vhost_list.gsub(/\s+/, "").split(",").uniq.each
 end
 
 log "  Remote recipe executed by do_attach_request"
