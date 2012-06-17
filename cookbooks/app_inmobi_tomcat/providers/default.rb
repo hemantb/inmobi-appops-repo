@@ -62,7 +62,7 @@ action :install do
             sun-java6-jre shared/present-sun-dlj-v1-1 note'|debconf-set-selections
             EOF
        end
-
+       sleep 5
     end
 
     package p do
