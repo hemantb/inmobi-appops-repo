@@ -102,7 +102,7 @@ action :setup_config do
     notifies :restart , "service[tomcat6]"
   end
 
-  log "  Creating /etc/init.d/tomcat6 with host_ip like #{node[:ip]}"
+  log "  Creating /etc/init.d/tomcat6 with host_ip like #{node[:app][:ip]}"
   template "/etc/init.d/tomcat6" do
     action :create
     source "tomcat6_init.erb"
