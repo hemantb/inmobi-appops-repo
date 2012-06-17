@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-cookbook_file "/tmp/testfile" do
+remote_file "/tmp/testfile" do
 	source "testfile"
 	mode "0644"
 end
