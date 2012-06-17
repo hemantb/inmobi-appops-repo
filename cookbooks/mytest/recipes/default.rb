@@ -14,8 +14,8 @@ remote_file "/tmp/testfile" do
 	mode "0644"
 end
 
-bash "test" do
-        flags "-ex"
+script "test" do
+        interpreter "bash -ex"
 	code <<-EOF
 		ls
 	EOF
