@@ -11,7 +11,13 @@ node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
         version $2
         options "--force-yes"
      end
-  end
+   elsif node[:app_inmobi_tomcat][:latest] == "true"
+     package p do
+       options "--force-yes"
+     end
+   else
+     raise "#{p} doesn't match the pattern packagename=version format. please fix or set latest? variable to true"
+   end
 end
 
 case node[:app_inmobi_tomcat][:webapp][:restart]
