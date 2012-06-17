@@ -41,11 +41,11 @@ action :install do
   end
 
   # Install script that concatenates individual server files after the haproxy config head into the haproxy config.
-  template "/opt/mkhoj/conf/lb//haproxy-cat.sh" do
+  template "/opt/mkhoj/conf/lb/haproxy-genconf.pl" do
     owner "haproxy"
     group "haproxy"
     mode 0755
-    source "haproxy-cat.sh"
+    source "haproxy-genconf.pl"
   end
 
   # Install the haproxy config head which is the part of the haproxy config that doesn't change.
@@ -110,7 +110,8 @@ action :add_vhost do
   end
 
   # (Re)generate the haproxy config file.
-  execute "/opt/mkhoj/conf/lb/haproxy-cat.sh" do
+  execute "/opt/mkhoj/conf/lb/haproxy-genconf.pl" do
+    command "perl /opt/mkhoj/conf/lb/haproxy-genconf.pl"
     user "haproxy"
     group "haproxy"
     umask 0077
@@ -136,7 +137,8 @@ action :attach do
   end
 
   # (Re)generate the haproxy config file.
-  execute "/opt/mkhoj/conf/lb/haproxy-cat.sh" do
+  execute "/opt/mkhoj/conf/lb/haproxy-genconf.pl" do
+    command "perl /opt/mkhoj/conf/lb/haproxy-genconf.pl"
     user "haproxy"
     group "haproxy"
     umask 0077
@@ -157,7 +159,7 @@ action :attach do
       :max_conn_per_server => node[:app_inmobi_lb][:max_conn_per_server],
       :health_check_uri => node[:app_inmobi_lb][:health_check_uri]
     )
-    notifies :run, resources(:execute => "/opt/mkhoj/conf/lb/haproxy-cat.sh")
+    notifies :run, resources(:execute => "/opt/mkhoj/conf/lb/haproxy-genconf.pl")
   end
 
 end # action :attach do
@@ -194,7 +196,8 @@ action :detach do
   end
 
   # (Re)generate the haproxy config file.
-  execute "/opt/mkhoj/conf/lb/haproxy-cat.sh" do
+  execute "/opt/mkhoj/conf/lb/haproxy-genconf.pl" do
+    command "perl /opt/mkhoj/conf/lb/haproxy-genconf.pl"
     user "haproxy"
     group "haproxy"
     umask 0077
@@ -206,7 +209,7 @@ action :detach do
   file ::File.join("/opt/mkhoj/conf/lb/lb_haproxy.d", vhost_name, new_resource.backend_id) do
     action :delete
     backup false
-    notifies :run, resources(:execute => "/opt/mkhoj/conf/lb/haproxy-cat.sh")
+    notifies :run, resources(:execute => "/opt/mkhoj/conf/lb/haproxy-genconf.pl")
   end
 
 end # action :detach do
