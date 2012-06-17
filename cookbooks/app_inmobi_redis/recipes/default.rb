@@ -17,7 +17,7 @@ rightscale_marker :begin
 
   remote_file "/tmp/#{redis_tar}" do
     source "redis-server-2.4.8.tar.gz"
-    chmod 755
+    mode "0755"
   end
 
   script "install redis server" do
