@@ -20,7 +20,7 @@ rightscale_marker :begin
     mode "0755"
   end
 
-  script "install redis server" do
+  script "install_redis_server" do
    interpreter "bash -ex"
     code <<-EOF
       cd /tmp
@@ -32,34 +32,46 @@ rightscale_marker :begin
     EOF
   end
 
-  service "redis_#{node[:app_inmobi_redis][:port]}" do
+  service "redis_#{node[:app_inmobi_redis][:redis_port]}" do
     action :nothing
   end
 
-  log "  Creating /etc/init.d/redis_#{node[:app_inmobi_redis][:port]}"
-  template "/etc/init.d/#{node[:app_inmobi_redis][:port]}" do
+  log "  Creating /etc/init.d/redis_#{node[:app_inmobi_redis][:redis_port]}"
+  template "/etc/init.d/#{node[:app_inmobi_redis][:redis_port]}" do
     action :create
     source "redis-init-script.erb"
     group "root"
     owner "root"
     mode "0644"
     variables(
-      :redis_exe => node[:app_inmobi_redis][:redis_exe]
+      :redis_port => node[:app_inmobi_redis][:redis_port]
     )
-    notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:port]}")
+    notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:redis_port]}")
   end
 
-  log "  Creating /opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:port]}"
-  template "/opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:port]}" do
+  log "  Creating /opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}"
+  template "/opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}" do
     action :create
     source "redis-conf.erb"
     group "root"
     owner "root"
     mode "0644"
     variables(
-      :redis_exe => node[:app_inmobi_redis][:redis_exe]
+     :redis_port => node[:app_inmobi_redis][:redis_port]
+     :bind_address =>  node[:app_inmobi_redis][:bind_address]
+     :client_timeout =>  node[:app_inmobi_redis][:client_timeout]
+     :db_num =>  node[:app_inmobi_redis][:db_num]
+     :bgsave_line =>  node[:app_inmobi_redis][:bgsave_line]
+     :dump_file =>  node[:app_inmobi_redis][:dump_file]
+     :data_dir =>  node[:app_inmobi_redis][:data_dir]
+     :slave_of_line =>  node[:app_inmobi_redis][:slave_of_line]
+     :max_clients =>  node[:app_inmobi_redis][:max_clients]
+     :append_only =>  node[:app_inmobi_redis][:append_only]
+     :append_fsync => node[:app_inmobi_redis][:append_fsync]
+     :auto_aof_rewrite_percentage =>  node[:app_inmobi_redis][:auto_aof_rewrite_percentage]
+     :slowlog_log_slower_than => node[:app_inmobi_redis][:slowlog_log_slower_than]
     )
-    notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:port]}")
+    notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:redis_port]}")
   end
 
 right_link_tag "appserver:active=true"
