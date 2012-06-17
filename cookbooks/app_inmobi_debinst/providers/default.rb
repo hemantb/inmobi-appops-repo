@@ -6,6 +6,8 @@
 
 action :restart do
 
+rightscale_marker :begin
+
   log "Running restart sequence of #{new_resource.name}"
 
   if node[:app_inmobi_debinst][:start] != nil && node[:app_inmobi_debinst][:stop] != nil
@@ -46,4 +48,7 @@ action :restart do
     end
 
   end
+
+rightscale_marker :end
+
 end
