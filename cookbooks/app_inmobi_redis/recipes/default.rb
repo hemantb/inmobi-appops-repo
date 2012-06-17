@@ -91,6 +91,9 @@ rightscale_marker :begin
     notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:redis_port]}")
   end
 
+  include_recipe "rightscale::setup_server_tags"
+  include_recipe "rightscale::setup_monitoring"
+
   right_link_tag "appserver:active=true"
   right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
 
