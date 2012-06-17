@@ -84,6 +84,10 @@ end
 # Setup tomcat configuration files
 action :setup_config do
 
+  service "tomcat6" do
+      action :nothing
+  end
+
   log "  Creating /etc/default/tomcat6"
   template "/etc/default/tomcat6" do
     action :create
@@ -130,9 +134,6 @@ action :setup_config do
           )
     notifies :restart , "service[tomcat6]"
   end
-
-  #include_recipe "rightscale::setup_timezone"
-  #include_recipe "rightscale::setup_server_tags"
 
 end
 
