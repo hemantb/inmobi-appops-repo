@@ -77,7 +77,11 @@ module Inmobi
 
   # Set provider for each vhost.
   def vhosts(vhost_list)
-    return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+    vhost = vhost_list.gsub(/\s+/, "")
+    if vhost !~ /^(sticky|nosticky)-(\d+)-(.+)-(\d+)$/  
+      raise "#{vhost} is not in valid format"
+    end
+    return vhost.split(",").uniq.each
   end
 
 end
