@@ -4,11 +4,11 @@ app_inmobi_debinst "app_inmobi_debinst" do
   action :nothing
 end
 
-log "restart = node[:app_inmobi_debinst][:restart]"
-log "start = node[:app_inmobi_debinst][:stopcmd]"
-log "stop = node[:app_inmobi_debinst][:startcmd]"
-log "service = node[:app_inmobi_debinst][:service]"
-log "latest = node[:app_inmobi_debinst][:latest]"
+log "restart = #{node[:app_inmobi_debinst][:restart]}"
+log "start = #{node[:app_inmobi_debinst][:stopcmd]}"
+log "stop = #{node[:app_inmobi_debinst][:startcmd]}"
+log "service = #{node[:app_inmobi_debinst][:service]}"
+log "latest = #{node[:app_inmobi_debinst][:latest]}"
 
 execute "update apt cache" do
  command "apt-get update"
