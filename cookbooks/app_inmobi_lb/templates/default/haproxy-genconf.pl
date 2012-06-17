@@ -35,7 +35,7 @@ foreach my $fport (keys %VHOSTS) {
 		$acl =~ s/\./_/g;
 		$backend =~ s/\./_/g;
 		$FRONTEND .= "        acl ${acl}_acl hdr_dom(host) -i $VHOSTS{$fport}{$vhost}{vhost}\n";
-		$FRONTEND .= "        use_backend $backend if ${acl}_acl\n\n";
+		$FRONTEND .= "        use_backend ${backend}_backend if ${acl}_acl\n\n";
 
 		open (FILE, "$CONF_DIR/lb_haproxy.d/${vhost}.cfg") || die "Can't open config file $CONF_DIR/lb_haproxy.d/${vhost}.cfg";
 		$BACKEND .= join("", <FILE>);
