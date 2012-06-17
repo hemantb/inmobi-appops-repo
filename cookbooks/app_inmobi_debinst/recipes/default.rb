@@ -28,12 +28,12 @@ node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
      package $1 do
         version $2
         options "--force-yes"
-        notifies :restart , "service[#{node[:app_inmobi_debinst][:startcmd]}]" unless node[:app_inmobi_debinst][:restart] == "false"
+        notifies :restart , "service[#{node[:app_inmobi_debinst][:service]}]" unless node[:app_inmobi_debinst][:restart] == "false"
      end
    elsif node[:app_inmobi_tomcat][:webapp][:latest] == "true"
      package p do
         options "--force-yes"
-        notifies :restart , "service[#{node[:app_inmobi_debinst][:startcmd]}]" unless node[:app_inmobi_debinst][:restart] == "false"
+        notifies :restart , "service[#{node[:app_inmobi_debinst][:service]}]" unless node[:app_inmobi_debinst][:restart] == "false"
      end
    else
      raise "#{p} doesn't match the pattern packagename=version format. please fix or set latest? variable to true"
