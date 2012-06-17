@@ -5,12 +5,8 @@ rightscale_marker :begin
     ignore_failure true
   end
 
-  depends = ["gcc","tcl8.5","mkhoj-base"]
-
-  depends.each do |p|
-    package p do
-      options "--force-yes"
-    end
+  execute "install dependencies" do
+    command "apt-get install gcc tcl8.5 mkhoj-base"
   end
 
   remote_file "/tmp/redis-server-2.4.8.tar.gz" do
