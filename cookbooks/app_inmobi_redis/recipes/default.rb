@@ -92,7 +92,7 @@ rightscale_marker :begin
   end
 
   include_recipe "rightscale::setup_server_tags"
-  include_recipe "rightscale::setup_monitoring"
+#  include_recipe "rightscale::setup_monitoring"
 
   right_link_tag "appserver:active=true"
   right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
