@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+log "adding new test"
+
 remote_file "/tmp/testfile" do
 	source "testfile"
 	mode "0644"
