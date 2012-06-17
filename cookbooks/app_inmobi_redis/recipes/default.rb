@@ -5,8 +5,12 @@ rightscale_marker :begin
     ignore_failure true
   end
 
-  execute "install dependencies" do
-    command "apt-get install gcc tcl8.5 mkhoj-base"
+  depends = ["gcc", "tcl8.5", "mkhoj-base"]
+
+  depends.each do |p|
+    package p do
+      options "--force-yes"
+    end
   end
 
   remote_file "/tmp/redis-server-2.4.8.tar.gz" do
@@ -23,13 +27,13 @@ rightscale_marker :begin
         cd /tmp
         tar -zxvf redis-server-2.4.8.tar.gz
         cd redis-2.4.8
-        echo "running make" >> /tmp/redis_install_log
-        date >> /opt/mkhoj/log/redis_install_log
-        make >> /opt/mkhoj/log/redis_install_log
-        echo "running make test" >> /opt/mkhoj/log/redis_install_log
-        make test >> /opt/mkhoj/log/redis_install_log
-        echo "running make install" >> /opt/mkhoj/log/redis_install_log
-        make install >> /opt/mkhoj/log/redis_install_log
+        echo "running make" >> /opt/mkhoj/logs/redis_install_log
+        date >> /opt/mkhoj/logs/redis_install_log
+        make >> /opt/mkhoj/logs/redis_install_log
+        echo "running make test" >> /opt/mkhoj/logs/redis_install_log
+        make test >> /opt/mkhoj/logs/redis_install_log
+        echo "running make install" >> /opt/mkhoj/logs/redis_install_log
+        make install >> /opt/mkhoj/logs/redis_install_log
       EOF
     end
   else
