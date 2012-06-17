@@ -10,23 +10,18 @@ app_inmobi_debinst "app_inmobi_debinst" do
   action :nothing
 end
 
-service "app_inmobi_debinst" do
-  action :nothing
-  not_if {node[:app_inmobi_tomcat][:webapp][:restart] == "false"}
-end
-
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   log "Installing #{p}"
   if p =~ /^([^=]+)=(.+)$/
      package $1 do
         version $2
         options "--force-yes"
-        notifies :restart , resources(:service => "tomcat6")
+        notifies :restart , resources(:app_inmobi_debinst => "app_inmobi_debinst") unless node[:app_inmobi_debinst][:restart] == "false"
      end
    elsif node[:app_inmobi_tomcat][:webapp][:latest] == "true"
      package p do
         options "--force-yes"
-        notifies :restart , resources(:service => "tomcat6")
+        notifies :restart , resources(:app_inmobi_debinst => "app_inmobi_debinst") unless node[:app_inmobi_debinst][:restart] == "false"
      end
    else
      raise "#{p} doesn't match the pattern packagename=version format. please fix or set latest? variable to true"
