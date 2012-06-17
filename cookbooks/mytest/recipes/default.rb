@@ -15,7 +15,7 @@ remote_file "/tmp/testfile" do
 end
 
 script "test" do
-        interpreter "bash -ex"
+        interpreter "bash"
 	code <<-EOF
 		lsss
 		ls
