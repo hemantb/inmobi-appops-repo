@@ -12,13 +12,13 @@ execute "update apt cache" do
 end
 
 if node[:app_inmobi_debinst][:stopcmd] == nil || node[:app_inmobi_debinst][:startcmd] == nil
-   node[:app_inmobi_debinst][:stopcmd] = nil
-   node[:app_inmobi_debinst][:startcmd] = nil
+   node[:app_inmobi_debinst][:startcmd] = "/etc/init.d/{#{node[:app_inmobi_debinst][:service]} start"
+   node[:app_inmobi_debinst][:stopcmd] = "/etc/init.d/{#{node[:app_inmobi_debinst][:service]} stop"
 end
 
 service "#{node[:app_inmobi_debinst][:service]}" do
-  start_command "#{node[:app_inmobi_debinst][:startcmd]}" unless node[:app_inmobi_debinst][:startcmd] == nil
-  stop_command "#{node[:app_inmobi_debinst][:stopcmd]}" unless node[:app_inmobi_debinst][:stopcmd] == nil
+  start_command "#{node[:app_inmobi_debinst][:startcmd]}"
+  stop_command "#{node[:app_inmobi_debinst][:stopcmd]}"
   action :nothing
 end
 
