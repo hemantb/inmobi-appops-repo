@@ -50,7 +50,7 @@ rightscale_marker :begin
     source "redis-init-script.erb"
     group "root"
     owner "root"
-    mode "0644"
+    mode "0755"
     variables(
       :redis_port => node[:app_inmobi_redis][:redis_port]
     )
