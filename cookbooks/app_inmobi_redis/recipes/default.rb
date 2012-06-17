@@ -36,6 +36,8 @@ rightscale_marker :begin
         make install >> /opt/mkhoj/log/redis_install_log
       EOF
     end
+  else
+    log "Redis 2.4.8 has already been installed once. Not installing again"
   end
 
   service "redis_#{node[:app_inmobi_redis][:redis_port]}" do
