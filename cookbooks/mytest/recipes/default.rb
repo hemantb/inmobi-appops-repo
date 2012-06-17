@@ -13,7 +13,6 @@ remote_file "/tmp/testfile" do
 end
 
 bash "test" do
-	flags "-ex"
 	code <<-EOF
 		ls
 	EOF
