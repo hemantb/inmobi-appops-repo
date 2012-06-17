@@ -50,7 +50,9 @@ action :install do
     case p
     when "sun-java6-jre"
         log "Setting debconf parameters to automate #{p} installation"
-        bash "update-debconf-set-selections" do
+        script "update-debconf-set-selections" do
+            interpreter "bash"
+            flags "-ex"
             code <<-EOF
             echo 'sun-java6-bin shared/accepted-sun-dlj-v1-1 boolean true
             sun-java6-jdk shared/accepted-sun-dlj-v1-1 boolean true
@@ -155,7 +157,8 @@ action :setup_monitoring do
   end
 
   #Add collectd support to tomcat.conf
-  bash "Add collectd to tomcat.conf" do
+  script "Add collectd to tomcat.conf" do
+    interpreter "bash"
     flags "-ex"
     code <<-EOH
       cat <<'EOF'>>/etc/tomcat6/tomcat6.conf
@@ -163,6 +166,5 @@ action :setup_monitoring do
       EOF
     EOH
   end
-
 
 end
