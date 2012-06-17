@@ -1,0 +1,209 @@
+{
+  "replacing": {
+  },
+  "description": "Installs/Configures app_inmobi_redis",
+  "version": "0.0.1",
+  "license": "All rights reserved",
+  "attributes": {
+    "app_inmobi_redis/auto_aof_rewrite_percentage": {
+      "display_name": "BGREWRITEAOF will be performed after AOF file grows to given percentage from previous check. default : 0 (disabled)",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "0",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/redis_port": {
+      "description": "No Description",
+      "display_name": "Redis Port Number",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "6379",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/client_timeout": {
+      "description": "No Description",
+      "display_name": "Close the connection after a client is idle for N seconds (0 to disable) default: 300",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "300",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/slowlog_log_slower_than": {
+      "display_name": "Log queries taking longer than given microseconds in memory. default : 10000",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "10000",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/bind_address": {
+      "description": "No Description",
+      "display_name": "Redis Bind address default: 0.0.0.0",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "0.0.0.0",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/bgsave_line": {
+      "description": "No Description",
+      "display_name": "mention the config line for auto BGSAVE eg: save 1 1",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/append_only": {
+      "display_name": "Mention the configuration for appendonly setting. default: yes",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "yes",
+      "calculated": false,
+      "choice": [
+        "no",
+        "yes"
+      ]
+    },
+    "app_inmobi_redis/dump_file": {
+      "description": "No Description",
+      "display_name": "File where BGSAVE dumps the memory data default: dump.rdb",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "dump.rdb",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/append_fsync": {
+      "display_name": "Mention the frequency for appendonly setting. default: everysec",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "everysec",
+      "calculated": false,
+      "choice": [
+        "no",
+        "always",
+        "everysec"
+      ]
+    },
+    "app_inmobi_redis/max_clients": {
+      "display_name": "Set the max number of connected clients at the same time. default: 500",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "500",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/data_dir": {
+      "description": "No Description",
+      "display_name": "Data directory for Redis default : /var/lib. redis/<portnum> will be appended by default",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "/var/lib",
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/slave_of_line": {
+      "description": "No Description",
+      "display_name": "Config line which describes slave configuration if required default: slaveof no one",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "calculated": false,
+      "choice": [
+
+      ]
+    },
+    "app_inmobi_redis/db_num": {
+      "description": "No Description",
+      "display_name": "Set the number of databases default: 16",
+      "required": "optional",
+      "type": "string",
+      "recipes": [
+        "app_inmobi_redis::default"
+      ],
+      "default": "16",
+      "calculated": false,
+      "choice": [
+
+      ]
+    }
+  },
+  "dependencies": {
+    "rightscale": ">= 0.0.0"
+  },
+  "recipes": {
+    "app_inmobi_redis::default": "Install redis server 2.4.8"
+  },
+  "providing": {
+  },
+  "conflicting": {
+  },
+  "suggestions": {
+  },
+  "groupings": {
+  },
+  "maintainer": "YOUR_COMPANY_NAME",
+  "platforms": {
+  },
+  "long_description": "Description\n===========\n\nRequirements\n============\n\nAttributes\n==========\n\nUsage\n=====\n\n",
+  "recommendations": {
+  },
+  "maintainer_email": "YOUR_EMAIL",
+  "name": "app_inmobi_redis"
+}

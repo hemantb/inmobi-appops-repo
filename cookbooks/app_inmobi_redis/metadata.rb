@@ -91,7 +91,7 @@ attribute "app_inmobi_redis/append_only",
   :display_name => "Mention the configuration for appendonly setting. default: yes", 
   :required => "optional",
   :default => "yes",
-  :choice => ["no", "yes"]
+  :choice => ["no", "yes"],
   :recipes => [
     "app_inmobi_redis::default",
   ]
@@ -100,7 +100,7 @@ attribute "app_inmobi_redis/append_fsync",
   :display_name => "Mention the frequency for appendonly setting. default: everysec", 
   :required => "optional",
   :default => "everysec",
-  :choice => ["no", "always", "everysec"]
+  :choice => ["no", "always", "everysec"],
   :recipes => [
     "app_inmobi_redis::default",
   ]
