@@ -43,4 +43,10 @@ end
 right_link_tag "appserver:active=true"
 right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
 
+node[:app_inmobi_debinst][:restart] = nil
+node[:app_inmobi_debinst][:startcmd] = nil
+node[:app_inmobi_debinst][:stopcmd] = nil
+node[:app_inmobi_debinst][:service] = nil
+node[:app_inmobi_debinst][:latest] = nil
+
 rightscale_marker :end
