@@ -17,22 +17,20 @@ node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
      package $1 do
         version $2
         options "--force-yes"
-        notifies :restart , resources(:app_inmobi_debinst => "debinst")
+        notifies :restart , "app_inmobi_debinst[debinst]"
      end
    elsif node[:app_inmobi_tomcat][:webapp][:latest] == "true"
      package p do
         options "--force-yes"
-        notifies :restart , resources(:app_inmobi_debinst => "debinst")
+        notifies :restart , "app_inmobi_debinst[debinst]"
      end
    else
      raise "#{p} doesn't match the pattern packagename=version format. please fix or set latest? variable to true"
    end
 end
 
-if node[:app_inmobi_debinst][:restart] == "true"
-  app_inmobi_debinst "debinst" do
-    action :restart
-  end
+app_inmobi_debinst "debinst" do
+  action :nothing
 end
 
 right_link_tag "appserver:active=true"
