@@ -73,6 +73,14 @@ attribute "app_inmobi_tomcat/webapp/debians",
   :required => true,
   :recipes => [ "app_inmobi_tomcat::debinst" ]
 
+attribute "app_inmobi_tomcat/webapp/latest",
+  :display_name => "Confirm if latest package version needs to be installed",
+  :description => "It is false by default. Select true and remove version number from debian list to install the latest package",
+  :default => "false",
+  :required => "optional",
+  :choice => ["true","false"],
+  :recipes => [ "app_inmobi_tomcat::debinst" ]
+
 attribute "app_inmobi_tomcat/webapp/restart",
   :display_name => "Mention if tomcat needs to be restarted after debian install",
   :description => "Choices true or false",

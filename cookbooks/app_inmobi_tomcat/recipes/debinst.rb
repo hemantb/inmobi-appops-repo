@@ -11,7 +11,7 @@ node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
         version $2
         options "--force-yes"
      end
-   elsif node[:app_inmobi_tomcat][:latest] == "true"
+   elsif node[:app_inmobi_tomcat][:webapp][:latest] == "true"
      package p do
        options "--force-yes"
      end
