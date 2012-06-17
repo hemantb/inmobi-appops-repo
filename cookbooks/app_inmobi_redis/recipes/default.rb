@@ -18,19 +18,24 @@ rightscale_marker :begin
     mode "0755"
   end
 
-  script "install_redis_server" do
-   interpreter "bash -ex"
-    code <<-EOF
-      cd /tmp
-      tar -zxvf redis-server-2.4.8.tar.gz
-      cd redis-2.4.8
-      echo "running make" >> /tmp/redis_install_log
-      make >> /tmp/redis_install_log
-      echo "running make test" >> /tmp/redis_install_log
-      make test >> /tmp/redis_install_log
-      echo "running make install" >> /tmp/redis_install_log
-      make install >> /tmp/redis_install_log
-    EOF
+  node[:app_inmobi_redis][:installed] = false
+
+  if ! node[:app_inmobi_redis][:installed]
+    script "install_redis_server" do
+     interpreter "bash -ex"
+      code <<-EOF
+        cd /tmp
+        tar -zxvf redis-server-2.4.8.tar.gz
+        cd redis-2.4.8
+        echo "running make" >> /tmp/redis_install_log
+        date >> /opt/mkhoj/log/redis_install_log
+        make >> /opt/mkhoj/log/redis_install_log
+        echo "running make test" >> /opt/mkhoj/log/redis_install_log
+        make test >> /opt/mkhoj/log/redis_install_log
+        echo "running make install" >> /opt/mkhoj/log/redis_install_log
+        make install >> /opt/mkhoj/log/redis_install_log
+      EOF
+    end
   end
 
   service "redis_#{node[:app_inmobi_redis][:redis_port]}" do
@@ -84,7 +89,9 @@ rightscale_marker :begin
     notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:redis_port]}")
   end
 
-right_link_tag "appserver:active=true"
-right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
+  right_link_tag "appserver:active=true"
+  right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
+
+  node[:app_inmobi_redis][:installed] = true
 
 rightscale_marker :end
