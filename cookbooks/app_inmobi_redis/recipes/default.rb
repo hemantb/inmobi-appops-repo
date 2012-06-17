@@ -18,9 +18,9 @@ rightscale_marker :begin
     mode "0755"
   end
 
-  node[:app_inmobi_redis][:installed] = false
+  node[:app_inmobi_redis][:installed] = "false"
 
-  if ! node[:app_inmobi_redis][:installed]
+  if node[:app_inmobi_redis][:installed] == "false"
     script "install_redis_server" do
      interpreter "bash -ex"
       code <<-EOF
@@ -94,6 +94,6 @@ rightscale_marker :begin
   right_link_tag "appserver:active=true"
   right_link_tag "appserver:listen_ip=#{node[:app][:ip]}"
 
-  node[:app_inmobi_redis][:installed] = true
+  node[:app_inmobi_redis][:installed] = "true"
 
 rightscale_marker :end
