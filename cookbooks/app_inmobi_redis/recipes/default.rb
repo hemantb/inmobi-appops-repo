@@ -13,9 +13,7 @@ rightscale_marker :begin
     end
   end
 
-  redis_tar = "redis-server-2.4.8.tar.gz"
-
-  remote_file "/tmp/#{redis_tar}" do
+  remote_file "/tmp/redis-server-2.4.8.tar.gz" do
     source "redis-server-2.4.8.tar.gz"
     mode "0755"
   end
@@ -24,7 +22,7 @@ rightscale_marker :begin
    interpreter "bash -ex"
     code <<-EOF
       cd /tmp
-      tar -zxvf #{redis-tar}
+      tar -zxvf redis-server-2.4.8.tar.gz
       cd redis-2.4.8
       echo "running make" >> /tmp/redis_install_log
       make >> /tmp/redis_install_log
