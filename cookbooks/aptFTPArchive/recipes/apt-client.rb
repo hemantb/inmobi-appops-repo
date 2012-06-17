@@ -1,4 +1,5 @@
 execute "apt-get update" do
+        ignore_failure true
         action    :nothing
 end
 
