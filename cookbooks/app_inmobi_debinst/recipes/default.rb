@@ -1,8 +1,8 @@
 rightscale_marker :begin
 
 log "restart = #{node[:app_inmobi_debinst][:restart]}"
-log "start = #{node[:app_inmobi_debinst][:stopcmd]}"
-log "stop = #{node[:app_inmobi_debinst][:startcmd]}"
+log "start = #{node[:app_inmobi_debinst][:startcmd]}"
+log "stop = #{node[:app_inmobi_debinst][:stopcmd]}"
 log "service = #{node[:app_inmobi_debinst][:service]}"
 log "latest = #{node[:app_inmobi_debinst][:latest]}"
 
@@ -12,8 +12,8 @@ execute "update apt cache" do
 end
 
 if node[:app_inmobi_debinst][:stopcmd] == nil || node[:app_inmobi_debinst][:startcmd] == nil
-   node[:app_inmobi_debinst][:startcmd] = "/etc/init.d/{#{node[:app_inmobi_debinst][:service]} start"
-   node[:app_inmobi_debinst][:stopcmd] = "/etc/init.d/{#{node[:app_inmobi_debinst][:service]} stop"
+   node[:app_inmobi_debinst][:startcmd] = "/etc/init.d/#{node[:app_inmobi_debinst][:service]} start"
+   node[:app_inmobi_debinst][:stopcmd] = "/etc/init.d/#{node[:app_inmobi_debinst][:service]} stop"
 end
 
 service "#{node[:app_inmobi_debinst][:service]}" do

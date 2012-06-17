@@ -33,7 +33,7 @@ attribute "app_inmobi_debinst/restart",
   :default => "true",
   :choice => ["true","false"]
 
-attribute "app_inmobi_debinst/starcmd",
+attribute "app_inmobi_debinst/startcmd",
   :display_name => "Mention the complete command used to start the service",
   :description => "Eg: svc -u /etc/service-puppet",
   :required => "optional",
