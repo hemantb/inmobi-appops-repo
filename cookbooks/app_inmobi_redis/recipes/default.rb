@@ -72,7 +72,7 @@ rightscale_marker :begin
      :append_only =>  node[:app_inmobi_redis][:append_only],
      :append_fsync => node[:app_inmobi_redis][:append_fsync],
      :auto_aof_rewrite_percentage =>  node[:app_inmobi_redis][:auto_aof_rewrite_percentage],
-     :slowlog_log_slower_than => node[:app_inmobi_redis][:slowlog_log_slower_than],
+     :slowlog_log_slower_than => node[:app_inmobi_redis][:slowlog_log_slower_than]
     )
     notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:redis_port]}")
   end
