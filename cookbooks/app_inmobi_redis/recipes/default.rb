@@ -57,7 +57,7 @@ rightscale_marker :begin
     notifies :restart , resources(:service => "redis_#{node[:app_inmobi_redis][:redis_port]}")
   end
 
-  log "  Creating /opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}"
+  log "  Creating /opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}.conf"
 
   directory "/opt/mkhoj/conf/redis" do
     owner "root"
@@ -67,7 +67,7 @@ rightscale_marker :begin
     recursive true
   end
  
-  template "/opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}" do
+  template "/opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}.conf" do
     action :create
     source "redis-conf.erb"
     group "root"
