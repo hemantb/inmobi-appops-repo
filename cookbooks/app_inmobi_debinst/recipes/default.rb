@@ -11,6 +11,11 @@ execute "update apt cache" do
   ignore_failure true
 end
 
+if node[:app_inmobi_debinst][:stopcmd] == nil || node[:app_inmobi_debinst][:startcmd] == nil
+   node[:app_inmobi_debinst][:stopcmd] = nil
+   node[:app_inmobi_debinst][:startcmd] = nil
+end
+
 service "#{node[:app_inmobi_debinst][:service]}" do
   start_command "#{node[:app_inmobi_debinst][:startcmd]}" unless node[:app_inmobi_debinst][:startcmd] == nil
   stop_command "#{node[:app_inmobi_debinst][:stopcmd]}" unless node[:app_inmobi_debinst][:stopcmd] == nil
