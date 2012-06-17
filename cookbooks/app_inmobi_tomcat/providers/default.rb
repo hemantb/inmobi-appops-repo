@@ -112,7 +112,7 @@ action :setup_config do
       :java_jmx_port => node[:app_inmobi_tomcat][:java][:jmxport],
       :java_heapdumppath => node[:app_inmobi_tomcat][:java][:heapdumppath],
       :java_extraopts => node[:app_inmobi_tomcat][:java][:extraopts],
-      :host_ip => ENV['RS_SERVER_NAME']
+      :host_ip => node[:app][:ip]
     )
     notifies :restart , "service[tomcat6]"
   end
