@@ -20,7 +20,7 @@ service "#{node[:app_inmobi_debinst][:service]}" do
   start_command "#{node[:app_inmobi_debinst][:startcmd]}" unless node[:app_inmobi_debinst][:startcmd] == nil
   stop_command "#{node[:app_inmobi_debinst][:stopcmd]}" unless node[:app_inmobi_debinst][:stopcmd] == nil
   action :restart
-}
+end
 
 node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
   log "Installing #{p}"
