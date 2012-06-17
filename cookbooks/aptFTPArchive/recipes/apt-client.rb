@@ -1,14 +1,8 @@
-execute "apt-get update" do
-        ignore_failure true
-        action    :nothing
-end
-
 template "/etc/apt/sources.list.d/inmobi-app-apt.list" do
   source "inmobi-app-apt.list.erb"
   owner "root"
   group "root"
   mode 0644
-  notifies  :run, resources("execute[apt-get update]"), :delayed
 end
 
 template "/etc/apt/sources.list.d/tmpapt.list" do
@@ -16,7 +10,14 @@ template "/etc/apt/sources.list.d/tmpapt.list" do
   owner "root"
   group "root"
   mode 0644
-  notifies  :run, resources("execute[apt-get update]"), :delayed
+end
+
+script "update_apt_repo" do
+  interpreter "bash"
+  code <<-EOF
+    apt-get update
+    echo "Apt Repo has been updated"
+  EOF
 end
 
 log "Adding APT key for APPOps"
