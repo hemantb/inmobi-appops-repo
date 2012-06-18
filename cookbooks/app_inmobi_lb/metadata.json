@@ -1,132 +1,123 @@
 {
-  "recipes": {
-    "app_inmobi_lb::handle_detach": "Remote recipe executed by do_detach_request. DO NOT RUN.",
-    "app_inmobi_lb::handle_attach": "Remote recipe executed by do_attach_request. DO NOT RUN.",
-    "app_inmobi_lb::setup_load_balancer": "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection.",
-    "app_inmobi_lb::do_attach_all": "Registers all running application servers with the loadbalancer:<vhost_name>=app tags. This should be run on a load balancer to connect all application servers in deployment.",
-    "app_inmobi_lb::do_attach_request": "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to attach current server to listener pool. This should be run by a new application server that is ready to accept connections.",
-    "app_inmobi_lb::default": "This loads the required load balancer resources.",
-    "app_inmobi_lb::setup_monitoring": "Installs the load balancer collectd plugin for monitoring support.",
-    "app_inmobi_lb::do_detach_request": "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to detach current server from listener pool. This should be run by an application server at decommission."
+  "providing": {
   },
-  "recommendations": {
+  "suggestions": {
   },
+  "long_description": "= RightScale Load Balancer Cookbook \n\n== DESCRIPTION:\n\nThis cookbook provides a set of load balancer recipes used by the RightScale\nLoad Balancer ServerTemplates.\n\nThis cookbook does not contain a specific load balancer implementation; rather,\nit provides an interface for general load balancer actions and parameters.\n\n== DETAILS:\n\n=== General\nThe 'lb' interface is defined by a Lightweight Resource, which can be found in\nthe resources/default.rb file.\n\nThis cookbook is intended to be used in conjunction with cookbooks that contain\nLightweight Providers that implement the 'lb' interface. See the RightScale\nlb_haproxy cookbook for an example.\n\nTo review information about Lightweight Resources and Providers (LWRPs), see the Chef\nWiki at:\n\n  http://wiki.opscode.com/display/chef/Lightweight+Resources+and+Providers+%28LWRP%29\n\n== REQUIREMENTS:\n\n * Requires a virtual machine launched from a RightScale-managed RightImage.\n\n== SETUP:\n\n== USAGE:\n\n=== Application Server Attach\n\n==== do_attach_request\n\nThis recipe is used by application servers to request that load balancer servers\nconfigure themselves to attach to the application server.\n\n==== handle_attach recipes\n\nThis recipe is used by a load balancer server to add an application server to\nits configuration when the application server requests it, and restart if necessary.\n\n=== Application Server Detach\n\n==== do_detach_request\n\nThis recipe is used by application servers to request that load balancer servers\nconfigure themselves to detach from the application server.\n\n==== handle_detach recipes\n\nThis recipe is used by a load balancer server to remove an application server\nfrom its configuration when the application server requests it, and restart if necessary.\n\n=== Automatic Server Detection\n\n==== do_attach_all recipe\n\nThis recipe is used by the load balancer to automatically detect whether application\nservers have disappeared or reappeared, without detaching or reattaching using the\nother recipes. This recipe is set to run in a periodic reconverge, which, by default, runs every 15 minutes.\n\n== KNOWN LIMITATIONS:\n\n= LICENSE\n\nCopyright RightScale, Inc. All rights reserved.  All access and use subject to the\nRightScale Terms of Service available at http://www.rightscale.com/terms.php and,\nif applicable, other agreements such as a RightScale Master Subscription Agreement.",
+  "description": "Inmobi HAProxy LB Manager",
   "dependencies": {
     "rightscale": ">= 0.0.0"
   },
-  "long_description": "= RightScale Load Balancer Cookbook \n\n== DESCRIPTION:\n\nThis cookbook provides a set of load balancer recipes used by the RightScale\nLoad Balancer ServerTemplates.\n\nThis cookbook does not contain a specific load balancer implementation; rather,\nit provides an interface for general load balancer actions and parameters.\n\n== DETAILS:\n\n=== General\nThe 'lb' interface is defined by a Lightweight Resource, which can be found in\nthe resources/default.rb file.\n\nThis cookbook is intended to be used in conjunction with cookbooks that contain\nLightweight Providers that implement the 'lb' interface. See the RightScale\nlb_haproxy cookbook for an example.\n\nTo review information about Lightweight Resources and Providers (LWRPs), see the Chef\nWiki at:\n\n  http://wiki.opscode.com/display/chef/Lightweight+Resources+and+Providers+%28LWRP%29\n\n== REQUIREMENTS:\n\n * Requires a virtual machine launched from a RightScale-managed RightImage.\n\n== SETUP:\n\n== USAGE:\n\n=== Application Server Attach\n\n==== do_attach_request\n\nThis recipe is used by application servers to request that load balancer servers\nconfigure themselves to attach to the application server.\n\n==== handle_attach recipes\n\nThis recipe is used by a load balancer server to add an application server to\nits configuration when the application server requests it, and restart if necessary.\n\n=== Application Server Detach\n\n==== do_detach_request\n\nThis recipe is used by application servers to request that load balancer servers\nconfigure themselves to detach from the application server.\n\n==== handle_detach recipes\n\nThis recipe is used by a load balancer server to remove an application server\nfrom its configuration when the application server requests it, and restart if necessary.\n\n=== Automatic Server Detection\n\n==== do_attach_all recipe\n\nThis recipe is used by the load balancer to automatically detect whether application\nservers have disappeared or reappeared, without detaching or reattaching using the\nother recipes. This recipe is set to run in a periodic reconverge, which, by default, runs every 15 minutes.\n\n== KNOWN LIMITATIONS:\n\n= LICENSE\n\nCopyright RightScale, Inc. All rights reserved.  All access and use subject to the\nRightScale Terms of Service available at http://www.rightscale.com/terms.php and,\nif applicable, other agreements such as a RightScale Master Subscription Agreement.",
+  "recipes": {
+    "app_inmobi_lb::handle_attach": "Remote recipe executed by do_attach_request. DO NOT RUN.",
+    "app_inmobi_lb::setup_load_balancer": "Installs the load balancer and adds the loadbalancer:<vhost_name>=lb tags to your server, which identifies it as a load balancer for a given listener pool. This tag is used by application servers to request connection/disconnection.",
+    "app_inmobi_lb::do_attach_all": "Registers all running application servers with the loadbalancer:<vhost_name>=app tags. This should be run on a load balancer to connect all application servers in deployment.",
+    "app_inmobi_lb::default": "This loads the required load balancer resources.",
+    "app_inmobi_lb::setup_monitoring": "Installs the load balancer collectd plugin for monitoring support.",
+    "app_inmobi_lb::do_attach_request": "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to attach current server to listener pool. This should be run by a new application server that is ready to accept connections.",
+    "app_inmobi_lb::do_detach_request": "Sends request to all servers with loadbalancer:<vhost_name>=lb tag to detach current server from listener pool. This should be run by an application server at decommission.",
+    "app_inmobi_lb::handle_detach": "Remote recipe executed by do_detach_request. DO NOT RUN."
+  },
+  "groupings": {
+  },
+  "platforms": {
+  },
   "maintainer": "Inmobi, Inc.",
-  "suggestions": {
-  },
-  "version": "1.0.0",
-  "replacing": {
-  },
-  "description": "Inmobi HAProxy LB Manager",
-  "name": "app_inmobi_lb",
   "attributes": {
-    "app_inmobi_lb/session_stickiness": {
+    "app_inmobi_lb/health_check_uri": {
+      "description": "The URI that the load balancer will use to check the health of a server. It is only used for HTTP (not HTTPS) requests.",
+      "required": "optional",
+      "choice": [
+
+      ],
       "recipes": [
+        "app_inmobi_lb::setup_load_balancer",
         "app_inmobi_lb::handle_attach"
       ],
-      "display_name": "Use Session Stickiness",
+      "type": "string",
+      "default": "/lbstatus.html",
+      "display_name": "Health Check URI",
+      "calculated": false
+    },
+    "app_inmobi_lb/session_stickiness": {
+      "description": "Determines session stickiness. Set to 'True' to use session stickiness, where the load balancer will reconnect a session to the last server it was connected to (via a cookie). Set to 'False' if you do not want to use sticky sessions; the load balancer will establish a connection with the next available server.",
+      "required": "optional",
       "choice": [
         "true",
         "false"
       ],
+      "recipes": [
+        "app_inmobi_lb::handle_attach"
+      ],
+      "type": "string",
       "default": "true",
-      "type": "string",
-      "description": "Determines session stickiness. Set to 'True' to use session stickiness, where the load balancer will reconnect a session to the last server it was connected to (via a cookie). Set to 'False' if you do not want to use sticky sessions; the load balancer will establish a connection with the next available server.",
-      "calculated": false,
-      "required": "optional"
+      "display_name": "Use Session Stickiness",
+      "calculated": false
     },
-    "app_inmobi_lb/stats_password": {
-      "recipes": [
-        "app_inmobi_lb::setup_load_balancer"
-      ],
-      "display_name": "Status Page Password",
+    "app_inmobi_lb/real_vhost_names": {
+      "description": "Comma-separated list of host names in the format (sticky/notsticky/nosticky)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.",
+      "required": "required",
       "choice": [
 
       ],
-      "default": "",
-      "type": "string",
-      "description": "The password that is required to access the load balancer statistics report page.",
-      "calculated": false,
-      "required": "optional"
-    },
-    "app_inmobi_lb/stats_user": {
       "recipes": [
-        "app_inmobi_lb::setup_load_balancer"
+        "app_inmobi_lb::do_attach_request",
+        "app_inmobi_lb::do_detach_request"
       ],
-      "display_name": "Status Page Username",
-      "choice": [
-
-      ],
-      "default": "",
       "type": "string",
-      "description": "The username that is required to access the load balancer statistics report page.",
-      "calculated": false,
-      "required": "optional"
-    },
-    "app_inmobi_lb/stats_uri": {
-      "recipes": [
-        "app_inmobi_lb::setup_load_balancer"
-      ],
-      "display_name": "Status URI",
-      "choice": [
-
-      ],
-      "default": "/haproxy-status",
-      "type": "string",
-      "description": "The URI for the load balancer statistics report page (e.g., /haproxy-status). This page lists the current session, queued session, response error, health check error, server status, etc. for each load balancer group.",
-      "calculated": false,
-      "required": "optional"
+      "display_name": "Virtual Host Names on the Real server",
+      "calculated": false
     },
     "app_inmobi_lb/service/provider": {
+      "description": "Specify the load balance provider to use: either 'lb_haproxy' for HAProxy, 'lb_elb' for AWS Load Balancing, or 'lb_clb' for Rackspace Cloud Load Balancing.",
+      "required": "recommended",
+      "choice": [
+        "app_inmobi_lb"
+      ],
       "recipes": [
         "app_inmobi_lb::default",
         "app_inmobi_lb::do_attach_request",
         "app_inmobi_lb::do_detach_request"
       ],
-      "display_name": "Load Balance Provider",
-      "choice": [
-        "app_inmobi_lb"
-      ],
+      "type": "string",
       "default": "app_inmobi_lb",
-      "type": "string",
-      "description": "Specify the load balance provider to use: either 'lb_haproxy' for HAProxy, 'lb_elb' for AWS Load Balancing, or 'lb_clb' for Rackspace Cloud Load Balancing.",
-      "calculated": false,
-      "required": "recommended"
+      "display_name": "Load Balance Provider",
+      "calculated": false
     },
-    "app_inmobi_lb/real_vhost_names": {
-      "recipes": [
-        "app_inmobi_lb::do_attach_request",
-        "app_inmobi_lb::do_detach_request"
-      ],
-      "display_name": "Virtual Host Names on the Real server",
+    "app_inmobi_lb/stats_password": {
+      "description": "The password that is required to access the load balancer statistics report page.",
+      "required": "optional",
       "choice": [
 
       ],
-      "type": "string",
-      "description": "Comma-separated list of host names in the format (sticky/nosticky)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.",
-      "calculated": false,
-      "required": "required"
-    },
-    "app_inmobi_lb/health_check_uri": {
       "recipes": [
-        "app_inmobi_lb::setup_load_balancer",
-        "app_inmobi_lb::handle_attach"
+        "app_inmobi_lb::setup_load_balancer"
       ],
-      "display_name": "Health Check URI",
+      "type": "string",
+      "default": "",
+      "display_name": "Status Page Password",
+      "calculated": false
+    },
+    "app_inmobi_lb/stats_uri": {
+      "description": "The URI for the load balancer statistics report page (e.g., /haproxy-status). This page lists the current session, queued session, response error, health check error, server status, etc. for each load balancer group.",
+      "required": "optional",
       "choice": [
 
       ],
-      "default": "/lbstatus.html",
+      "recipes": [
+        "app_inmobi_lb::setup_load_balancer"
+      ],
       "type": "string",
-      "description": "The URI that the load balancer will use to check the health of a server. It is only used for HTTP (not HTTPS) requests.",
-      "calculated": false,
-      "required": "optional"
+      "default": "/haproxy-status",
+      "display_name": "Status URI",
+      "calculated": false
     },
     "app_inmobi_lb/vhost_names": {
+      "description": "Comma-separated list of host names in the format (sticky/notsticky/nosticky)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.",
+      "required": "required",
+      "choice": [
+
+      ],
       "recipes": [
         "app_inmobi_lb::default",
         "app_inmobi_lb::handle_attach",
@@ -134,24 +125,33 @@
         "app_inmobi_lb::setup_load_balancer",
         "app_inmobi_lb::do_attach_all"
       ],
+      "type": "string",
       "display_name": "Virtual Host Names on the load balancer",
+      "calculated": false
+    },
+    "app_inmobi_lb/stats_user": {
+      "description": "The username that is required to access the load balancer statistics report page.",
+      "required": "optional",
       "choice": [
 
       ],
+      "recipes": [
+        "app_inmobi_lb::setup_load_balancer"
+      ],
       "type": "string",
-      "description": "Comma-separated list of host names in the format (sticky/nosticy)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.",
-      "calculated": false,
-      "required": "required"
+      "default": "",
+      "display_name": "Status Page Username",
+      "calculated": false
     }
-  },
-  "conflicting": {
   },
   "license": "Copyright Inmobi, Inc. All rights reserved.",
   "maintainer_email": "bhagyaraj.g@inmobi.com",
-  "groupings": {
+  "conflicting": {
   },
-  "providing": {
+  "recommendations": {
   },
-  "platforms": {
+  "name": "app_inmobi_lb",
+  "version": "1.0.0",
+  "replacing": {
   }
 }

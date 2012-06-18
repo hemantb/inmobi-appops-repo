@@ -17,7 +17,7 @@ foreach my $list (@dirlist) {
 		chomp $count; next if ! $count;
 		$list =~ s/\s+$//;
 		$list =~ s/^\s+//;
-		if ($list =~ /^(sticky|nosticky)-(\d+)-(.+)-(\d+)$/) {
+		if ($list =~ /^(sticky|notsticky|nosticky)-(\d+)-(.+)-(\d+)$/) {
 			$VHOSTS{$2}{$list}{sticky} = $1;
 			$VHOSTS{$2}{$list}{dest} = $4;
 			$VHOSTS{$2}{$list}{vhost} = $3;

@@ -18,7 +18,7 @@ recipe "app_inmobi_lb::setup_monitoring", "Installs the load balancer collectd p
 
 attribute "app_inmobi_lb/vhost_names",
   :display_name => "Virtual Host Names on the load balancer",
-  :description => "Comma-separated list of host names in the format (sticky/nosticy)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.", 
+  :description => "Comma-separated list of host names in the format (sticky/notsticky/nosticky)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.", 
   :required => true,
   :recipes => [
     "app_inmobi_lb::default",
@@ -30,7 +30,7 @@ attribute "app_inmobi_lb/vhost_names",
 
 attribute "app_inmobi_lb/real_vhost_names",
   :display_name => "Virtual Host Names on the Real server",
-  :description => "Comma-separated list of host names in the format (sticky/nosticky)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.", 
+  :description => "Comma-separated list of host names in the format (sticky/notsticky/nosticky)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.", 
   :required => true,
   :recipes => [
     "app_inmobi_lb::do_attach_request",
