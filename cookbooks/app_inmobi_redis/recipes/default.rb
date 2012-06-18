@@ -75,6 +75,14 @@ rightscale_marker :begin
     recursive true
   end
 
+  directory "#{node[:app_inmobi_redis][:data_dir]}/redis/#{node[:app_inmobi_redis][:redis_port]}" do
+    owner "root"
+    group "root"
+    mode "0755"
+    action :create
+    recursive true
+  end
+
   template "/opt/mkhoj/conf/redis/redis_#{node[:app_inmobi_redis][:redis_port]}.conf" do
     action :create
     source "redis-conf.erb"
