@@ -12,14 +12,6 @@ template "/etc/apt/sources.list.d/tmpapt.list" do
   mode 0644
 end
 
-script "update_apt_repo" do
-  interpreter "bash"
-  code <<-EOF
-    apt-get update
-    echo "Apt Repo has been updated"
-  EOF
-end
-
 log "Adding APT key for APPOps"
 #execute "curl -s http://#{node[:aptFTPArchive][:aptserver]}/app-apt.key | apt-key add -" do
 #execute "curl -s http://appkg1.ev1.inmobi.com/app-apt.key | apt-key add -" do
@@ -36,9 +28,12 @@ log "Done APT key for APPOps"
 
 log " Staring apt-get update"
 
-execute "apt-get-update" do
-  command "apt-get update"
-  ignore_failure true
+script "update_apt_repo" do
+  interpreter "bash"
+  code <<-EOF
+    apt-get update
+    echo "Apt Repo has been updated"
+  EOF
 end
 
 log "Done with apt-get update"
