@@ -17,17 +17,24 @@ recipe "app_inmobi_lb::do_detach_request", "Sends request to all servers with lo
 recipe "app_inmobi_lb::setup_monitoring", "Installs the load balancer collectd plugin for monitoring support."
 
 attribute "app_inmobi_lb/vhost_names",
-  :display_name => "Virtual Host Names",
-  :description => "Comma-separated list of host names in the format sourceport:virtualhostname:destinationport for which the load balancer will answer website requests.", 
+  :display_name => "Virtual Host Names on the load balancer",
+  :description => "Comma-separated list of host names in the format (sticky/nosticy)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.", 
   :required => true,
   :recipes => [
     "app_inmobi_lb::default",
-    "app_inmobi_lb::do_attach_request",
     "app_inmobi_lb::handle_attach",
-    "app_inmobi_lb::do_detach_request",
     "app_inmobi_lb::handle_detach",
     "app_inmobi_lb::setup_load_balancer",
     "app_inmobi_lb::do_attach_all"
+  ]
+
+attribute "app_inmobi_lb/real_vhost_names",
+  :display_name => "Virtual Host Names on the Real server",
+  :description => "Comma-separated list of host names in the format (sticky/nosticky)-sourceport-virtualhostname-destinationport for which the load balancer will answer website requests.", 
+  :required => true,
+  :recipes => [
+    "app_inmobi_lb::do_attach_request",
+    "app_inmobi_lb::do_detach_request",
   ]
 
 attribute "app_inmobi_lb/stats_uri",

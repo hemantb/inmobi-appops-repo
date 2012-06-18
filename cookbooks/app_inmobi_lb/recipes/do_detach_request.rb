@@ -11,7 +11,7 @@ class Chef::Recipe
   include Inmobi::LB::Helper
 end
 
-vhosts(node[:app_inmobi_lb][:vhost_names]).each do |vhost_name|
+vhosts(node[:app_inmobi_lb][:real_vhost_names]).each do |vhost_name|
   log "  Remove the load balancing tags, so we will not be re-attached. - #{vhost_name}"
   lb_tag vhost_name do
     action :remove
