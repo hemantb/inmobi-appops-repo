@@ -9,7 +9,8 @@ service "tomcat6" do
   action :nothing
 end
 
-node[:app_inmobi_tomcat][:webapp][:debians] .each do |p|
+debians = node[:app_inmobi_tomcat][:webapp][:debians]
+debians.gsub(/\s+/, "").split(",").uniq.each do |p|
   log "Installing #{p}"
   if p =~ /^([^=]+)=(.+)$/
      package $1 do
