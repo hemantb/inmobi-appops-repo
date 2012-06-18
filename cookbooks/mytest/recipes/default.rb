@@ -9,15 +9,14 @@
 
 log "adding new test"
 
-remote_file "/tmp/testfile" do
+cookbook_file "/tmp/testing" do
 	source "testfile"
 	mode "0644"
 end
 
-script "test" do
-        interpreter "bash"
+bash "test" do
+        flags "-ex"
 	code <<-EOF
-		lsss
 		ls
 	EOF
 end
