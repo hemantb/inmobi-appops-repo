@@ -18,9 +18,7 @@ rightscale_marker :begin
     mode "0755"
   end
 
-  node[:app_inmobi_redis][:installed] = "false"
-
-  if node[:app_inmobi_redis][:installed] == "false"
+  if node[:app_inmobi_redis][:installed] && node[:app_inmobi_redis][:installed] != "true"
     script "install_redis_server" do
      interpreter "bash -ex"
       code <<-EOF
