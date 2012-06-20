@@ -36,7 +36,7 @@ foreach my $fport (keys %VHOSTS) {
 		$LISTEN .= "        balance roundrobin\n";
 		$LISTEN .= "        mode $VHOSTS{$fport}{$vhost}{mode}\n\n";
 		$LISTEN .= "        cookie SERVERID insert indirect nocache\n";
-		$LISTEN .= "        appsession JSESSIONID len 100 timeout 7d\n" if $VHOSTS{$fport}{$vhost}{sticky} eq 'sticky';
+		$LISTEN .= "        appsession JSESSIONID len 100 timeout 7d\n\n" if $VHOSTS{$fport}{$vhost}{sticky} eq 'sticky';
                  
 		open (FILE, "$CONF_DIR/lb_haproxy.d/${vhost}.cfg") || die "Can't open config file $CONF_DIR/lb_haproxy.d/${vhost}.cfg";
 
@@ -48,10 +48,9 @@ foreach my $fport (keys %VHOSTS) {
                 }
 		close FILE;
 
-                $LISTEN .= "$listencont{status_uri}\n" if $listencont{status_uri};
-                $LISTEN .= "$listencont{health_uri}\n" if $listencont{health_uri};
-                $LISTEN .= "$listencont{health_check_line}\n" if $listencont{health_check_line} and $listencont{health_uri};
-                $ILSTEN .= "\n\n";
+                $LISTEN .= "        $listencont{status_uri_line}\n" if $listencont{status_uri_line};
+                $LISTEN .= "        $listencont{health_uri}\n" if $listencont{health_uri};
+                $LISTEN .= "        $listencont{health_check_line}\n\n\n" if $listencont{health_check_line} and $listencont{health_uri};
 
 		$LISTEN .= "        server disabled-server 127.0.0.1:1 check downinter 2000d\n";
 
@@ -81,9 +80,6 @@ open(FILE, ">$CONF_FILE") || die "Couldnt write to config file $CONF_FILE";
 
 print FILE $HEAD;
 print FILE $LISTEN;
-
-print $HEAD;
-print $LISTEN;
 
 close FILE;
 
