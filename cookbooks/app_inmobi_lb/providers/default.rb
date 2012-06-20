@@ -31,10 +31,17 @@ action :install do
         make TARGET=linux26 >> /opt/mkhoj/logs/haproxy_install_log
         echo "running make install" >> /opt/mkhoj/logs/haproxy_install_log
         make install PREFIX=/opt/mkhoj >> /opt/mkhoj/logs/haproxy_install_log
+        touch /etc/init.d/haproxy
       EOF
     end
   else
     log "HAProxy 1.4.21 has already been installed once. Not installing again"
+  end
+
+  # Create haproxy service.
+  service "haproxy" do
+    supports :restart => true, :status => true, :start => true, :stop => true
+    action :enable
   end
 
   # Install haproxy file depending on OS/platform.
@@ -91,12 +98,6 @@ action :install do
     variables(
       :default_backend_line => default_backend
     )
-  end
-
-  # Create haproxy service.
-  service "haproxy" do
-    supports :restart => true, :status => true, :start => true, :stop => true
-    action :enable
   end
 
   node[:app_inmobi_lb][:installed] = "true"
