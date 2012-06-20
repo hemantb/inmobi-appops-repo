@@ -133,7 +133,7 @@ action :add_vhost do
       :stats_uri_line => stats_uri,
       :stats_auth_line => stats_auth,
       :health_uri_line => health_uri,
-#      :health_check_line => health_chk
+      :health_check_line => health_chk
     )
   end
 
