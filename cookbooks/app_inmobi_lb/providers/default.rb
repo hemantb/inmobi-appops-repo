@@ -6,9 +6,27 @@ action :install do
 
   log "  Installing haproxy"
 
-  # Install haproxy package.
-  package "haproxy" do
-    action :install
+  remote_file "/tmp/haproxy-1.4.21.tar.gz" do
+    source "haproxy-1.4.21.tar.gz"
+    mode "0755"
+  end
+
+  if node[:app_inmobi_lb][:installed] && node[:app_inmobi_lb][:installed] != "true"
+    script "install_haproxy_server" do
+     interpreter "bash -ex"
+      code <<-EOF
+        cd /tmp
+        tar -zxvf haproxy-1.4.21.tar.gz
+        cd haproxy-1.4.21
+        echo "running make" >> /opt/mkhoj/logs/haproxy_install_log
+        date >> /opt/mkhoj/logs/haproxy_install_log
+        make TARGET=linux26 >> /opt/mkhoj/logs/haproxy_install_log
+        echo "running make install" >> /opt/mkhoj/logs/haproxy_install_log
+        make install PREFIX=/opt/mkhoj >> /opt/mkhoj/logs/haproxy_install_log
+      EOF
+    end
+  else
+    log "HAProxy 1.4.21 has already been installed once. Not installing again"
   end
 
   # Create haproxy service.
@@ -73,6 +91,8 @@ action :install do
     )
   end
 
+  node[:app_inmobi_lb][:installed] = "true"
+
 end # action :install do
 
 action :add_vhost do
@@ -105,7 +125,7 @@ action :add_vhost do
       :stats_uri_line => stats_uri,
       :stats_auth_line => stats_auth,
       :health_uri_line => health_uri,
-      :health_check_line => health_chk
+#      :health_check_line => health_chk
     )
   end
 

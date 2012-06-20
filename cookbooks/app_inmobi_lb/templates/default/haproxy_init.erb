@@ -13,8 +13,8 @@
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 PIDFILE=/var/run/haproxy.pid
-CONFIG=/opt/mkhoj/conf/lb/inmobi_lb.cfg
-HAPROXY=/usr/sbin/haproxy
+CONFIG=<%=node[:app_inmobi_lb][:cfg_file]%>
+HAPROXY=/opt/mkhoj/sbin/haproxy
 EXTRAOPTS=
 ENABLED=0
 
