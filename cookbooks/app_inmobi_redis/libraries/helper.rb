@@ -1,37 +1,18 @@
 #
-# Cookbook Name:: inmobi_lb
+# Cookbook Name:: app_inmobi_redis
 #
 
 module Inmobi
   module Redis
     module Helper
 
-      # @param [String] vhost_name virtual hosts name.
-      #
-      # @return [Set] attached_servers set of attached servers for vhost i.e., servers in lb config dir
-      #
-      def get_attached_servers(vhost_name)
-        attached_servers = Set.new
-        haproxy_d = "/opt/mkhoj/conf/lb/lb_haproxy.d/#{vhost_name}"
-        Dir.entries(haproxy_d).select do |file|
-          next if file == "." or file == ".."
-          attached_servers.add?(file)
-        end if (::File.directory?(haproxy_d))
-
-        attached_servers
-      end # def get_attached_servers(vhost_name)
-
-      # @param [String] vhost_name virtual hosts name.
-      #
-      # @return [Hash] app_servers hash of app servers in deployment answering for vhost_name
-      #
-      def query_redis_masters(app_name)
+      def get_redis_masters(app_name)
         require "timeout"
         redis_servers = Hash.new
         main_tags = ["redis:#{app_name}=master"]
-        secondary_tags = ["server:uuid=*", "appserver:listen_ip=*"]
+        secondary_tags = ["server:uuid=*", "redis:listen_ip=*", "redis:port=*"]
 
-        r = server_collection "app_servers" do
+        r = server_collection "redis_servers" do
           tags main_tags
           action :nothing
         end
@@ -59,27 +40,19 @@ module Inmobi
           end
         end
         rescue Timeout::Error => e
-          raise "ERROR: timed out trying to find servers tagged with loadbalancer:#{vhost_name}=app"
+          raise "ERROR: timed out trying to find servers tagged with redis:#{app_name}=master"
         end
 
-        node[:server_collection]['app_servers'].to_hash.values.each do |tags|
+        node[:server_collection]['redis_servers'].to_hash.values.each do |tags|
           uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
-          ip = RightScale::Utils::Helper.get_tag_value('appserver:listen_ip', tags)
-          app_servers[uuid] = {}
-          app_servers[uuid][:ip] = ip
+          ip = RightScale::Utils::Helper.get_tag_value('redis:listen_ip', tags)
+          port = RightScale::Utils::Helper.get_tag_value('redis:listen_port', tags)
+          redis_servers[uuid] = {}
+          redis_servers[uuid][:ip] = ip
+          redis_servers[uuid][:port] = port
         end
 
-        app_servers
-      end # def query_appservers(vhost_name)
-
-      # Set provider for each vhost.
-      def vhosts(vhost_list)
-        vhost_list.gsub(/\s+/, "").split(",").uniq.each do |v| 
-          if v !~ /^(sticky|notsticky|nosticky)-(http|tcp)-(\d+)-(.+)-(\d+)$/  
-            raise "#{v} is not in valid format"
-          end
-        end
-        return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+        redis_servers
       end
 
     end

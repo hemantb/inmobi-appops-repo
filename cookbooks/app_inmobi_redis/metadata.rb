@@ -121,3 +121,16 @@ attribute "app_inmobi_redis/slowlog_log_slower_than",
     "app_inmobi_redis::default",
   ]
 
+attribute "app_inmobi_redis/app_name",
+  :display_name => "Mention the identifier for the application name that this redis server is being used for",
+  :required => true,
+  :recipes => [
+    "app_inmobi_redis::default",
+  ]
+
+attribute "app_inmobi_redis/role",
+  :display_name => "Mention the role of this server master/slave",
+  :required => true,
+  :recipes => [
+    "app_inmobi_redis::default",
+  ]
