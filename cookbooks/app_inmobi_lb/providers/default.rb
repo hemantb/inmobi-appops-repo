@@ -32,23 +32,11 @@ action :install do
         echo "running make install" >> /opt/mkhoj/logs/haproxy_install_log
         make install PREFIX=/opt/mkhoj >> /opt/mkhoj/logs/haproxy_install_log
         touch /etc/init.d/haproxy
+        useradd haproxy -r -d /home/haproxy -s /bin/false
       EOF
     end
   else
     log "HAProxy 1.4.21 has already been installed once. Not installing again"
-  end
-
-  user "haproxy" do
-    comment "haproxy service"
-    system true
-    shell "/bin/false"
-    action :create
-  end
-
-  group "haproxy" do
-    system true
-    action :create
-    members ['haproxy']
   end
 
   # Create haproxy service.
