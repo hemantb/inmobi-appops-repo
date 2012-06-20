@@ -19,7 +19,7 @@ action :install do
     mode "0755"
   end
 
-#  if node[:app_inmobi_lb][:installed] && node[:app_inmobi_lb][:installed] != "true"
+  if node[:app_inmobi_lb][:installed] && node[:app_inmobi_lb][:installed] != "true"
     script "install_haproxy_server" do
      interpreter "bash -ex"
       code <<-EOF
@@ -35,9 +35,9 @@ action :install do
         useradd haproxy -r -d /home/haproxy -s /bin/false
       EOF
     end
-#  else
-#    log "HAProxy 1.4.21 has already been installed once. Not installing again"
-#  end
+  else
+    log "HAProxy 1.4.21 has already been installed once. Not installing again"
+  end
 
   # Create haproxy service.
   service "haproxy" do
