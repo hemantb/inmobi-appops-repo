@@ -69,6 +69,7 @@ foreach my $fport (keys %VHOSTS) {
 			$LISTEN .= "        server $contents{server} $contents{backend_ip}:$VHOSTS{$fport}{$vhost}{dest} ";
 			$LISTEN .= "cookie $contents{server} ";
 			$LISTEN .= "check " if $contents{health_check_uri};
+			$LISTEN .= "$content{stickyness} " if $contents{stickyness};
 			$LISTEN .= "$contents{extraopts} " if $contents{extraopts};
 			$LISTEN .= "maxconn $contents{maxconn}" if $contents{maxconn};
 			$LISTEN .= "\n\n";
