@@ -1,13 +1,37 @@
-class Inmobi
-  class Redis
-    class Helper
-      def get_redis_master(appname)
+#
+# Cookbook Name:: inmobi_lb
+#
+
+module Inmobi
+  module LB
+    module Helper
+
+      # @param [String] vhost_name virtual hosts name.
+      #
+      # @return [Set] attached_servers set of attached servers for vhost i.e., servers in lb config dir
+      #
+      def get_attached_servers(vhost_name)
+        attached_servers = Set.new
+        haproxy_d = "/opt/mkhoj/conf/lb/lb_haproxy.d/#{vhost_name}"
+        Dir.entries(haproxy_d).select do |file|
+          next if file == "." or file == ".."
+          attached_servers.add?(file)
+        end if (::File.directory?(haproxy_d))
+
+        attached_servers
+      end # def get_attached_servers(vhost_name)
+
+      # @param [String] vhost_name virtual hosts name.
+      #
+      # @return [Hash] app_servers hash of app servers in deployment answering for vhost_name
+      #
+      def query_appservers(vhost_name)
         require "timeout"
-        redi_servers = Hash.new
-        main_tags = ["redis:#{app_name}=master"]
+        app_servers = Hash.new
+        main_tags = ["loadbalancer:#{vhost_name}=app"]
         secondary_tags = ["server:uuid=*", "appserver:listen_ip=*"]
 
-        r = server_collection "redis_master" do
+        r = server_collection "app_servers" do
           tags main_tags
           action :nothing
         end
@@ -20,7 +44,7 @@ class Inmobi
 
           while true
             r.run_action(:load)
-            collection = node[:server_collection]["redis_master"]
+            collection = node[:server_collection]["app_servers"]
 
             break if collection.empty?
             break if !collection.empty? && collection.all? do |id, tags|
@@ -29,28 +53,35 @@ class Inmobi
               end
             end
 
-            delay = ((delay == 1) ? 2 : (delay*delay))
-            Chef::Log.info "not all tags for redis:#{app_name}=master exist; retrying in #{delay} seconds..."
+            delay = ((delay == 1) ? 2 : (delay*delay)) 
+            Chef::Log.info "not all tags for loadbalancer:#{vhost_name}=app exist; retrying in #{delay} seconds..."
             sleep delay
           end
         end
         rescue Timeout::Error => e
-          raise "ERROR: timed out trying to find servers tagged with redis:#{appname}=master"
+          raise "ERROR: timed out trying to find servers tagged with loadbalancer:#{vhost_name}=app"
         end
 
-        if node[:server_collection]['redis_master'].length > 1
-         throw "More than 1 redis servers found for this app #{node[:app_inmobi_lb][:redis_app]}"
-        end
-
-        node[:server_collection]['redis_master'].to_hash.values.first do |tags|
+        node[:server_collection]['app_servers'].to_hash.values.each do |tags|
           uuid = RightScale::Utils::Helper.get_tag_value('server:uuid', tags)
           ip = RightScale::Utils::Helper.get_tag_value('appserver:listen_ip', tags)
-          redis_servers[uuid] = {}
-          redis_servers[uuid][:ip] = ip
+          app_servers[uuid] = {}
+          app_servers[uuid][:ip] = ip
         end
 
-        redis_servers
-     end
+        app_servers
+      end # def query_appservers(vhost_name)
+
+      # Set provider for each vhost.
+      def vhosts(vhost_list)
+        vhost_list.gsub(/\s+/, "").split(",").uniq.each do |v| 
+          if v !~ /^(sticky|notsticky|nosticky)-(http|tcp)-(\d+)-(.+)-(\d+)$/  
+            raise "#{v} is not in valid format"
+          end
+        end
+        return vhost_list.gsub(/\s+/, "").split(",").uniq.each
+      end
+
     end
   end
 end
