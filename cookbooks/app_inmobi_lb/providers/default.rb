@@ -37,12 +37,6 @@ action :install do
     log "HAProxy 1.4.21 has already been installed once. Not installing again"
   end
 
-  # Create haproxy service.
-  service "haproxy" do
-    supports :restart => true, :status => true, :start => true, :stop => true
-    action :enable
-  end
-
   # Install haproxy file depending on OS/platform.
   template "/etc/init.d/haproxy" do
     source "haproxy.init.erb"
@@ -97,6 +91,12 @@ action :install do
     variables(
       :default_backend_line => default_backend
     )
+  end
+
+  # Create haproxy service.
+  service "haproxy" do
+    supports :restart => true, :status => true, :start => true, :stop => true
+    action :enable
   end
 
   node[:app_inmobi_lb][:installed] = "true"
