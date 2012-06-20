@@ -50,6 +50,7 @@ class Inmobi
         end
 
         redis_servers
+     end
     end
   end
 end
