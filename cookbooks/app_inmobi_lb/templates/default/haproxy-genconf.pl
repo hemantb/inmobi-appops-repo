@@ -33,10 +33,10 @@ foreach my $fport (keys %VHOSTS) {
 		my ($acl, $backend);
 
 		$LISTEN .= "listen $vhost *:$fport\n\n";
-		$LISTEN .= "balance roundrobin\n";
-		$LISTEN .= "mode $VHOSTS{$fport}{$vhost}{mode}\n\n";
-		$LISTEN .= "cookie SERVERID insert indirect nocache\n\n";
-		$LISTEN .= "appsession JSESSIONID len 100 timeout 1w\n" if $VHOSTS{$fport}{$vhost}{sticky} eq 'sticky';
+		$LISTEN .= "        balance roundrobin\n";
+		$LISTEN .= "        mode $VHOSTS{$fport}{$vhost}{mode}\n\n";
+		$LISTEN .= "        cookie SERVERID insert indirect nocache\n";
+		$LISTEN .= "        appsession JSESSIONID len 100 timeout 7d\n" if $VHOSTS{$fport}{$vhost}{sticky} eq 'sticky';
                  
 		open (FILE, "$CONF_DIR/lb_haproxy.d/${vhost}.cfg") || die "Can't open config file $CONF_DIR/lb_haproxy.d/${vhost}.cfg";
 

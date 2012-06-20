@@ -3,7 +3,7 @@
 #
 
 module Inmobi
-  module LB
+  module Redis
     module Helper
 
       # @param [String] vhost_name virtual hosts name.
@@ -25,10 +25,10 @@ module Inmobi
       #
       # @return [Hash] app_servers hash of app servers in deployment answering for vhost_name
       #
-      def query_appservers(vhost_name)
+      def query_redis_masters(app_name)
         require "timeout"
-        app_servers = Hash.new
-        main_tags = ["loadbalancer:#{vhost_name}=app"]
+        redis_servers = Hash.new
+        main_tags = ["redis:#{app_name}=master"]
         secondary_tags = ["server:uuid=*", "appserver:listen_ip=*"]
 
         r = server_collection "app_servers" do
@@ -44,7 +44,7 @@ module Inmobi
 
           while true
             r.run_action(:load)
-            collection = node[:server_collection]["app_servers"]
+            collection = node[:server_collection]["redis_servers"]
 
             break if collection.empty?
             break if !collection.empty? && collection.all? do |id, tags|
@@ -54,7 +54,7 @@ module Inmobi
             end
 
             delay = ((delay == 1) ? 2 : (delay*delay)) 
-            Chef::Log.info "not all tags for loadbalancer:#{vhost_name}=app exist; retrying in #{delay} seconds..."
+            Chef::Log.info "not all tags for redis:#{app_name}=master exist; retrying in #{delay} seconds..."
             sleep delay
           end
         end
