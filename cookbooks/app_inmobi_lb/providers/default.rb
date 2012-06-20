@@ -38,6 +38,19 @@ action :install do
     log "HAProxy 1.4.21 has already been installed once. Not installing again"
   end
 
+  user "haproxy" do
+    comment "haproxy service"
+    system true
+    shell "/bin/false"
+    action :create
+  end
+
+  group "haproxy" do
+    system true
+    action :create
+    members ['haproxy']
+  end
+
   # Create haproxy service.
   service "haproxy" do
     supports :restart => true, :status => true, :start => true, :stop => true
