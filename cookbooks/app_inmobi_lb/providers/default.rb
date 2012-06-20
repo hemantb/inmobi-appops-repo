@@ -187,6 +187,7 @@ action :attach do
       :backend_name => new_resource.backend_id,
       :backend_ip => new_resource.backend_ip,
       :max_conn_per_server => node[:app_inmobi_lb][:max_conn_per_server],
+      :session_sticky => node[:app_inmobi_lb][:session_stickiness],
       :health_check_uri => node[:app_inmobi_lb][:health_check_uri]
     )
     notifies :run, resources(:execute => "/opt/mkhoj/conf/lb/haproxy-genconf.pl")
