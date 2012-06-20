@@ -6,6 +6,14 @@ action :install do
 
   log "  Installing haproxy"
 
+  depends = ["libc6", "libc6-dev", "gcc", "mkhoj-base"]
+
+  depends.each do |p|
+    package p do
+      options "--force-yes"
+    end
+  end
+
   remote_file "/tmp/haproxy-1.4.21.tar.gz" do
     source "haproxy-1.4.21.tar.gz"
     mode "0755"
